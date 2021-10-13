@@ -4,8 +4,9 @@ public class Section implements Comparable<Section>{
 
     private String name;
     private String code;
-    private Boolean active = false;
+    private Boolean activeSection = false;
     private Boolean test = false;
+    private Integer order;
     private Course course;
 
     public Section(String name, String code, Course course) {
@@ -24,6 +25,14 @@ public class Section implements Comparable<Section>{
         this.course = course;
     }
 
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
     public String getName() {
         return name;
     }
@@ -33,7 +42,7 @@ public class Section implements Comparable<Section>{
     }
 
     public Boolean getActive() {
-        return active;
+        return activeSection;
     }
 
     public Boolean getTest() {
@@ -45,7 +54,7 @@ public class Section implements Comparable<Section>{
     }
 
     public void setActive(Boolean active) {
-        this.active = active;
+        this.activeSection = active;
     }
 
     public void setTest(Boolean test) {
@@ -54,6 +63,6 @@ public class Section implements Comparable<Section>{
 
     @Override
     public int compareTo(Section anotherSection) {
-        return this.code.compareTo(anotherSection.code);
+        return this.order.compareTo(anotherSection.order);
     }
 }

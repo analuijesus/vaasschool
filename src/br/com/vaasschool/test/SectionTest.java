@@ -16,6 +16,10 @@ public class SectionTest {
         Section s2 = new Section("iniciando estados", "iniciante", c);
         Section s3 = new Section("anotações", "anotacoes", c);
         Section s4 = new Section("novo teste", "java-novoteste", c);
+        s1.setOrder(3);
+        s2.setOrder(2);
+        s3.setOrder(10);
+        s4.setOrder(1);
 
         List list = Arrays.asList(s1, s2, s3, s4);
 
