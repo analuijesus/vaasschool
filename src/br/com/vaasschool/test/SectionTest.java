@@ -12,7 +12,7 @@ public class SectionTest {
 
         Course c = new Course("java", "-java", 20, "Ana");
 
-        Section s1 = new Section("java teste", "java-teste", c);
+        Section s1 = new Section("java teste", null, c);
         Section s2 = new Section("iniciando estados", "iniciante", c);
         Section s3 = new Section("anotações", "anotacoes", c);
         Section s4 = new Section("novo teste", "java-novoteste", c);
