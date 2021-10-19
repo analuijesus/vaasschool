@@ -1,5 +1,7 @@
 package br.com.vaasschool.model;
 
+import br.com.vaasschool.model.validation.Validator;
+
 public class Video extends Activity{
 
     private String url;
@@ -9,9 +11,8 @@ public class Video extends Activity{
     public Video(String title, String code, Section section, String url) {
         super(title, code, section);
 
-        if (url == null || url.trim().isEmpty()) {
-            throw new IllegalArgumentException("URL inválida");
-        }
+        Validator.nullValidation(section);
+        Validator.writtenFieldValidation(url);
 
         this.url = url;
     }
@@ -34,5 +35,10 @@ public class Video extends Activity{
 
     public String getUrl() {
         return url;
+    }
+
+    @Override
+    public int compareTo(Activity anotherVideo) {
+        return this.getOrder().compareTo(anotherVideo.getOrder());
     }
 }

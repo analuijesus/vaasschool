@@ -1,26 +1,22 @@
 package br.com.vaasschool.model;
 
+import br.com.vaasschool.model.validation.Validator;
+
 public class Category  implements Comparable<Category>{
 
     private String name;
     private String code;
     private String description;
     private String explanatoryGuide;
-    private Boolean activeCategory = false;
+    private Boolean active = false;
     private Integer order;
-    private String pathImage;
+    private String imagePath;
     private String colorCode = "3383FF";
 
     public Category(String name, String code) {
 
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome inválido");
-        }
-
-        boolean validateCode = code.matches("([a-z^-]+)");
-        if (!validateCode) {
-            throw new IllegalArgumentException("Código inválido");
-        }
+        Validator.writtenFieldValidation(name);
+        Validator.codeValidation(code);
 
         this.name = name;
         this.code = code;
@@ -34,16 +30,16 @@ public class Category  implements Comparable<Category>{
         this.explanatoryGuide = explanatoryGuide;
     }
 
-    public void setActiveCategory(Boolean activeCategory) {
-        this.activeCategory = activeCategory;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public void setOrder(Integer order) {
         this.order = order;
     }
 
-    public void setPathImage(String pathImage) {
-        this.pathImage = pathImage;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public void setColorCode(String colorCode) {
@@ -66,16 +62,16 @@ public class Category  implements Comparable<Category>{
         return explanatoryGuide;
     }
 
-    public Boolean getActiveCategory() {
-        return activeCategory;
+    public Boolean getActive() {
+        return active;
     }
 
     public Integer getOrder() {
         return order;
     }
 
-    public String getPathImage() {
-        return pathImage;
+    public String getImagePath() {
+        return imagePath;
     }
 
     public String getColorCode() {

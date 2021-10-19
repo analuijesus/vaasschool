@@ -10,9 +10,9 @@ import java.util.List;
 public class SectionTest {
     public static void main(String[] args) {
 
-        Course c = new Course("java", "-java", 20, "Ana");
+        //Course c = new Course("java", "-java", 20, "Ana");
 
-        Section s1 = new Section("java teste", null, c);
+        Section s1 = new Section("java teste", "java-", null);
         Section s2 = new Section("iniciando estados", "iniciante", c);
         Section s3 = new Section("anotações", "anotacoes", c);
         Section s4 = new Section("novo teste", "java-novoteste", c);

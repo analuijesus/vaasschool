@@ -1,24 +1,20 @@
 package br.com.vaasschool.model;
 
-public class Activity implements Comparable<Activity> {
+import br.com.vaasschool.model.validation.Validator;
+
+public abstract class Activity implements Comparable<Activity> {
 
     private String title;
     private String code;
     private Integer order;
-    private Boolean activeActivity = false;
-    private Object type;
+    private Boolean active = false;
     private Section section;
 
     public Activity(String title, String code, Section section) {
 
-        if (title == null || title.trim().isEmpty()) {
-            throw new IllegalArgumentException("Título inválido");
-        }
-
-        boolean validateCode = code.matches("([a-z^-]+)");
-        if (!validateCode) {
-            throw new IllegalArgumentException("Código inválido");
-        }
+        Validator.nullValidation(section);
+        Validator.writtenFieldValidation(title);
+        Validator.codeValidation(code);
 
         this.title = title;
         this.code = code;
@@ -33,20 +29,12 @@ public class Activity implements Comparable<Activity> {
         this.order = order;
     }
 
-    public Boolean getActiveActivity() {
-        return activeActivity;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setActiveActivity(Boolean activeActivity) {
-        this.activeActivity = activeActivity;
-    }
-
-    public Object getType() {
-        return type;
-    }
-
-    public void setType(Object type) {
-        this.type = type;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public String getTitle() {
@@ -59,10 +47,5 @@ public class Activity implements Comparable<Activity> {
 
     public Section getSection() {
         return section;
-    }
-
-    @Override
-    public int compareTo(Activity anotherActivity) {
-        return this.order.compareTo(anotherActivity.order);
     }
 }

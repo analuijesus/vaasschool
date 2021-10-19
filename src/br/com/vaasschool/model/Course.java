@@ -1,55 +1,55 @@
 package br.com.vaasschool.model;
 
+import br.com.vaasschool.model.validation.Validator;
+
 public class Course {
 
     private String name;
     private String code;
-    private Integer timeCouse;
-    private Boolean visibility = false;
-    private String description;
+    private int estimatedTimeToFinish;
+    private CourseVisibility visibility = CourseVisibility.PRIVATE;
+    private String targetAudience;
     private String instructorName;
-    private String menu;
-    private String learnedSkill;
+    private String summary;
+    private String learnedSkills;
+    private Subcategory subcategory;
 
-    public Course(String name, String code, Integer timeCouse, String instructorName) {
+    public Course(String name, String code, int estimatedTimeToFinish, String instructorName, Subcategory subcategory) {
 
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome inválido");
-        }
+        Validator.writtenFieldValidation(name);
+        Validator.codeValidation(code);
+        Validator.writtenFieldValidation(instructorName);
+        Validator.nullValidation(subcategory);
 
-        boolean validateCode = code.matches("([a-z^-]+)");
-        if (!validateCode) {
-            throw new IllegalArgumentException("Código inválido");
-        }
-
-        if (timeCouse < 1 || timeCouse > 20){
+        if (estimatedTimeToFinish < 1 || estimatedTimeToFinish > 20){
             throw new IllegalArgumentException("Carga horária inválida");
-        }
-
-        if (instructorName == null || instructorName.trim().isEmpty()){
-            throw new IllegalArgumentException("Nome do instrutor inválido");
         }
 
         this.name = name;
         this.code = code;
-        this.timeCouse = timeCouse;
+        this.estimatedTimeToFinish = estimatedTimeToFinish;
         this.instructorName = instructorName;
+        this.subcategory = subcategory;
     }
 
-    public void setVisibility(boolean visibility) {
+    public CourseVisibility getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(CourseVisibility visibility) {
         this.visibility = visibility;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTargetAudience(String targetAudience) {
+        this.targetAudience = targetAudience;
     }
 
-    public void setMenu(String menu) {
-        this.menu = menu;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
-    public void setLearnedSkill(String learnedSkill) {
-        this.learnedSkill = learnedSkill;
+    public void setLearnedSkills(String learnedSkills) {
+        this.learnedSkills = learnedSkills;
     }
 
     public String getName() {
@@ -60,27 +60,23 @@ public class Course {
         return code;
     }
 
-    public Integer getTimeCouse() {
-        return timeCouse;
+    public int getEstimatedTimeToFinish() {
+        return estimatedTimeToFinish;
     }
 
-    public Boolean getVisibility() {
-        return visibility;
-    }
-
-    public String getDescription() {
-        return description;
+    public String getTargetAudience() {
+        return targetAudience;
     }
 
     public String getInstructorName() {
         return instructorName;
     }
 
-    public String getMenu() {
-        return menu;
+    public String getSummary() {
+        return summary;
     }
 
-    public String getLearnedSkill() {
-        return learnedSkill;
+    public String getLearnedSkills() {
+        return learnedSkills;
     }
 }
