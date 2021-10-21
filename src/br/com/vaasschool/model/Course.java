@@ -1,55 +1,57 @@
 package br.com.vaasschool.model;
 
+import br.com.vaasschool.model.validation.Validator;
+
 public class Course {
+
+    public static final int MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH = 1;
+    public static final int MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH = 20;
 
     private String name;
     private String code;
-    private Integer timeCouse;
-    private Boolean visibility = false;
-    private String description;
+    private int estimatedTimeToFinish;
+    private CourseVisibility visibility = CourseVisibility.PRIVATE;
+    private String targetAudience;
     private String instructorName;
-    private String menu;
-    private String learnedSkill;
+    private String summary;
+    private String learnedSkills;
+    private Subcategory subcategory;
 
-    public Course(String name, String code, Integer timeCouse, String instructorName) {
+    public Course(String name, String code, int estimatedTimeToFinish, String instructorName, Subcategory subcategory) {
 
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome inválido");
-        }
-
-        boolean validateCode = code.matches("([a-z^-]+)");
-        if (!validateCode) {
-            throw new IllegalArgumentException("Código inválido");
-        }
-
-        if (timeCouse < 1 || timeCouse > 20){
-            throw new IllegalArgumentException("Carga horária inválida");
-        }
-
-        if (instructorName == null || instructorName.trim().isEmpty()){
-            throw new IllegalArgumentException("Nome do instrutor inválido");
-        }
+        Validator.notNullOrEmpty(name, "O nome do curso precisa ser preenchido.");
+        Validator.isCode(code, "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).");
+        Validator.notNullOrEmpty(instructorName,"O nome do instrutor deve ser preenchido.");
+        Validator.notNull(subcategory,"O curso deve ter uma subcategoria associada.");
+        Validator.validInterval(estimatedTimeToFinish, MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH, MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH,
+                "Carga horária inválida. Deve estar entre " + MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH + " e " +
+                        MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH);
 
         this.name = name;
         this.code = code;
-        this.timeCouse = timeCouse;
+        this.estimatedTimeToFinish = estimatedTimeToFinish;
         this.instructorName = instructorName;
+        this.subcategory = subcategory;
     }
 
-    public void setVisibility(boolean visibility) {
+    public CourseVisibility getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(CourseVisibility visibility) {
         this.visibility = visibility;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTargetAudience(String targetAudience) {
+        this.targetAudience = targetAudience;
     }
 
-    public void setMenu(String menu) {
-        this.menu = menu;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
-    public void setLearnedSkill(String learnedSkill) {
-        this.learnedSkill = learnedSkill;
+    public void setLearnedSkills(String learnedSkills) {
+        this.learnedSkills = learnedSkills;
     }
 
     public String getName() {
@@ -60,27 +62,23 @@ public class Course {
         return code;
     }
 
-    public Integer getTimeCouse() {
-        return timeCouse;
+    public int getEstimatedTimeToFinish() {
+        return estimatedTimeToFinish;
     }
 
-    public Boolean getVisibility() {
-        return visibility;
-    }
-
-    public String getDescription() {
-        return description;
+    public String getTargetAudience() {
+        return targetAudience;
     }
 
     public String getInstructorName() {
         return instructorName;
     }
 
-    public String getMenu() {
-        return menu;
+    public String getSummary() {
+        return summary;
     }
 
-    public String getLearnedSkill() {
-        return learnedSkill;
+    public String getLearnedSkills() {
+        return learnedSkills;
     }
 }

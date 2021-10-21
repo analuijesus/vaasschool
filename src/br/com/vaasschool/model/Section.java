@@ -1,24 +1,21 @@
 package br.com.vaasschool.model;
 
+import br.com.vaasschool.model.validation.Validator;
+
 public class Section implements Comparable<Section>{
 
     private String name;
     private String code;
-    private Boolean activeSection = false;
+    private Boolean active = false;
     private Boolean test = false;
     private Integer order;
     private Course course;
 
     public Section(String name, String code, Course course) {
 
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome inválido");
-        }
-
-        boolean validateCode = code.matches("([a-z^-]+)");
-        if (!validateCode) {
-            throw new IllegalArgumentException("Código inválido");
-        }
+        Validator.notNull(course);
+        Validator.notNullOrEmpty(name);
+        Validator.isCode(code);
 
         this.name = name;
         this.code = code;
@@ -42,7 +39,7 @@ public class Section implements Comparable<Section>{
     }
 
     public Boolean getActive() {
-        return activeSection;
+        return active;
     }
 
     public Boolean getTest() {
@@ -54,7 +51,7 @@ public class Section implements Comparable<Section>{
     }
 
     public void setActive(Boolean active) {
-        this.activeSection = active;
+        this.active = active;
     }
 
     public void setTest(Boolean test) {

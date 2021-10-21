@@ -1,5 +1,7 @@
 package br.com.vaasschool.model;
 
+import br.com.vaasschool.model.validation.Validator;
+
 public class Explanation extends Activity{
 
     private String text;
@@ -7,9 +9,8 @@ public class Explanation extends Activity{
     public Explanation(String title, String code, Section section, String text) {
         super(title, code, section);
 
-        if (text == null || text.trim().isEmpty()) {
-            throw new IllegalArgumentException("Texto inválido");
-        }
+        Validator.notNull(section);
+        Validator.notNullOrEmpty(text);
 
         this.text = text;
     }

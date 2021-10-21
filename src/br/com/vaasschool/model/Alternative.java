@@ -1,21 +1,22 @@
 package br.com.vaasschool.model;
 
+import br.com.vaasschool.model.validation.Validator;
+
 public class Alternative implements Comparable<Alternative>{
 
     private String text;
     private Integer order;
-    private Boolean correction;
+    private Boolean correct;
     private String justification;
     private Question question;
 
-    public Alternative(String text, Boolean correction, Question question) {
+    public Alternative(String text, Boolean correct, Question question) {
 
-        if (text == null || text.trim().isEmpty()) {
-            throw new IllegalArgumentException("Texto inválido");
-        }
+        Validator.notNull(question);
+        Validator.notNullOrEmpty(text);
 
         this.text = text;
-        this.correction = correction;
+        this.correct = correct;
         this.question = question;
     }
 
@@ -35,8 +36,8 @@ public class Alternative implements Comparable<Alternative>{
         return order;
     }
 
-    public Boolean getCorrection() {
-        return correction;
+    public Boolean getCorrect() {
+        return correct;
     }
 
     public String getJustification() {

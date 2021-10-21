@@ -1,26 +1,29 @@
 package br.com.vaasschool.model;
 
+import br.com.vaasschool.model.validation.Validator;
+
 public class Subcategory implements Comparable<Subcategory>{
 
     private String name;
     private String code;
     private String description;
     private String explanatoryGuide;
-    private Boolean activeCategory = false;
+    private Boolean active = false;
     private Integer order;
     private Category category;
     private Course course;
 
+    public Subcategory(String name, String code, Category category) {
+        this.name = name;
+        this.code = code;
+        this.category = category;
+    }
+
     public Subcategory(String name, String code, Category category, Course course) {
 
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome inválido");
-        }
-
-        boolean validateCode = code.matches("([a-z^-]+)");
-        if (!validateCode) {
-            throw new IllegalArgumentException("Código inválido");
-        }
+        Validator.notNull(course);
+        Validator.notNullOrEmpty(name);
+        Validator.isCode(code);
 
         this.name = name;
         this.code = code;
@@ -36,8 +39,8 @@ public class Subcategory implements Comparable<Subcategory>{
         this.explanatoryGuide = explanatoryGuide;
     }
 
-    public void setActiveCategory(Boolean activeCategory) {
-        this.activeCategory = activeCategory;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public void setOrder(Integer order) {
@@ -60,8 +63,8 @@ public class Subcategory implements Comparable<Subcategory>{
         return explanatoryGuide;
     }
 
-    public Boolean getActiveCategory() {
-        return activeCategory;
+    public Boolean getActive() {
+        return active;
     }
 
     public Integer getOrder() {
