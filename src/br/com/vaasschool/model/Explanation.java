@@ -9,18 +9,13 @@ public class Explanation extends Activity{
     public Explanation(String title, String code, Section section, String text) {
         super(title, code, section);
 
-        Validator.nullValidation(section);
-        Validator.writtenFieldValidation(text);
+        Validator.notNull(section);
+        Validator.notNullOrEmpty(text);
 
         this.text = text;
     }
 
     public String getText() {
         return text;
-    }
-
-    @Override
-    public int compareTo(Activity anotherExplanation) {
-        return this.getOrder().compareTo(anotherExplanation.getOrder());
     }
 }

@@ -13,11 +13,17 @@ public class Subcategory implements Comparable<Subcategory>{
     private Category category;
     private Course course;
 
+    public Subcategory(String name, String code, Category category) {
+        this.name = name;
+        this.code = code;
+        this.category = category;
+    }
+
     public Subcategory(String name, String code, Category category, Course course) {
 
-        Validator.nullValidation(course);
-        Validator.writtenFieldValidation(name);
-        Validator.codeValidation(code);
+        Validator.notNull(course);
+        Validator.notNullOrEmpty(name);
+        Validator.isCode(code);
 
         this.name = name;
         this.code = code;

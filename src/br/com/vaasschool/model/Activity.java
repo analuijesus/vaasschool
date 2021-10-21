@@ -12,9 +12,9 @@ public abstract class Activity implements Comparable<Activity> {
 
     public Activity(String title, String code, Section section) {
 
-        Validator.nullValidation(section);
-        Validator.writtenFieldValidation(title);
-        Validator.codeValidation(code);
+        Validator.notNull(section);
+        Validator.notNullOrEmpty(title);
+        Validator.isCode(code);
 
         this.title = title;
         this.code = code;
@@ -47,5 +47,10 @@ public abstract class Activity implements Comparable<Activity> {
 
     public Section getSection() {
         return section;
+    }
+
+    @Override
+    public int compareTo(Activity anotherActivity) {
+        return this.order.compareTo(anotherActivity.order);
     }
 }

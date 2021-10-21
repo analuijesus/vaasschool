@@ -13,10 +13,15 @@ public class Category  implements Comparable<Category>{
     private String imagePath;
     private String colorCode = "3383FF";
 
+    public Category(String name) {
+        Validator.notNullOrEmpty(name);
+        this.name = name;
+    }
+
     public Category(String name, String code) {
 
-        Validator.writtenFieldValidation(name);
-        Validator.codeValidation(code);
+        Validator.notNullOrEmpty(name);
+        Validator.isCode(code);
 
         this.name = name;
         this.code = code;
@@ -46,40 +51,23 @@ public class Category  implements Comparable<Category>{
         this.colorCode = colorCode;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getExplanatoryGuide() {
-        return explanatoryGuide;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public String getColorCode() {
-        return colorCode;
-    }
 
     @Override
     public int compareTo(Category anotherCategory) {
         return this.order.compareTo(anotherCategory.order);
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", description='" + description + '\'' +
+                ", explanatoryGuide='" + explanatoryGuide + '\'' +
+                ", active=" + active +
+                ", order=" + order +
+                ", imagePath='" + imagePath + '\'' +
+                ", colorCode='" + colorCode + '\'' +
+                '}';
     }
 }

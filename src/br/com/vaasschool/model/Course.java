@@ -4,6 +4,9 @@ import br.com.vaasschool.model.validation.Validator;
 
 public class Course {
 
+    public static final int MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH = 1;
+    public static final int MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH = 20;
+
     private String name;
     private String code;
     private int estimatedTimeToFinish;
@@ -16,14 +19,13 @@ public class Course {
 
     public Course(String name, String code, int estimatedTimeToFinish, String instructorName, Subcategory subcategory) {
 
-        Validator.writtenFieldValidation(name);
-        Validator.codeValidation(code);
-        Validator.writtenFieldValidation(instructorName);
-        Validator.nullValidation(subcategory);
-
-        if (estimatedTimeToFinish < 1 || estimatedTimeToFinish > 20){
-            throw new IllegalArgumentException("Carga horária inválida");
-        }
+        Validator.notNullOrEmpty(name, "O nome do curso precisa ser preenchido.");
+        Validator.isCode(code, "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).");
+        Validator.notNullOrEmpty(instructorName,"O nome do instrutor deve ser preenchido.");
+        Validator.notNull(subcategory,"O curso deve ter uma subcategoria associada.");
+        Validator.validInterval(estimatedTimeToFinish, MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH, MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH,
+                "Carga horária inválida. Deve estar entre " + MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH + " e " +
+                        MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH);
 
         this.name = name;
         this.code = code;

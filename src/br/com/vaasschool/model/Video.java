@@ -11,8 +11,8 @@ public class Video extends Activity{
     public Video(String title, String code, Section section, String url) {
         super(title, code, section);
 
-        Validator.nullValidation(section);
-        Validator.writtenFieldValidation(url);
+        Validator.notNull(section);
+        Validator.notNullOrEmpty(url);
 
         this.url = url;
     }
@@ -35,10 +35,5 @@ public class Video extends Activity{
 
     public String getUrl() {
         return url;
-    }
-
-    @Override
-    public int compareTo(Activity anotherVideo) {
-        return this.getOrder().compareTo(anotherVideo.getOrder());
     }
 }

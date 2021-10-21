@@ -12,8 +12,8 @@ public class Alternative implements Comparable<Alternative>{
 
     public Alternative(String text, Boolean correct, Question question) {
 
-        Validator.nullValidation(question);
-        Validator.writtenFieldValidation(text);
+        Validator.notNull(question);
+        Validator.notNullOrEmpty(text);
 
         this.text = text;
         this.correct = correct;

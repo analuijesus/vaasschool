@@ -13,9 +13,9 @@ public class Section implements Comparable<Section>{
 
     public Section(String name, String code, Course course) {
 
-        Validator.nullValidation(course);
-        Validator.writtenFieldValidation(name);
-        Validator.codeValidation(code);
+        Validator.notNull(course);
+        Validator.notNullOrEmpty(name);
+        Validator.isCode(code);
 
         this.name = name;
         this.code = code;

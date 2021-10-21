@@ -1,21 +1,44 @@
 package br.com.vaasschool.model.validation;
 
-import com.sun.jdi.ObjectReference;
-
 public class Validator {
 
-    public static void codeValidation(String code) {
-        if (code == null) throw new NullPointerException("Código não pode ser nulo");
+    public static void isCode(String code) {
+       isCode(code, "Código inválido");
+    }
+
+    public static void isCode(String code, String errorMessage) {
+        notNull(code);
 
         boolean validateCode = code.matches("([a-z0-9^-]+)");
-        if (!validateCode) throw new IllegalArgumentException("Código inválido");
+        if (!validateCode) throw new IllegalArgumentException(errorMessage);
     }
 
-    public static void writtenFieldValidation(String validationString) {
-        if (validationString == null || validationString.trim().isEmpty()) throw new IllegalArgumentException("String inválida");
+    public static void notNullOrEmpty(String validationString) {
+       notNullOrEmpty(validationString,"String vazia");
     }
 
-    public static void nullValidation(Object object){
-        if (object == null) throw new NullPointerException("Valor não pode ser nulo");
+    public static void notNullOrEmpty(String validationString,String errorMessage) {
+        notNull(validationString);
+        if(validationString.trim().isEmpty())
+            throw new IllegalArgumentException(errorMessage);
+    }
+
+    public static void notNull(Object object) {
+       notNull(object,"Valor nulo");
+    }
+
+    public static void notNull(Object object, String errorMessage) {
+        if (object == null)
+            throw new IllegalArgumentException(errorMessage);
+    }
+
+    public static void validInterval(int value, int minValue, int maxValue) {
+        validInterval(value,minValue,maxValue,"Intervalo inválido");
+    }
+
+    public static void validInterval(int value, int minValue, int maxValue, String errorMessage){
+        if (value < minValue || value > maxValue){
+            throw new IllegalArgumentException(errorMessage);
+        }
     }
 }

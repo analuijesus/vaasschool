@@ -10,8 +10,8 @@ public class Question extends Activity{
     public Question(String title, String code, Section section, String statiment) {
         super(title, code, section);
 
-        Validator.nullValidation(section);
-        Validator.writtenFieldValidation(title);
+        Validator.notNull(section);
+        Validator.notNullOrEmpty(title);
 
         this.statiment = statiment;
     }
@@ -22,10 +22,5 @@ public class Question extends Activity{
 
     public String getStatiment() {
         return statiment;
-    }
-
-    @Override
-    public int compareTo(Activity anotherQuestion) {
-        return this.getOrder().compareTo(anotherQuestion.getOrder());
     }
 }
