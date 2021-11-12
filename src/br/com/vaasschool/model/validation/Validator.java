@@ -1,5 +1,8 @@
 package br.com.vaasschool.model.validation;
 
+import java.text.Normalizer;
+import java.util.regex.Pattern;
+
 public class Validator {
 
     public static void isCode(String code) {

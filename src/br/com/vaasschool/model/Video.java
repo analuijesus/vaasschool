@@ -10,30 +10,9 @@ public class Video extends Activity{
 
     public Video(String title, String code, Section section, String url) {
         super(title, code, section);
-
         Validator.notNull(section);
         Validator.notNullOrEmpty(url);
 
         this.url = url;
-    }
-
-    public Long getMinutes() {
-        return minutes;
-    }
-
-    public void setMinutes(Long minutes) {
-        this.minutes = minutes;
-    }
-
-    public String getTranscription() {
-        return transcription;
-    }
-
-    public void setTranscription(String transcription) {
-        this.transcription = transcription;
-    }
-
-    public String getUrl() {
-        return url;
     }
 }

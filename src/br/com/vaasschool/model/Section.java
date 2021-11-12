@@ -12,7 +12,6 @@ public class Section implements Comparable<Section>{
     private Course course;
 
     public Section(String name, String code, Course course) {
-
         Validator.notNull(course);
         Validator.notNullOrEmpty(name);
         Validator.isCode(code);
@@ -22,40 +21,8 @@ public class Section implements Comparable<Section>{
         this.course = course;
     }
 
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public String getCode() {
         return code;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public Boolean getTest() {
-        return test;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public void setTest(Boolean test) {
-        this.test = test;
     }
 
     @Override

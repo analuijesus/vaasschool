@@ -2,7 +2,11 @@ package br.com.vaasschool.model;
 
 import br.com.vaasschool.model.validation.Validator;
 
-public class Subcategory implements Comparable<Subcategory>{
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Subcategory implements Comparable<Subcategory> {
 
     private String name;
     private String code;
@@ -11,72 +15,53 @@ public class Subcategory implements Comparable<Subcategory>{
     private Boolean active = false;
     private Integer order;
     private Category category;
-    private Course course;
+    private List<Course> courseList = new ArrayList<>();
 
-    public Subcategory(String name, String code, Category category) {
-        this.name = name;
-        this.code = code;
-        this.category = category;
-    }
-
-    public Subcategory(String name, String code, Category category, Course course) {
-
-        Validator.notNull(course);
+    public Subcategory(String name, String code, String description, Boolean active, Integer order, Category category) {
         Validator.notNullOrEmpty(name);
         Validator.isCode(code);
+        Validator.notNull(category);
 
         this.name = name;
         this.code = code;
-        this.category = category;
-        this.course = course;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setExplanatoryGuide(String explanatoryGuide) {
-        this.explanatoryGuide = explanatoryGuide;
-    }
-
-    public void setActive(Boolean active) {
         this.active = active;
+        this.order = order;
+        this.category = category;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+
+    public String getCode() {
+        return code;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getCode() {
-        return code;
+    public List<Course> getCourseList() {
+        return courseList;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCourseNameList(){
+       return courseList.stream().map(Course::getName).collect(Collectors.joining(" , "));
     }
 
-    public String getExplanatoryGuide() {
-        return explanatoryGuide;
+    public void addCourse(Course course) {
+        this.courseList.add(course);
     }
 
-    public Boolean getActive() {
-        return active;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public Course getCourse() {
-        return course;
+    @Override
+    public String toString() {
+        return "Subcategory{" +
+                "name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", description='" + description + '\'' +
+                ", explanatoryGuide='" + explanatoryGuide + '\'' +
+                ", active=" + active +
+                ", order=" + order +
+                ", category=" + category.getName() +
+                '}';
     }
 
     @Override
