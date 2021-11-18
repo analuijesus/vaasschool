@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HtmlFileCreationTest {
+public class CategoryHtmlPageGenerator {
     public static void main(String[] args) throws Exception {
 
         CategoryReader categoryReader = new CategoryReader();
