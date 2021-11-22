@@ -14,12 +14,12 @@ public class SectionTest {
 
         Category category = new Category("Java Teste", "java-teste");
         Subcategory subcategory = new Subcategory("JavaOO", "java-oo","a linguagem para se trabalhar", true, 3, category);
-        Course c = new Course("java", "-java", 20, "Ana", subcategory);
+        Course javaCourse = new Course("java", "-java", 20, "Ana", subcategory);
 
-        Section s1 = new Section("java teste", "java-", c);
-        Section s2 = new Section("iniciando estados", "iniciante", c);
-        Section s3 = new Section("anotações", "anotacoes", c);
-        Section s4 = new Section("novo teste", "java-novoteste", c);
+        Section s1 = new Section("java teste", "java-", javaCourse);
+        Section s2 = new Section("iniciando estados", "iniciante", javaCourse);
+        Section s3 = new Section("anotações", "anotacoes", javaCourse);
+        Section s4 = new Section("novo teste", "java-novoteste", javaCourse);
 
 
         List list = Arrays.asList(s1, s2, s3, s4);

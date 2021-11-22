@@ -17,8 +17,7 @@ public class CourseReaderTest {
         CategoryReader categoryReader = new CategoryReader();
 
         List<Category> categoryList = categoryReader
-                .readCsvFile("C:\\Users\\anadejesus\\Documents" +
-                        "\\projetos-java\\vaas-school\\src\\planilha-dados-escola - Categoria.csv");
+                .readCsvFile("planilha-dados-escola - Categoria.csv");
 
         Map<String, Category> categoryMap = new HashMap<>();
         for (Category category : categoryList) {
@@ -27,8 +26,7 @@ public class CourseReaderTest {
 
         SubcategoryReader subcategoryReader = new SubcategoryReader(categoryMap);
         List<Subcategory> subcategoryList = subcategoryReader
-                .readCsvFile("C:\\Users\\anadejesus" +
-                        "\\Documents\\projetos-java\\vaas-school\\src\\planilha-dados-escola - Subcategoria.csv");
+                .readCsvFile("planilha-dados-escola - Subcategoria.csv");
 
 
         Map<String, Subcategory> subcategoryMap = new HashMap<>();
@@ -38,8 +36,7 @@ public class CourseReaderTest {
 
         CourseReader courseReader = new CourseReader(subcategoryMap);
         List<Course> courseList = courseReader
-                .readCsvFile("C:\\Users\\anadejesus\\Documents" +
-                        "\\projetos-java\\vaas-school\\src\\planilha-dados-escola - Curso.csv");
+                .readCsvFile("planilha-dados-escola - Curso.csv");
 
         Map<String, Course> courseMap = new HashMap<>();
         for (Course course : courseList) {

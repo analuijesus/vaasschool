@@ -9,7 +9,7 @@ public class CategoryReaderTest {
     public static void main(String[] args) throws Exception {
 
         CategoryReader categoryReader = new CategoryReader();
-        List<Category> categories = categoryReader.readCsvFile("C:\\Users\\anadejesus\\Documents\\projetos-java\\vaas-school\\src\\planilha-dados-escola - Categoria.csv");
+        List<Category> categories = categoryReader.readCsvFile("planilha-dados-escola - Categoria.csv");
 
         for (Category c: categories) {
             System.out.println(c);

@@ -4,6 +4,7 @@ import br.com.vaasschool.model.validation.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Category implements Comparable<Category> {
 
@@ -15,7 +16,7 @@ public class Category implements Comparable<Category> {
     private Integer order;
     private String imagePath;
     private String colorCode = "3383FF";
-    private List<Subcategory> subCategoryList = new ArrayList<>();
+    private List<Subcategory> subcategoryList = new ArrayList<>();
 
     public Category(String name) {
         Validator.notNullOrEmpty(name);
@@ -45,10 +46,6 @@ public class Category implements Comparable<Category> {
         return code;
     }
 
-    public Integer getOrder() {
-        return order;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -65,12 +62,26 @@ public class Category implements Comparable<Category> {
         return colorCode;
     }
 
-    public List<Subcategory> getSubCategoryList() {
-        return subCategoryList;
+    public List<Subcategory> getSubcategoryList() {
+        return subcategoryList;
     }
 
-    public void addSubcategory(Subcategory subCategory) {
-        this.subCategoryList.add(subCategory);
+    public void addSubcategory(Subcategory subcategory) {
+        this.subcategoryList.add(subcategory);
+    }
+
+    public int getTotalHoursCourse(){
+        return subcategoryList.stream().mapToInt(c -> c.getTotalHoursCourse()).sum();
+    }
+
+    public int getTotalCourse(){
+        return subcategoryList.stream().mapToInt(c -> c.getTotalCourse()).sum();
+    }
+
+    public List<Subcategory> getActiveSubcategory(){
+        return subcategoryList.stream()
+                .filter(s -> getActive().equals("ATIVA"))
+                .collect(Collectors.toList());
     }
 
     @Override

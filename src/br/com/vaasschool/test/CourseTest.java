@@ -8,9 +8,9 @@ public class CourseTest {
     public static void main(String[] args) {
         Category category = new Category("JavaOO", "java-oo");
         Subcategory subcategory = new Subcategory("Javinha Teste", "java-teste", "teste", true, 15, category);
-        Course c = new Course("Csharp", "csharp", 2, "Ana", subcategory);
+        Course javaCourse = new Course("Java", "java-8", 2, "Ana", subcategory);
 
-        System.out.println(c);
+        System.out.println(javaCourse);
 
     }
 }

@@ -7,17 +7,21 @@ import br.com.vaasschool.reader.CategoryReader;
 import br.com.vaasschool.reader.CourseReader;
 import br.com.vaasschool.reader.SubcategoryReader;
 
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CategoryHtmlPageGenerator {
     public static void main(String[] args) throws Exception {
+        loadData();
+    }
 
+    private static void loadData() throws Exception {
         CategoryReader categoryReader = new CategoryReader();
-        List<Category> categoryList = categoryReader.readCsvFile("C:\\Users\\anadejesus" +
-                "\\Documents\\projetos-java\\vaas-school\\src\\planilha-dados-escola - Categoria.csv");
+        List<Category> categoryList = categoryReader.readCsvFile("planilha-dados-escola - Categoria.csv");
 
         Map<String, Category> categoryMap = new HashMap<>();
         for (Category category : categoryList) {
@@ -25,8 +29,7 @@ public class CategoryHtmlPageGenerator {
         }
 
         SubcategoryReader subcategoryReader = new SubcategoryReader(categoryMap);
-        List<Subcategory> subcategoryList = subcategoryReader.readCsvFile("C:\\Users\\anadejesus" +
-                "\\Documents\\projetos-java\\vaas-school\\src\\planilha-dados-escola - Subcategoria.csv");
+        List<Subcategory> subcategoryList = subcategoryReader.readCsvFile("planilha-dados-escola - Subcategoria.csv");
 
         Map<String, Subcategory> subcategoryMap = new HashMap<>();
         for (Subcategory subcategory : subcategoryList) {
@@ -35,14 +38,17 @@ public class CategoryHtmlPageGenerator {
 
         CourseReader courseReader = new CourseReader(subcategoryMap);
         List<Course> courseList = courseReader
-                .readCsvFile("C:\\Users\\anadejesus\\Documents" +
-                        "\\projetos-java\\vaas-school\\src\\planilha-dados-escola - Curso.csv");
+                .readCsvFile("planilha-dados-escola - Curso.csv");
 
         Map<String, Course> courseMap = new HashMap<>();
         for (Course course : courseList) {
             courseMap.put(course.getCode(), course);
         }
 
+        writePage(categoryList);
+    }
+
+    private static void writePage(List<Category> categoryList) throws Exception {
         try (OutputStream os = new FileOutputStream("info-categoria.html")) {
             PrintStream ps = new PrintStream(os);
 
@@ -57,16 +63,15 @@ public class CategoryHtmlPageGenerator {
             ps.println("<tr>");
 
             ps.print("<th>Nome</th>");
-            ps.print("<th>Código</th>");
-            ps.print("<th>Ordem</th>");
             ps.print("<th>Descrição</th>");
             ps.print("<th>Status</th>");
+            ps.print("<th>Total de horas</th>");
+            ps.print("<th>Total de Cursos</th>");
             ps.print("<th>Ícone</th>");
             ps.print("<th>Cor</th>");
             ps.print("<th>Sub Nome</th>");
             ps.print("<th>Sub Cor</th>");
             ps.print("<th>Cursos</th>");
-
             ps.println("</tr>");
             ps.println("</thead>");
             ps.println("<tbody>");
@@ -74,13 +79,13 @@ public class CategoryHtmlPageGenerator {
             for (Category c : categoryList) {
                 ps.println("<tr>");
                 ps.println("<td>" + c.getName() + "<td>");
-                ps.println("<td>" + c.getCode() + "<td>");
-                ps.println("<td>" + c.getOrder() + "<td>");
                 ps.println("<td>" + c.getDescription() + "<td>");
                 ps.println("<td>" + c.getActive() + "<td>");
+                ps.println("<td>" + c.getTotalHoursCourse() + "<td>");
+                ps.println("<td>" + c.getTotalCourse() + "<td>");
                 ps.println("<td><img src=\"" + c.getImagePath() + "\"><td>");
                 ps.println("<td>" + c.getColorCode() + "<td>");
-                for (Subcategory sub : c.getSubCategoryList()) {
+                for (Subcategory sub : c.getActiveSubcategory()) {
                     ps.println("<td>" + sub.getName() + "<td>");
                     ps.println("<td>" + sub.getCode() + "<td>");
                     ps.println("<td>" + sub.getCourseNameList() + "<td>");

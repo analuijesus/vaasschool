@@ -49,6 +49,10 @@ public class Course {
         return code;
     }
 
+    public int getEstimatedTimeToFinish() {
+        return estimatedTimeToFinish;
+    }
+
     @Override
     public String toString() {
         return "Course{" +

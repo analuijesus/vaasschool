@@ -27,7 +27,7 @@ public class CourseReader {
 
             while (line != null) {
                 String[] courseData = line.split(",");
-                Course course = courseStructure(courseData);
+                Course course = read(courseData);
 
                 courses.add(course);
 
@@ -37,7 +37,7 @@ public class CourseReader {
         }
     }
 
-    private Course courseStructure(String[] vectorCourse) {
+    private Course read(String[] vectorCourse) {
         String name = vectorCourse[0];
         String code = vectorCourse[1];
         int estimatedTimeToFinish = Integer.parseInt(vectorCourse[2]);

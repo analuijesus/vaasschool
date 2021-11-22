@@ -44,11 +44,19 @@ public class Subcategory implements Comparable<Subcategory> {
     }
 
     public String getCourseNameList(){
-       return courseList.stream().map(Course::getName).collect(Collectors.joining(" , "));
+       return courseList.stream().map(c -> getName()).collect(Collectors.joining(" , "));
     }
 
     public void addCourse(Course course) {
         this.courseList.add(course);
+    }
+
+    public int getTotalHoursCourse(){
+        return courseList.stream().mapToInt(c -> c.getEstimatedTimeToFinish()).sum();
+    }
+
+    public int getTotalCourse(){
+        return (int) courseList.stream().count();
     }
 
     @Override
