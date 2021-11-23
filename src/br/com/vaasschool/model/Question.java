@@ -15,12 +15,4 @@ public class Question extends Activity{
 
         this.statiment = statiment;
     }
-
-    public void setType(QuestionType type) {
-        this.type = type;
-    }
-
-    public String getStatiment() {
-        return statiment;
-    }
 }

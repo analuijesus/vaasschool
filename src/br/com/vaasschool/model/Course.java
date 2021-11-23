@@ -18,7 +18,6 @@ public class Course {
     private Subcategory subcategory;
 
     public Course(String name, String code, int estimatedTimeToFinish, String instructorName, Subcategory subcategory) {
-
         Validator.notNullOrEmpty(name, "O nome do curso precisa ser preenchido.");
         Validator.isCode(code, "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).");
         Validator.notNullOrEmpty(instructorName,"O nome do instrutor deve ser preenchido.");
@@ -34,23 +33,11 @@ public class Course {
         this.subcategory = subcategory;
     }
 
-    public CourseVisibility getVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(CourseVisibility visibility) {
+    public Course(String name, String code, int estimatedTimeToFinish, CourseVisibility visibility, String targetAudience, String instructorName, String summary, String learnedSkills, Subcategory subcategory) {
+        this(name, code, estimatedTimeToFinish, instructorName, subcategory);
         this.visibility = visibility;
-    }
-
-    public void setTargetAudience(String targetAudience) {
         this.targetAudience = targetAudience;
-    }
-
-    public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    public void setLearnedSkills(String learnedSkills) {
         this.learnedSkills = learnedSkills;
     }
 
@@ -66,19 +53,18 @@ public class Course {
         return estimatedTimeToFinish;
     }
 
-    public String getTargetAudience() {
-        return targetAudience;
-    }
-
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public String getLearnedSkills() {
-        return learnedSkills;
+    @Override
+    public String toString() {
+        return "Course{" +
+                "name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", estimatedTimeToFinish=" + estimatedTimeToFinish +
+                ", visibility=" + visibility +
+                ", targetAudience='" + targetAudience + '\'' +
+                ", instructorName='" + instructorName + '\'' +
+                ", summary='" + summary + '\'' +
+                ", learnedSkills='" + learnedSkills + '\'' +
+                ", subcategory=" + subcategory.getName() +
+                '}';
     }
 }

@@ -14,8 +14,4 @@ public class Explanation extends Activity{
 
         this.text = text;
     }
-
-    public String getText() {
-        return text;
-    }
 }

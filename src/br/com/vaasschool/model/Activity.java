@@ -11,7 +11,6 @@ public abstract class Activity implements Comparable<Activity> {
     private Section section;
 
     public Activity(String title, String code, Section section) {
-
         Validator.notNull(section);
         Validator.notNullOrEmpty(title);
         Validator.isCode(code);
@@ -21,32 +20,8 @@ public abstract class Activity implements Comparable<Activity> {
         this.section = section;
     }
 
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
     public String getCode() {
         return code;
-    }
-
-    public Section getSection() {
-        return section;
     }
 
     @Override
