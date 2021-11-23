@@ -52,11 +52,11 @@ public class Subcategory implements Comparable<Subcategory> {
     }
 
     public int getTotalHoursCourse(){
-        return courseList.stream().mapToInt(c -> c.getEstimatedTimeToFinish()).sum();
+        return courseList.stream().mapToInt(Course::getEstimatedTimeToFinish).sum();
     }
 
     public int getTotalCourse(){
-        return (int) courseList.stream().count();
+        return courseList.size();
     }
 
     @Override

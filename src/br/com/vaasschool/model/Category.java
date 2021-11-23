@@ -71,16 +71,16 @@ public class Category implements Comparable<Category> {
     }
 
     public int getTotalHoursCourse(){
-        return subcategoryList.stream().mapToInt(c -> c.getTotalHoursCourse()).sum();
+        return subcategoryList.stream().mapToInt(Subcategory::getTotalHoursCourse).sum();
     }
 
     public int getTotalCourse(){
-        return subcategoryList.stream().mapToInt(c -> c.getTotalCourse()).sum();
+        return subcategoryList.stream().mapToInt(Subcategory::getTotalCourse).sum();
     }
 
     public List<Subcategory> getActiveSubcategory(){
         return subcategoryList.stream()
-                .filter(s -> getActive().equals("ATIVA"))
+                .filter(s -> getActive().equals(true))
                 .collect(Collectors.toList());
     }
 
