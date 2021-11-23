@@ -16,15 +16,15 @@ public class SectionTest {
         Subcategory subcategory = new Subcategory("JavaOO", "java-oo","a linguagem para se trabalhar", true, 3, category);
         Course javaCourse = new Course("java", "-java", 20, "Ana", subcategory);
 
-        Section s1 = new Section("java teste", "java-", javaCourse);
-        Section s2 = new Section("iniciando estados", "iniciante", javaCourse);
-        Section s3 = new Section("anotações", "anotacoes", javaCourse);
-        Section s4 = new Section("novo teste", "java-novoteste", javaCourse);
+        Section section1 = new Section("java teste", "java-", javaCourse);
+        Section section2 = new Section("iniciando estados", "iniciante", javaCourse);
+        Section section3 = new Section("anotações", "anotacoes", javaCourse);
+        Section section4 = new Section("novo teste", "java-novoteste", javaCourse);
 
 
-        List list = Arrays.asList(s1, s2, s3, s4);
-        Collections.sort(list);
-        System.out.println(list);
+        List<Section> sections = Arrays.asList(section1, section2, section3, section4);
+        Collections.sort(sections);
+        System.out.println(sections);
 
     }
 }

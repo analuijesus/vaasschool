@@ -78,17 +78,17 @@ public class CategoryHtmlPageGenerator {
 
             for (Category c : categoryList) {
                 ps.println("<tr>");
-                ps.println("<td>" + c.getName() + "<td>");
-                ps.println("<td>" + c.getDescription() + "<td>");
-                ps.println("<td>" + c.getActive() + "<td>");
-                ps.println("<td>" + c.getTotalHoursCourse() + "<td>");
-                ps.println("<td>" + c.getTotalCourse() + "<td>");
-                ps.println("<td><img src=\"" + c.getImagePath() + "\"><td>");
-                ps.println("<td>" + c.getColorCode() + "<td>");
-                for (Subcategory sub : c.getActiveSubcategory()) {
-                    ps.println("<td>" + sub.getName() + "<td>");
-                    ps.println("<td>" + sub.getCode() + "<td>");
-                    ps.println("<td>" + sub.getCourseNameList() + "<td>");
+                ps.println("<td>" + c.getName() + "</td>");
+                ps.println("<td>" + c.getDescription() + "</td>");
+                ps.println("<td>" + c.getActive() + "</td>");
+                ps.println("<td>" + c.getTotalCourseHours() + "</td>");
+                ps.println("<td>" + c.getNumberOfCourses() + "</td>");
+                ps.println("<td><img src=\"" + c.getImagePath() + "\"></td>");
+                ps.println("<td>" + c.getColorCode() + "</td>");
+                for (Subcategory sub : c.getActiveSubcategories()) {
+                    ps.println("<td>" + sub.getName() + "</td>");
+                    ps.println("<td>" + sub.getCode() + "</td>");
+                    ps.println("<td>" + sub.getCourseNames() + "</td>");
                 }
                 ps.println("</tr>");
             }
