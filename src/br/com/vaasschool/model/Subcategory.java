@@ -30,6 +30,9 @@ public class Subcategory implements Comparable<Subcategory> {
         this.category = category;
     }
 
+    public Boolean getActive() {
+        return active;
+    }
 
     public String getCode() {
         return code;
@@ -44,7 +47,7 @@ public class Subcategory implements Comparable<Subcategory> {
     }
 
     public String getCourseNameList(){
-       return courseList.stream().map(c -> getName()).collect(Collectors.joining(" , "));
+       return courseList.stream().map(Course::getName).collect(Collectors.joining(" , "));
     }
 
     public void addCourse(Course course) {

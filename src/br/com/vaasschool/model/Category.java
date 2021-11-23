@@ -80,8 +80,8 @@ public class Category implements Comparable<Category> {
 
     public List<Subcategory> getActiveSubcategory(){
         return subcategoryList.stream()
-                .filter(s -> getActive().equals(true))
-                .collect(Collectors.toList());
+                .filter(Subcategory::getActive)
+                .toList();
     }
 
     @Override

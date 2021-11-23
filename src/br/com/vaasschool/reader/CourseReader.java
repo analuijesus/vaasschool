@@ -41,7 +41,7 @@ public class CourseReader {
         String name = vectorCourse[0];
         String code = vectorCourse[1];
         int estimatedTimeToFinish = Integer.parseInt(vectorCourse[2]);
-        CourseVisibility visibility = CourseVisibility.languageType(vectorCourse[3]);
+        CourseVisibility visibility = CourseVisibility.fromDisplayName(vectorCourse[3]);
         String targetAudience = vectorCourse[4];
         String instructorName = vectorCourse[5];
         String summary = vectorCourse[6];
