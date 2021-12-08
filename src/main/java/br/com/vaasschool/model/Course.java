@@ -49,6 +49,30 @@ public class Course {
         return code;
     }
 
+    public CourseVisibility getVisibility() {
+        return visibility;
+    }
+
+    public String getTargetAudience() {
+        return targetAudience;
+    }
+
+    public String getInstructorName() {
+        return instructorName;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public String getLearnedSkills() {
+        return learnedSkills;
+    }
+
+    public Subcategory getSubcategory() {
+        return subcategory;
+    }
+
     public int getEstimatedTimeToFinish() {
         return estimatedTimeToFinish;
     }

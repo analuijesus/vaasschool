@@ -61,6 +61,10 @@ public class Category implements Comparable<Category> {
         return colorCode;
     }
 
+    public Integer getOrder() {
+        return order;
+    }
+
     public List<Subcategory> getSubcategories() {
         return subcategories;
     }

@@ -42,6 +42,18 @@ public class Subcategory implements Comparable<Subcategory> {
         return name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
     public List<Course> getCourses() {
         return courses;
     }
