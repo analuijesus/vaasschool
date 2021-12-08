@@ -113,4 +113,16 @@ public class CourseTest {
         assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
                 "recursos do Java 8", "java-oito-lambda", 21, "Ana de Jesus", subcategory));
     }
+
+    @Test
+    void shouldThrowAnExceptionWhenInstructorNameIsEmpty (){
+        assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
+                "recursos do Java 8", "java-oito-lambda", 18, "", subcategory));
+    }
+
+    @Test
+    void shouldThrowAnExceptionWhenInstructorNameIsNull (){
+        assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
+                "recursos do Java 8", "java-oito-lambda", 14, null, subcategory));
+    }
 }
