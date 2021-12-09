@@ -6,7 +6,7 @@ create table `Category` (
   `code` varchar(255) not null unique,
   `description` varchar(255) not null,
   `explanatory_guide` varchar(255),
-  `active` tinyint,
+  `active` bit(1),
   `order` int not null,
   `imagem_path` varchar(255) not null,
   `color_code` varchar(7) not null
@@ -18,7 +18,7 @@ create table `Subcategory` (
   `code` varchar(255) not null unique,
   `description` varchar(255) not null,
   `explanatory_guide` varchar(255),
-  `active` tinyint,
+  `active` bit(1),
   `order` int not null,
   `category_id` int not null,
   FOREIGN KEY(`category_id`) REFERENCES `Category`(`id`)
@@ -42,8 +42,8 @@ create table `Section`(
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(75) not null,
   `code` varchar(255) not null unique,
-  `active` tinyint,
-  `test` tinyint,
+  `active` bit(1),
+  `test` bit(1),
   `order` int,
   `course_id` int not null,
   FOREIGN KEY(`course_id`) REFERENCES `Course`(`id`)
@@ -54,7 +54,7 @@ create table `Activity`(
   `title` varchar(255) not null,
   `code` varchar(255) not null unique,
   `order` int,
-  `active` tinyint,
+  `active` bit(1),
   `type` ENUM('Explanation', 'Video', 'Question'),
   `section_id` int not null,
   FOREIGN KEY(`section_id`) REFERENCES `Section`(`id`)
@@ -88,7 +88,7 @@ create table `Alternative`(
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `text` varchar(255) not null,
   `order` int,
-  `correct` tinyint,
+  `correct` bit(1),
   `justification` varchar(255),
   `question_id` int not null,
   FOREIGN KEY(`question_id`) REFERENCES `Question`(`id`)
