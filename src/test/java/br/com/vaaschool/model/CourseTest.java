@@ -5,16 +5,19 @@ import br.com.vaasschool.model.Course;
 import br.com.vaasschool.model.Subcategory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CourseTest {
 
     private Subcategory subcategory;
-    private Category category = new Category("Programação");
 
     @BeforeEach
     public void setUp() {
+        Category category = new Category("Programação");
         subcategory = new Subcategory("Cursos de Java", "cursos-de-java", "Formação Java",
                 true, 1, category);
     }
@@ -28,12 +31,7 @@ public class CourseTest {
         assertEquals("java-oito-lambda", course.getCode());
         assertEquals(1, course.getEstimatedTimeToFinish());
         assertEquals("Ana de Jesus", course.getInstructorName());
-        assertEquals("Cursos de Java", course.getSubcategory().getName());
-        assertEquals("cursos-de-java", course.getSubcategory().getCode());
-        assertEquals("Formação Java", course.getSubcategory().getDescription());
-        assertEquals(true, course.getSubcategory().getActive());
-        assertEquals(1, course.getSubcategory().getOrder());
-        assertEquals("Programação", course.getSubcategory().getCategory().getName());
+        assertEquals(subcategory, course.getSubcategory());
     }
 
     @Test
@@ -43,86 +41,54 @@ public class CourseTest {
     }
 
     @Test
-    void shouldAcceptTheValueOneBeingTheSmallestValueForTheEstimatedTimeToFinish() {
+    void shouldAcceptTheSmallestValueForTheEstimatedTimeToFinish() {
         assertDoesNotThrow(() -> new Course("Java moderno: Tire proveito dos novos recursos do Java 8",
                 "java-oito-lambda", 1, "Ana de Jesus", subcategory));
     }
 
     @Test
-    void shouldAcceptTheValueTwentyBeingTheHighestValueForTheEstimatedTimeToFinish() {
+    void shouldAcceptTheHighestValueForTheEstimatedTimeToFinish() {
         assertDoesNotThrow(() -> new Course("Java moderno: Tire proveito dos novos recursos do Java 8",
                 "java-oito-lambda", 20, "Ana de Jesus", subcategory));
     }
 
     @Test
-    void shouldThrowAnExceptionWhenTheNameIsNull() {
-        assertThrows(IllegalArgumentException.class, () -> new Course(null, "java-oito-lambda",
-                10, "Ana de Jesus", subcategory));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheNameIsEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> new Course("", "java-oito-lambda",
-                10, "Ana de Jesus", subcategory));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheCodeIsNull() {
-        assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
-                "recursos do Java 8", null, 6, "Ana de Jesus", subcategory));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheCodeIsEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
-                "recursos do Java 8", "", 8, "Ana de Jesus", subcategory));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheCodeHasCapitalLetters() {
-        assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
-                "recursos do Java 8", "JAVA", 16, "Ana de Jesus", subcategory));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheCodeHasSpecialCharacters() {
-        assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
-                "recursos do Java 8", "java*", 14, "Ana de Jesus", subcategory));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheCodeContainsWordsWithAccents() {
-        assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
-                "recursos do Java 8", "javaé", 12, "Ana de Jesus", subcategory));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheCodeHasSpace() {
-        assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
-                "recursos do Java 8", "java oito", 10, "Ana de Jesus", subcategory));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheEstimatedTimeToFinishIsLessThanOne() {
+    void shouldThrowAnExceptionWhenTheEstimatedTimeToFinishIsLessThanTheSmallest() {
         assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
                 "recursos do Java 8", "java-oito-lambda", 0, "Ana de Jesus", subcategory));
     }
 
     @Test
-    void shouldThrowAnExceptionWhenTheEstimatedTimeToFinishIsGreaterThanTwenty() {
+    void shouldThrowAnExceptionWhenTheEstimatedTimeToFinishIsGreaterThanTheHighest() {
         assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
                 "recursos do Java 8", "java-oito-lambda", 21, "Ana de Jesus", subcategory));
     }
 
-    @Test
-    void shouldThrowAnExceptionWhenInstructorNameIsEmpty (){
-        assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
-                "recursos do Java 8", "java-oito-lambda", 18, "", subcategory));
+    @ParameterizedTest
+    @NullAndEmptySource
+    void shouldThrowAnExceptionWhenTheNameIsNullOrEmpty(String name) {
+        assertThrows(IllegalArgumentException.class, () -> new Course(name, "java-oito-lambda",
+                10, "Ana de Jesus", subcategory));
     }
 
-    @Test
-    void shouldThrowAnExceptionWhenInstructorNameIsNull (){
+    @ParameterizedTest
+    @NullAndEmptySource
+    void shouldThrowAnExceptionWhenInstructorNameIsNullOrEmpty(String instructorName) {
         assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
-                "recursos do Java 8", "java-oito-lambda", 14, null, subcategory));
+                "recursos do Java 8", "java-oito-lambda", 14, instructorName, subcategory));
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void shouldThrowAnExceptionWhenTheCodeIsNullOrEmpty(String code) {
+        assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
+                "recursos do Java 8", code, 10, "Ana de Jesus", subcategory));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"JAVA", "java*", "javaé", "java oito lambda"})
+    void shouldThrowAnExceptionWhenTheCodeIsInvalid(String invalidCode) {
+        assertThrows(IllegalArgumentException.class, () -> new Course("Java moderno: Tire proveito dos novos " +
+                "recursos do Java 8", invalidCode, 10, "Ana de Jesus", subcategory));
     }
 }

@@ -4,6 +4,9 @@ import br.com.vaasschool.model.Category;
 import br.com.vaasschool.model.Subcategory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,57 +38,26 @@ public class SubcategoryTest {
                 "Formação Java", true, 1, category));
     }
 
-    @Test
-    void shouldThrowAnExceptionWhenTheNameIsNull() {
-        assertThrows(IllegalArgumentException.class, () -> new Subcategory(null, "java-oito",
+    @ParameterizedTest
+    @NullAndEmptySource
+    void shouldThrowAnExceptionWhenTheNameIsNullOrEmpty(String name) {
+        assertThrows(IllegalArgumentException.class, () -> new Subcategory(name, "java-oito",
                 "novidades do java 8", true, 1, category));
     }
 
-    @Test
-    void shouldThrowAnExceptionWhenTheNameIsEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> new Subcategory("", "java-oito",
-                "novidades do java 8", true, 1, category));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheCodeIsNull() {
-        assertThrows(IllegalArgumentException.class, () -> new Subcategory("Teste utilizando Java",
-                null, "A importância de escrever testes automatizados em uma aplicação", true,
-                1, category));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheCodeIsEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> new Subcategory("Teste utilizando Java", "",
+    @ParameterizedTest
+    @NullAndEmptySource
+    void shouldThrowAnExceptionWhenTheCodeIsNullOrEmpty(String code) {
+        assertThrows(IllegalArgumentException.class, () -> new Subcategory("Teste utilizando Java", code,
                 "A importância de escrever testes automatizados em uma aplicação", true,
                 1, category));
     }
 
-    @Test
-    void shouldThrowAnExceptionWhenTheCodeHasCapitalLetters() {
+    @ParameterizedTest
+    @CsvSource({"tdd e java", "tdd*e*java*", "javaé", "TDD-e-java"})
+    void shouldThrowAnExceptionWhenTheCodeIsInvalid(String invalidCode) {
         assertThrows(IllegalArgumentException.class, () -> new Subcategory("Teste utilizando Java",
-                "TDD-e-java", "A importância de escrever testes automatizados em uma aplicação",
-                true, 1, category));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheCodeHasSpecialCharacters() {
-        assertThrows(IllegalArgumentException.class, () -> new Subcategory("Teste utilizando Java",
-                "tdd*e*java", "A importância de escrever testes automatizados em uma aplicação",
-                true, 1, category));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheCodeContainsWordsWithAccents() {
-        assertThrows(IllegalArgumentException.class, () -> new Subcategory("Teste utilizando Java",
-                "javaé", "A importância de escrever testes automatizados em uma aplicação",
-                true, 1, category));
-    }
-
-    @Test
-    void shouldThrowAnExceptionWhenTheCodeHasSpace() {
-        assertThrows(IllegalArgumentException.class, () -> new Subcategory("Teste utilizando Java",
-                "tdd e java", "A importância de escrever testes automatizados em uma aplicação",
+                invalidCode, "A importância de escrever testes automatizados em uma aplicação",
                 true, 1, category));
     }
 
