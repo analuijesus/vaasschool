@@ -6,8 +6,8 @@ create table `Category` (
   `code` varchar(255) not null unique,
   `description` varchar(255) not null,
   `explanatory_guide` varchar(255),
-  `active` bit(1),
-  `order` int not null,
+  `active` bit(1) default 0,
+  `order_visualization` int not null,
   `imagem_path` varchar(255) not null,
   `color_code` varchar(7) not null
 );
@@ -18,8 +18,8 @@ create table `Subcategory` (
   `code` varchar(255) not null unique,
   `description` varchar(255) not null,
   `explanatory_guide` varchar(255),
-  `active` bit(1),
-  `order` int not null,
+  `active` bit(1) default 0,
+  `order_visualization` int not null,
   `category_id` int not null,
   FOREIGN KEY(`category_id`) REFERENCES `Category`(`id`)
 );
@@ -42,9 +42,9 @@ create table `Section`(
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(75) not null,
   `code` varchar(255) not null unique,
-  `active` bit(1),
-  `test` bit(1),
-  `order` int,
+  `active` bit(1) default 0,
+  `test` bit(1) default 0,
+  `order_visualization` int,
   `course_id` int not null,
   FOREIGN KEY(`course_id`) REFERENCES `Course`(`id`)
 );
@@ -53,8 +53,8 @@ create table `Activity`(
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `title` varchar(255) not null,
   `code` varchar(255) not null unique,
-  `order` int,
-  `active` bit(1),
+  `order_visualization` int,
+  `active` bit(1) default 0,
   `type` ENUM('Explanation', 'Video', 'Question'),
   `section_id` int not null,
   FOREIGN KEY(`section_id`) REFERENCES `Section`(`id`)
@@ -87,7 +87,7 @@ create table `Question`(
 create table `Alternative`(
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `text` varchar(255) not null,
-  `order` int,
+  `order_visualization` int,
   `correct` bit(1),
   `justification` varchar(255),
   `question_id` int not null,

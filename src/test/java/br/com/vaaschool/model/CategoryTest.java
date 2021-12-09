@@ -11,13 +11,13 @@ public class CategoryTest {
 
     @Test
     void shouldAddNewCategory() {
-        Category category = assertDoesNotThrow(() -> new Category("Programação", "java-oito"));
+        Category category = assertDoesNotThrow(() -> new Category("Programação", "formacao-java"));
         assertEquals("Programação", category.getName());
-        assertEquals("java-oito", category.getCode());
+        assertEquals("formacao-java", category.getCode());
     }
 
     @Test
-    void shouldAcceptWhenTheCodeIsNumber() {
+    void shouldAcceptWhenTheCodeContainsNumber() {
         assertDoesNotThrow(() -> new Category("Programação", "java8-lambda"));
     }
 

@@ -16,7 +16,7 @@ public class SubcategoryTest {
 
     @BeforeEach
     public void setUp() {
-        category = new Category("Programação");
+        category = new Category("Programação", "formacao-java");
     }
 
     @Test
@@ -29,11 +29,11 @@ public class SubcategoryTest {
         assertEquals("A importância de escrever testes automatizados em uma aplicação", subcategory.getDescription());
         assertEquals(true, subcategory.getActive());
         assertEquals(1, subcategory.getOrder());
-        assertEquals("Programação", subcategory.getCategory().getName());
+        assertEquals(category, subcategory.getCategory());
     }
 
     @Test
-    void shouldAcceptWhenTheCodeIsNumber() {
+    void shouldAcceptWhenTheCodeContainsNumber() {
         assertDoesNotThrow(() -> new Subcategory("Cursos de Java", "java8-lambda",
                 "Formação Java", true, 1, category));
     }

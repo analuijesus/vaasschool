@@ -17,7 +17,7 @@ public class CourseTest {
 
     @BeforeEach
     public void setUp() {
-        Category category = new Category("Programação");
+        Category category = new Category("Programação", "formacao-java");
         subcategory = new Subcategory("Cursos de Java", "cursos-de-java", "Formação Java",
                 true, 1, category);
     }
@@ -35,7 +35,7 @@ public class CourseTest {
     }
 
     @Test
-    void shouldAcceptWhenTheCodeIsNumber() {
+    void shouldAcceptWhenTheCodeContainsNumber() {
         assertDoesNotThrow(() -> new Course("Java moderno: Tire proveito dos novos recursos do Java 8",
                 "java8-lambda", 10, "Ana de Jesus", subcategory));
     }
