@@ -1,4 +1,4 @@
-package br.com.vaasschool.test;
+package br.com.vaasschool.filegenerator;
 
 import br.com.vaasschool.model.Category;
 import br.com.vaasschool.model.Course;

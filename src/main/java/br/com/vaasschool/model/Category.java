@@ -17,14 +17,10 @@ public class Category implements Comparable<Category> {
     private String colorCode = "3383FF";
     private List<Subcategory> subcategories = new ArrayList<>();
 
-    public Category(String name) {
-        Validator.notNullOrEmpty(name);
-        this.name = name;
-    }
-
     public Category(String name, String code) {
-        this(name);
+        Validator.notNullOrEmpty(name);
         Validator.isCode(code);
+        this.name = name;
         this.code = code;
     }
 
@@ -59,6 +55,10 @@ public class Category implements Comparable<Category> {
 
     public String getColorCode() {
         return colorCode;
+    }
+
+    public Integer getOrder() {
+        return order;
     }
 
     public List<Subcategory> getSubcategories() {
