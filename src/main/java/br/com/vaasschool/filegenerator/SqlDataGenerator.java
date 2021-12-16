@@ -88,7 +88,7 @@ public class SqlDataGenerator {
             boolean active = subcategory.getActive();
             Category category = subcategory.getCategory();
 
-            String sqlSubcategory = "insert into Subcategory (name, code, `order`, description, active, category_id)" +
+            String sqlSubcategory = "insert into Subcategory (name, code, order_visualization, description, active, category_id)" +
                     " values ('%s', '%s', %s, '%s', %s, (select id from Category where code = '%s'));";
 
             ps.println(format(sqlSubcategory, name, code, order, description, active, category.getCode()));
@@ -105,7 +105,7 @@ public class SqlDataGenerator {
             String imagePath = category.getImagePath();
             String colorCode = category.getColorCode();
 
-            String sqlCategory = "insert into Category (name, code, `order`, description, active, imagem_path, color_code)" +
+            String sqlCategory = "insert into Category (name, code, order_visualization, description, active, imagem_path, color_code)" +
                     " values ('%s', '%s', %s, '%s', %s, '%s', '%s');";
 
             ps.println(format(sqlCategory, name, code, order, description, active, imagePath, colorCode));

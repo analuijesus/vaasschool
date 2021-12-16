@@ -7,6 +7,7 @@ public class Course {
     public static final int MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH = 1;
     public static final int MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH = 20;
 
+    private int id;
     private String name;
     private String code;
     private int estimatedTimeToFinish;
@@ -39,6 +40,10 @@ public class Course {
         this.targetAudience = targetAudience;
         this.summary = summary;
         this.learnedSkills = learnedSkills;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -75,6 +80,10 @@ public class Course {
 
     public int getEstimatedTimeToFinish() {
         return estimatedTimeToFinish;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
