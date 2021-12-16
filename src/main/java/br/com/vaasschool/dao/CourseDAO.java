@@ -45,21 +45,20 @@ public class CourseDAO {
     }
 
     public void delete(String code) throws SQLException {
-        String SqlDelete = "delete from Course where code = ?;";
+        String sqlDelete = "delete from Course where code = ?;";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SqlDelete)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlDelete)) {
             preparedStatement.setString(1, code);
 
             preparedStatement.execute();
         }
     }
 
-    public void updatesAllForPublicVisibility() throws SQLException {
+    public int updatesAllForPublicVisibility() throws SQLException {
         String sqlUpdate = "update Course set visibility = 'PUBLIC' where visibility = 'PRIVATE';";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdate)) {
-
-            preparedStatement.execute();
+            return preparedStatement.executeUpdate();
         }
     }
 
@@ -69,7 +68,7 @@ public class CourseDAO {
         String sqlSearch = """ 
                             select c.id as id, 
                                    c.name as name, 
-                                   estimated_time_to_finish, 
+                                   c.estimated_time_to_finish, 
                                    s.id as subcategory_id, 
                                    s.name as subcategory_name 
                             from Course c join Subcategory s on c.subcategory_id = s.id
@@ -87,7 +86,6 @@ public class CourseDAO {
                             new SubcategoryDto(resultSet.getInt("subcategory_id"), resultSet.getString("subcategory_name")));
 
                     courses.add(courseDto);
-
                 }
             }
         }

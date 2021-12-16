@@ -16,7 +16,7 @@ create table `Subcategory` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(75) not null,
   `code` varchar(255) not null unique,
-  `description` varchar(255) not null,
+  `description` varchar(255),
   `explanatory_guide` varchar(255),
   `active` bit(1) default 0,
   `order_visualization` int not null,

@@ -17,24 +17,34 @@ public class CourseDaoTest {
         try (Connection connection = new ConnectionFactory().getConnection()) {
             connection.setAutoCommit(false);
 
-            CourseDAO courseDao = new CourseDAO(connection);
+            try {
 
-            Category category = new Category("Programação", "programacao", "Programe nas principais linguagens e plataformas. Iniciantes são bem vindos nos cursos de lógica e JavaScript.",
-                    1, true, " https://www.alura.com.br/assets/api/formacoes/categorias/512/programacao-transparent.png", "#00c86f");
+                CourseDAO courseDao = new CourseDAO(connection);
 
-            Subcategory subcategory = new Subcategory(2, "Java e Persistência", "java-e-persistencia",
-                    "", true, 2, category);
+                Category category = new Category("Programação", "programacao", "Programe nas principais linguagens e plataformas. Iniciantes são bem vindos nos cursos de lógica e JavaScript.",
+                        1, true, " https://www.alura.com.br/assets/api/formacoes/categorias/512/programacao-transparent.png", "#00c86f");
 
-            Course course = new Course("Java e JDBC: Trabalhando com um banco de dados", "java-e-jdbc",
-                    12, CourseVisibility.PUBLIC, "Desenvolvedores que já conheça Orientação a Objetos",
-                    "Ana de Jesus",
-                    "Comunique-se com um banco de dados relacional", "Evitando SQL Injection ", subcategory);
+                Subcategory subcategory = new Subcategory(2, "Java e Persistência", "java-e-persistencia",
+                        "", true, 2, category);
 
-            courseDao.add(course);
-            courseDao.delete("");
-            courseDao.updatesAllForPublicVisibility();
+                Course course = new Course("Java e JDBC: Trabalhando com um banco de dados", "java-e-jdbc",
+                        12, CourseVisibility.PUBLIC, "Desenvolvedores que já conheça Orientação a Objetos",
+                        "Ana de Jesus",
+                        "Comunique-se com um banco de dados relacional", "Evitando SQL Injection ", subcategory);
 
-            connection.commit();
+                int updatedCourses = courseDao.updatesAllForPublicVisibility();
+
+                courseDao.add(course);
+                //            courseDao.delete("git-e-github-para-sobrevivencia");
+
+                connection.commit();
+
+                System.out.println("Total de curso com a visibilidade alterada: " + updatedCourses);
+
+            } catch (Exception ex) {
+                connection.rollback();
+                throw ex;
+            }
         }
     }
 }

@@ -14,12 +14,19 @@ public class CourseHtmlPageGenerator {
 
     public static void main(String[] args) throws Exception {
 
-        Connection connection = new ConnectionFactory().getConnection();
+        try (Connection connection = new ConnectionFactory().getConnection()) {
+            connection.setAutoCommit(false);
 
-        CourseDAO courseDao = new CourseDAO(connection);
-        List<CourseDto> courses = courseDao.searchAllPublic();
+            try {
+                CourseDAO courseDao = new CourseDAO(connection);
+                List<CourseDto> courses = courseDao.searchAllPublic();
 
-        writePage(courses);
+                writePage(courses);
+            } catch (Exception ex) {
+                connection.rollback();
+                throw ex;
+            }
+        }
     }
 
     private static void writePage(List<CourseDto> courses) throws Exception {
