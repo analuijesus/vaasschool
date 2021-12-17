@@ -3,6 +3,7 @@ package br.com.vaasschool.dao;
 import br.com.vaasschool.dto.CourseDto;
 import br.com.vaasschool.dto.SubcategoryDto;
 import br.com.vaasschool.model.Course;
+import br.com.vaasschool.model.CourseVisibility;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -55,9 +56,12 @@ public class CourseDAO {
     }
 
     public int updatesAllForPublicVisibility() throws SQLException {
-        String sqlUpdate = "update Course set visibility = 'PUBLIC' where visibility = 'PRIVATE';";
+        String sqlUpdate = "update Course set visibility = ? where visibility = ?;";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdate)) {
+            preparedStatement.setString(1, CourseVisibility.PUBLIC.name());
+            preparedStatement.setString(2, CourseVisibility.PRIVATE.name());
+
             return preparedStatement.executeUpdate();
         }
     }

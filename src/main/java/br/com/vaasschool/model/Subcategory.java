@@ -32,17 +32,8 @@ public class Subcategory implements Comparable<Subcategory> {
     }
 
     public Subcategory(int id, String name, String code, String description, Boolean active, Integer order, Category category) {
-        Validator.notNullOrEmpty(name);
-        Validator.isCode(code);
-        Validator.notNull(category);
-
+        this(name, code, description, active, order, category);
         this.id = id;
-        this.name = name;
-        this.code = code;
-        this.description = description;
-        this.active = active;
-        this.order = order;
-        this.category = category;
     }
 
     public int getId() {
@@ -71,10 +62,6 @@ public class Subcategory implements Comparable<Subcategory> {
 
     public Category getCategory() {
         return category;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public List<Course> getCourses() {

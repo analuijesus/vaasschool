@@ -34,7 +34,7 @@ public class CourseDaoTest {
 
                 int updatedCourses = courseDao.updatesAllForPublicVisibility();
 
-                courseDao.add(course);
+//                courseDao.add(course);
                 //            courseDao.delete("git-e-github-para-sobrevivencia");
 
                 connection.commit();
