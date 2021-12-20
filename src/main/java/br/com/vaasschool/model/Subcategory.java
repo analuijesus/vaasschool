@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class Subcategory implements Comparable<Subcategory> {
 
+    private int id;
     private String name;
     private String code;
     private String description;
@@ -28,6 +29,15 @@ public class Subcategory implements Comparable<Subcategory> {
         this.active = active;
         this.order = order;
         this.category = category;
+    }
+
+    public Subcategory(int id, String name, String code, String description, Boolean active, Integer order, Category category) {
+        this(name, code, description, active, order, category);
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Boolean getActive() {
@@ -58,19 +68,19 @@ public class Subcategory implements Comparable<Subcategory> {
         return courses;
     }
 
-    public String getCourseNames(){
-       return courses.stream().map(Course::getName).collect(Collectors.joining(" , "));
+    public String getCourseNames() {
+        return courses.stream().map(Course::getName).collect(Collectors.joining(" , "));
     }
 
     public void addCourse(Course course) {
         this.courses.add(course);
     }
 
-    public int getTotalCourseHours(){
+    public int getTotalCourseHours() {
         return courses.stream().mapToInt(Course::getEstimatedTimeToFinish).sum();
     }
 
-    public int getNumberOfCourses(){
+    public int getNumberOfCourses() {
         return courses.size();
     }
 
@@ -91,4 +101,6 @@ public class Subcategory implements Comparable<Subcategory> {
     public int compareTo(Subcategory anotherSubCategory) {
         return this.order.compareTo(anotherSubCategory.order);
     }
+
+
 }
