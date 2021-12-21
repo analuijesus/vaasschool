@@ -1,7 +1,7 @@
 create database vaasschool;
 
 create table `Category` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` long PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(75) not null,
   `code` varchar(255) not null unique,
   `description` varchar(255) not null,
@@ -13,7 +13,7 @@ create table `Category` (
 );
 
 create table `Subcategory` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` long PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(75) not null,
   `code` varchar(255) not null unique,
   `description` varchar(255) not null,
@@ -25,7 +25,7 @@ create table `Subcategory` (
 );
 
 create table `Course`(
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` long PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(75) not null,
   `code` varchar (255) not null unique,
   `estimated_time_to_finish` smallint not null,
@@ -39,7 +39,7 @@ create table `Course`(
 );
 
 create table `Section`(
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` long PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(75) not null,
   `code` varchar(255) not null unique,
   `active` bit(1) default 0,
@@ -50,7 +50,7 @@ create table `Section`(
 );
 
 create table `Activity`(
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` long PRIMARY KEY AUTO_INCREMENT,
   `title` varchar(255) not null,
   `code` varchar(255) not null unique,
   `order_visualization` int,
@@ -61,14 +61,14 @@ create table `Activity`(
 );
 
 create table `Explanation`(
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` long PRIMARY KEY AUTO_INCREMENT,
   `text` varchar(255),
   `activity_id` int not null,
   FOREIGN KEY(`activity_id`) REFERENCES `Activity`(`id`)
 );
 
 create table `Video`(
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` long PRIMARY KEY AUTO_INCREMENT,
   `url` varchar(255) not null,
   `minutes` smallint,
   `transcription` varchar(255),
@@ -77,7 +77,7 @@ create table `Video`(
 );
  
 create table `Question`(
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` long PRIMARY KEY AUTO_INCREMENT,
   `statiment` varchar(255),
   `question_type` ENUM('SINGLE_ANSWER','MULTIPLE_ANSWERS','TRUE_FALSE') default 'SINGLE_ANSWER',
   `activity_id` int not null,
@@ -85,7 +85,7 @@ create table `Question`(
 );
 
 create table `Alternative`(
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` long PRIMARY KEY AUTO_INCREMENT,
   `text` varchar(255) not null,
   `order_visualization` int,
   `correct` bit(1),

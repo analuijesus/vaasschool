@@ -32,13 +32,13 @@ public class CourseDAO {
             preparedStatement.setString(6, course.getInstructorName());
             preparedStatement.setString(7, course.getSummary());
             preparedStatement.setString(8, course.getLearnedSkills());
-            preparedStatement.setInt(9, course.getSubcategory().getId());
+            preparedStatement.setLong(9, course.getSubcategory().getId());
 
             preparedStatement.execute();
 
             try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
                 while (resultSet.next()) {
-                    course.setId(resultSet.getInt(1));
+                    course.setId(resultSet.getLong(1));
                     System.out.println("Novo curso inserido! Id: " + course.getId());
                 }
             }

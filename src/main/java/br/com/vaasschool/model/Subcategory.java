@@ -2,20 +2,31 @@ package br.com.vaasschool.model;
 
 import br.com.vaasschool.model.validation.Validator;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Entity
 public class Subcategory implements Comparable<Subcategory> {
 
-    private int id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String code;
     private String description;
+
+    @Column(name="explanatory_guide")
     private String explanatoryGuide;
     private Boolean active = false;
+
+    @Column(name="order_visualization")
     private Integer order;
+
+    @ManyToOne
     private Category category;
+
+    @OneToMany
     private List<Course> courses = new ArrayList<>();
 
     public Subcategory(String name, String code, String description, Boolean active, Integer order, Category category) {
@@ -31,12 +42,14 @@ public class Subcategory implements Comparable<Subcategory> {
         this.category = category;
     }
 
-    public Subcategory(int id, String name, String code, String description, Boolean active, Integer order, Category category) {
+    public Subcategory(Long id, String name, String code, String description, Boolean active, Integer order, Category category) {
         this(name, code, description, active, order, category);
         this.id = id;
     }
 
-    public int getId() {
+    public Subcategory(){}
+
+    public Long getId() {
         return id;
     }
 

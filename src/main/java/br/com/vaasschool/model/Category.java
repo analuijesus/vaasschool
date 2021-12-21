@@ -2,19 +2,33 @@ package br.com.vaasschool.model;
 
 import br.com.vaasschool.model.validation.Validator;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Category implements Comparable<Category> {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String code;
     private String description;
+
+    @Column(name="explanatory_guide")
     private String explanatoryGuide;
     private Boolean active = false;
+
+    @Column(name="order_visualization")
     private Integer order;
+
+    @Column(name="imagem_path")
     private String imagePath;
+
+    @Column(name="color_code")
     private String colorCode = "3383FF";
+
+    @OneToMany
     private List<Subcategory> subcategories = new ArrayList<>();
 
     public Category(String name, String code) {
@@ -32,6 +46,8 @@ public class Category implements Comparable<Category> {
         this.imagePath = imagePath;
         this.colorCode = colorCode;
     }
+
+    public Category() {}
 
     public String getName() {
         return name;

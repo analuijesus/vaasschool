@@ -2,20 +2,34 @@ package br.com.vaasschool.model;
 
 import br.com.vaasschool.model.validation.Validator;
 
+import javax.persistence.*;
+
+@Entity
 public class Course {
 
     public static final int MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH = 1;
     public static final int MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH = 20;
 
-    private int id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String code;
+
+    @Column(name="estimated_time_to_finish")
     private int estimatedTimeToFinish;
     private CourseVisibility visibility = CourseVisibility.PRIVATE;
+
+    @Column(name="target_audience")
     private String targetAudience;
+
+    @Column(name="instructor_name")
     private String instructorName;
     private String summary;
+
+    @Column(name="learned_skills")
     private String learnedSkills;
+
+    @ManyToOne
     private Subcategory subcategory;
 
     public Course(String name, String code, int estimatedTimeToFinish, String instructorName, Subcategory subcategory) {
@@ -42,7 +56,9 @@ public class Course {
         this.learnedSkills = learnedSkills;
     }
 
-    public int getId() {
+    public Course(){}
+
+    public Long getId() {
         return id;
     }
 
@@ -82,7 +98,7 @@ public class Course {
         return estimatedTimeToFinish;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
