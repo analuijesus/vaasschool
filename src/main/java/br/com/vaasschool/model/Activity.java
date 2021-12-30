@@ -2,12 +2,24 @@ package br.com.vaasschool.model;
 
 import br.com.vaasschool.model.validation.Validator;
 
+import javax.persistence.*;
+
+@Entity
+@DiscriminatorColumn(name = "type", columnDefinition = "ENUM")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Activity implements Comparable<Activity> {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String title;
     private String code;
+
+    @Column(name = "order_visualization")
     private Integer order;
     private Boolean active = false;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Section section;
 
     public Activity(String title, String code, Section section) {
@@ -18,6 +30,10 @@ public abstract class Activity implements Comparable<Activity> {
         this.title = title;
         this.code = code;
         this.section = section;
+    }
+
+    @Deprecated
+    public Activity() {
     }
 
     public String getCode() {

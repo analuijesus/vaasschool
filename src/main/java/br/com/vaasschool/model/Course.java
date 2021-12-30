@@ -10,33 +10,43 @@ public class Course {
     public static final int MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH = 1;
     public static final int MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH = 20;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String code;
 
-    @Column(name="estimated_time_to_finish")
+    @Column(name = "estimated_time_to_finish", columnDefinition = "smallint")
     private int estimatedTimeToFinish;
+
+    @Column(columnDefinition = "ENUM")
+    @Enumerated(EnumType.STRING)
     private CourseVisibility visibility = CourseVisibility.PRIVATE;
 
-    @Column(name="target_audience")
+    @Column(name = "target_audience")
     private String targetAudience;
 
-    @Column(name="instructor_name")
+    @Column(name = "instructor_name")
     private String instructorName;
+
+    @Column(columnDefinition = "text")
     private String summary;
 
-    @Column(name="learned_skills")
+    @Column(name = "learned_skills")
     private String learnedSkills;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Subcategory subcategory;
+
+    @Deprecated
+    public Course() {
+    }
 
     public Course(String name, String code, int estimatedTimeToFinish, String instructorName, Subcategory subcategory) {
         Validator.notNullOrEmpty(name, "O nome do curso precisa ser preenchido.");
         Validator.isCode(code, "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).");
-        Validator.notNullOrEmpty(instructorName,"O nome do instrutor deve ser preenchido.");
-        Validator.notNull(subcategory,"O curso deve ter uma subcategoria associada.");
+        Validator.notNullOrEmpty(instructorName, "O nome do instrutor deve ser preenchido.");
+        Validator.notNull(subcategory, "O curso deve ter uma subcategoria associada.");
         Validator.validInterval(estimatedTimeToFinish, MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH, MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH,
                 "Carga horária inválida. Deve estar entre " + MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH + " e " +
                         MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH);
@@ -56,7 +66,10 @@ public class Course {
         this.learnedSkills = learnedSkills;
     }
 
-    public Course(){}
+    public Course(Long id, String name, String code, int estimatedTimeToFinish, CourseVisibility visibility, String targetAudience, String instructorName, String summary, String learnedSkills, Subcategory subcategory) {
+        this(name, code, estimatedTimeToFinish, visibility, targetAudience, instructorName, summary, learnedSkills, subcategory);
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -115,5 +128,9 @@ public class Course {
                 ", learnedSkills='" + learnedSkills + '\'' +
                 ", subcategory=" + subcategory.getName() +
                 '}';
+    }
+
+    public void publish() {
+        this.visibility = CourseVisibility.PUBLIC;
     }
 }

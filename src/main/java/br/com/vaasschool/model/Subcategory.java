@@ -10,24 +10,29 @@ import java.util.stream.Collectors;
 @Entity
 public class Subcategory implements Comparable<Subcategory> {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String code;
     private String description;
 
-    @Column(name="explanatory_guide")
+    @Column(name = "explanatory_guide")
     private String explanatoryGuide;
     private Boolean active = false;
 
-    @Column(name="order_visualization")
+    @Column(name = "order_visualization")
     private Integer order;
 
     @ManyToOne
     private Category category;
 
-    @OneToMany
+    @OneToMany(mappedBy = "subcategory")
     private List<Course> courses = new ArrayList<>();
+
+    @Deprecated
+    public Subcategory() {
+    }
 
     public Subcategory(String name, String code, String description, Boolean active, Integer order, Category category) {
         Validator.notNullOrEmpty(name);
@@ -46,8 +51,6 @@ public class Subcategory implements Comparable<Subcategory> {
         this(name, code, description, active, order, category);
         this.id = id;
     }
-
-    public Subcategory(){}
 
     public Long getId() {
         return id;

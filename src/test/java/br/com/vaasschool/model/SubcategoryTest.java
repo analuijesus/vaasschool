@@ -1,7 +1,5 @@
-package br.com.vaaschool.model;
+package br.com.vaasschool.model;
 
-import br.com.vaasschool.model.Category;
-import br.com.vaasschool.model.Subcategory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
