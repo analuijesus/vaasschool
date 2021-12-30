@@ -1,6 +1,5 @@
 package br.com.vaasschool.dao;
 
-import br.com.vaasschool.model.Category;
 import br.com.vaasschool.model.Subcategory;
 
 import javax.persistence.EntityManager;
