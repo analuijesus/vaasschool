@@ -37,15 +37,14 @@ public class CategoryDaoTest {
         entityManager.clear();
         List<Category> categories = this.categoryDao.searchAllActiveInOrder();
 
-        Integer order = categories.get(0).getOrder();
-
         assertThat(categories)
                 .hasSize(2)
-                .allMatch(c -> order.equals(1));
+                .extracting(Category::getOrder)
+                .containsExactly(1,2);
     }
 
     @Test
-    void shouldBringAllCategoriesActive() {
+    void shouldBringAllActiveCategories() {
         aCategory("programacao-java-jpa", true, 1);
         aCategory("programacao-java-jdbc", true, 2);
 
@@ -54,7 +53,7 @@ public class CategoryDaoTest {
 
         assertThat(categories)
                 .hasSize(2)
-                .allMatch(c -> c.getActive().equals(true));
+                .allMatch(Category::getActive);
     }
 
     @Test
@@ -67,7 +66,7 @@ public class CategoryDaoTest {
 
         assertThat(categories)
                 .hasSize(1)
-                .allMatch(c -> c.getActive().equals(true));
+                .allMatch(Category::getActive);
     }
 
     @Test

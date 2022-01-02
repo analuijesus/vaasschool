@@ -66,11 +66,6 @@ public class Course {
         this.learnedSkills = learnedSkills;
     }
 
-    public Course(Long id, String name, String code, int estimatedTimeToFinish, CourseVisibility visibility, String targetAudience, String instructorName, String summary, String learnedSkills, Subcategory subcategory) {
-        this(name, code, estimatedTimeToFinish, visibility, targetAudience, instructorName, summary, learnedSkills, subcategory);
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
     }

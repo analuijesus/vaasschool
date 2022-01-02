@@ -20,7 +20,7 @@ public class SubcategoryDaoTest {
             List<Subcategory> subcategories = subcategoryDAO.searchAllActiveInOrder();
             subcategories.forEach(System.out::println);
 
-            List<Subcategory> strings = subcategoryDAO.searchAllEmptyDescriptions();
+            List<String> strings = subcategoryDAO.searchAllEmptyDescriptions();
             strings.forEach(System.out::println);
 
             entityManager.getTransaction().commit();

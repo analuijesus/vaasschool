@@ -52,15 +52,14 @@ public class SubcategoryDaoTest {
 
         List<Subcategory> subcategories = this.subcategoryDao.searchAllActiveInOrder();
 
-        Integer order = subcategories.get(0).getOrder();
-
         assertThat(subcategories)
                 .hasSize(2)
-                .allMatch(c -> order.equals(1));
+                .extracting(Subcategory::getOrder)
+                .containsExactly(1, 2);
     }
 
     @Test
-    void shouldBringAllSubcategoriesActive() {
+    void shouldBringAllActiveSubcategories() {
         aSubcategory("programacao-java-jpa", true, 1, "Aprenda a utilizar a JPA com o " +
                 "Hibernate para persistência em Java, seguindo o modelo de ORM.\n");
         aSubcategory("programacao-java-jdbc", true, 2, "JDBC é uma API, com um conjunto " +
@@ -70,7 +69,7 @@ public class SubcategoryDaoTest {
 
         assertThat(subcategories)
                 .hasSize(2)
-                .allMatch(c -> c.getActive().equals(true));
+                .allMatch(Subcategory::getActive);
     }
 
     @Test
@@ -84,7 +83,7 @@ public class SubcategoryDaoTest {
 
         assertThat(subcategories)
                 .hasSize(1)
-                .allMatch(c -> c.getActive().equals(true));
+                .allMatch(Subcategory::getActive);
     }
 
     @Test
@@ -104,11 +103,10 @@ public class SubcategoryDaoTest {
         aSubcategory("programacao-java-jpa", true, 1, "");
         aSubcategory("programacao-java-jdbc", true, 2, "");
 
-        List<Subcategory> subcategories = this.subcategoryDao.searchAllEmptyDescriptions();
+        List<String> subcategories = this.subcategoryDao.searchAllEmptyDescriptions();
 
         assertThat(subcategories)
-                .hasSize(2)
-                .allMatch(c -> c.getDescription().isEmpty());
+                .hasSize(2);
     }
 
     @Test
@@ -117,13 +115,9 @@ public class SubcategoryDaoTest {
                 "Hibernate para persistência em Java, seguindo o modelo de ORM.");
         aSubcategory("programacao-java-jdbc", true, 2, "");
 
-        List<Subcategory> subcategories = this.subcategoryDao.searchAllEmptyDescriptions();
+        List<String> subcategories = this.subcategoryDao.searchAllEmptyDescriptions();
 
-        String description = subcategories.get(0).getDescription();
-
-        assertThat(subcategories)
-                .hasSize(1)
-                .allMatch(c -> description.equals(c.getDescription()));
+        assertThat(subcategories.contains(""));
     }
 
     @Test
@@ -133,7 +127,7 @@ public class SubcategoryDaoTest {
         aSubcategory("programacao-java-jdbc", true, 2, "JDBC é uma API, com um conjunto" +
                 "de interfaces que podem ser implementadas para a conexão a diversos bancos de dados.");
 
-        List<Subcategory> subcategories = this.subcategoryDao.searchAllEmptyDescriptions();
+        List<String> subcategories = this.subcategoryDao.searchAllEmptyDescriptions();
 
         assertThat(subcategories.isEmpty());
     }

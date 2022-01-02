@@ -25,7 +25,7 @@ public class ReportHtmlPageGenerator {
 
         List<Category> activeCategory = categoryDao.searchAllActiveInOrder();
         List<Subcategory> activeSubcategories = subcategoryDao.searchAllActiveInOrder();
-        List<Subcategory> emptyDescription = subcategoryDao.searchAllEmptyDescriptions();
+        List<String> emptyDescription = subcategoryDao.searchAllEmptyDescriptions();
         List<Course> publicCourse = courseDao.searchAllPublic();
 
         writePage(activeCategory, activeSubcategories, publicCourse, emptyDescription);
@@ -33,7 +33,7 @@ public class ReportHtmlPageGenerator {
     }
 
     private static void writePage(List<Category> categories, List<Subcategory> subcategories,
-                                  List<Course> courses, List<Subcategory> subcategoriesName) throws Exception {
+                                  List<Course> courses, List<String> subcategoriesName) throws Exception {
         try (OutputStream os = new FileOutputStream("relatorio-vaasschool.html")) {
             PrintStream ps = new PrintStream(os);
 
@@ -50,7 +50,7 @@ public class ReportHtmlPageGenerator {
             ps.println("<h2>Categoria Ativa</h2>");
             ps.print("<th>Nome Categoria</th>");
             ps.print("<th>Código Categoria</th>");
-            ps.print("<th>Ordem Categoria/th>");
+            ps.print("<th>Ordem Categoria</th>");
             ps.print("<th>Descrição Categoria</th>");
             ps.print("<th>Status Categoria</th>");
             ps.print("<th>Icone Categoria</th>");
@@ -97,7 +97,7 @@ public class ReportHtmlPageGenerator {
                 ps.println("<td>" + subcategory.getOrder() + "</td>");
                 ps.println("<td>" + subcategory.getDescription() + "</td>");
                 ps.println("<td>" + subcategory.getActive() + "</td>");
-                ps.println("<td>" + subcategory.getCategory().getName()+ "</td>");
+                ps.println("<td>" + subcategory.getCategory().getName() + "</td>");
                 ps.println("</tr>");
             }
 
@@ -132,7 +132,7 @@ public class ReportHtmlPageGenerator {
                 ps.println("<td>" + course.getInstructorName() + "</td>");
                 ps.println("<td>" + course.getSummary() + "</td>");
                 ps.println("<td>" + course.getLearnedSkills() + "</td>");
-                ps.println("<td>" + course.getSubcategory().getName()+ "</td>");
+                ps.println("<td>" + course.getSubcategory().getName() + "</td>");
                 ps.println("</tr>");
             }
 
@@ -150,11 +150,9 @@ public class ReportHtmlPageGenerator {
 
             ps.println("<tbody>");
 
-            for (Subcategory subcategory : subcategoriesName) {
-                ps.println("<tr>");
-                ps.println("<td>" + subcategory.getName() + "</td>");
-                ps.println("</tr>");
-            }
+            ps.println("<tr>");
+            ps.println("<td>" + subcategoriesName + "</td>");
+            ps.println("</tr>");
 
             ps.println("</tbody>");
             ps.println("</table>");

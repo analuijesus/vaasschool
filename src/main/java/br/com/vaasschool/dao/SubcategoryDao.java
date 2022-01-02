@@ -26,7 +26,7 @@ public class SubcategoryDao {
         return jpqlSubcategoryActive.getResultList();
     }
 
-    public List<Subcategory> searchAllEmptyDescriptions() {
+    public List<String> searchAllEmptyDescriptions() {
         Query jpqlDescriptionEmpty = entityManager.createQuery("""
                 select subcategory
                 from Subcategory subcategory 

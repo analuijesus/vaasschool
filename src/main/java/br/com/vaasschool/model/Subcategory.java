@@ -24,7 +24,7 @@ public class Subcategory implements Comparable<Subcategory> {
     @Column(name = "order_visualization")
     private Integer order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
     @OneToMany(mappedBy = "subcategory")
@@ -117,6 +117,5 @@ public class Subcategory implements Comparable<Subcategory> {
     public int compareTo(Subcategory anotherSubCategory) {
         return this.order.compareTo(anotherSubCategory.order);
     }
-
 
 }
