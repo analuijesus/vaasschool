@@ -2,13 +2,23 @@ package br.com.vaasschool.model;
 
 import br.com.vaasschool.model.validation.Validator;
 
+import javax.persistence.*;
+
+@Entity
 public class Section implements Comparable<Section>{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String code;
     private Boolean active = false;
     private Boolean test = false;
+
+    @Column(name = "order_visualization")
     private Integer order;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Course course;
 
     public Section(String name, String code, Course course) {
@@ -19,6 +29,10 @@ public class Section implements Comparable<Section>{
         this.name = name;
         this.code = code;
         this.course = course;
+    }
+
+    @Deprecated
+    public Section() {
     }
 
     public String getCode() {

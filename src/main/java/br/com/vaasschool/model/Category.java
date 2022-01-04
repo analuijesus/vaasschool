@@ -2,20 +2,39 @@ package br.com.vaasschool.model;
 
 import br.com.vaasschool.model.validation.Validator;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Category implements Comparable<Category> {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String code;
     private String description;
+
+    @Column(name = "explanatory_guide")
     private String explanatoryGuide;
     private Boolean active = false;
+
+    @Column(name = "order_visualization")
     private Integer order;
+
+    @Column(name = "imagem_path")
     private String imagePath;
+
+    @Column(name = "color_code")
     private String colorCode = "3383FF";
+
+    @OneToMany(mappedBy = "category")
     private List<Subcategory> subcategories = new ArrayList<>();
+
+    @Deprecated
+    public Category() {
+    }
 
     public Category(String name, String code) {
         Validator.notNullOrEmpty(name);
@@ -69,15 +88,15 @@ public class Category implements Comparable<Category> {
         this.subcategories.add(subcategory);
     }
 
-    public int getTotalCourseHours(){
+    public int getTotalCourseHours() {
         return subcategories.stream().mapToInt(Subcategory::getTotalCourseHours).sum();
     }
 
-    public int getNumberOfCourses(){
+    public int getNumberOfCourses() {
         return subcategories.stream().mapToInt(Subcategory::getNumberOfCourses).sum();
     }
 
-    public List<Subcategory> getActiveSubcategories(){
+    public List<Subcategory> getActiveSubcategories() {
         return subcategories.stream()
                 .filter(Subcategory::getActive)
                 .toList();

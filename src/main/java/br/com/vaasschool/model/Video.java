@@ -2,10 +2,14 @@ package br.com.vaasschool.model;
 
 import br.com.vaasschool.model.validation.Validator;
 
+import javax.persistence.*;
+
+@Entity
+@DiscriminatorValue("Video")
 public class Video extends Activity{
 
     private String url;
-    private Long minutes;
+    private int minutes;
     private String transcription;
 
     public Video(String title, String code, Section section, String url) {
@@ -14,5 +18,10 @@ public class Video extends Activity{
         Validator.notNullOrEmpty(url);
 
         this.url = url;
+    }
+
+    @Deprecated
+    public Video() {
+
     }
 }
