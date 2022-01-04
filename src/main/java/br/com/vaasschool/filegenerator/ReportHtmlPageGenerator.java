@@ -81,7 +81,7 @@ public class ReportHtmlPageGenerator {
             ps.println("<h2>Subcategoria Ativa</h2>");
             ps.print("<th>Nome Subcategoria</th>");
             ps.print("<th>Código Subcategoria</th>");
-            ps.print("<th>Ordem Subcategoria/th>");
+            ps.print("<th>Ordem Subcategoria</th>");
             ps.print("<th>Descrição Subcategoria</th>");
             ps.print("<th>Status Subcategoria</th>");
             ps.print("<th>Categoria Subcategoria</th>");
@@ -110,7 +110,7 @@ public class ReportHtmlPageGenerator {
             ps.println("<h2>Cursos Públicos</h2>");
             ps.print("<th>Nome Curso</th>");
             ps.print("<th>Código Curso</th>");
-            ps.print("<th>Tempo Finalização do Curso/th>");
+            ps.print("<th>Tempo Finalização do Curso</th>");
             ps.print("<th>Visibilidade Curso</th>");
             ps.print("<th>Publico Alvo</th>");
             ps.print("<th>Nome Instrutor</th>");
