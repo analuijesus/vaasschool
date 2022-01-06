@@ -1,6 +1,6 @@
-<%@ page import="br.com.vaasschool.model.Category" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 <head>
     <title>Categorias</title>
@@ -21,24 +21,18 @@
 
     <tbody>
 
-    <%
-        List<Category> categories = (List<Category>) request.getAttribute("categorias");
-        for (Category c : categories) {
-    %>
-    <tr>
-        <td><%=c.getName()%></td>
-        %>
-        <td><%=c.getCode()%></td>
-        <td><%=c.getOrder()%></td>
-        <td><%=c.getDescription()%></td>
-        <td><%=c.getActive()%></td>
-        <td><img src=<%=c.getImagePath()%></td>
-        <td><%=c.getColorCode()%></td>
-    </tr>
+    <c:forEach items="${categorias}" var="category">
+        <tr>
+            <td>${category.name}</td>
+            <td>${category.code}</td>
+            <td>${category.order}</td>
+            <td>${category.description}</td>
+            <td>${category.active}</td>
+            <td><img src=${category.imagePath}</td>
+            <td>${category.colorCode}</td>
+        </tr>
+    </c:forEach>
 
-    <%
-        }
-    %>
     </tbody>
 </table>
 </body>
