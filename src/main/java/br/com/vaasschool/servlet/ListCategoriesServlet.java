@@ -12,22 +12,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/listaCategorias")
-public class CategoryServlet extends HttpServlet {
+public class ListCategoriesServlet extends HttpServlet {
 
-    EntityManager entityManager = JPAUtil.getEntityManager();
-    CategoryDao categoryDao = new CategoryDao(entityManager);
+//    EntityManager entityManager = JPAUtil.getEntityManager();
+//    CategoryDao categoryDao = new CategoryDao(entityManager);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        EntityManager entityManager = JPAUtil.getEntityManager();
+        CategoryDao categoryDao = new CategoryDao(entityManager);
+
+        entityManager.getTransaction().begin();
         List<Category> categories = categoryDao.findAll();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
         request.setAttribute("categorias", categories);
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/listaCategorias.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/listCategory.jsp");
         requestDispatcher.forward(request, response);
     }
 }
