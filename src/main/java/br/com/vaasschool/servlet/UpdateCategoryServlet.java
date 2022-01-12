@@ -15,11 +15,11 @@ import java.io.IOException;
 @WebServlet("/alteraCategoria")
 public class UpdateCategoryServlet extends HttpServlet {
 
-    EntityManager entityManager = JPAUtil.getEntityManager();
-    CategoryDao categoryDao = new CategoryDao(entityManager);
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        EntityManager entityManager = JPAUtil.getEntityManager();
+        CategoryDao categoryDao = new CategoryDao(entityManager);
 
         Long id = Long.parseLong(request.getParameter("id"));
         String name = request.getParameter("name");

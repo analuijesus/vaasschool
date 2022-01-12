@@ -30,7 +30,7 @@ public class DisableCategoryServlet extends HttpServlet {
         entityManager.getTransaction().commit();
         entityManager.close();
 
-        request.setAttribute("desativaCategoria", category);
+        request.setAttribute("disableCategory", category);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/listCategory.jsp");
         requestDispatcher.forward(request, response);

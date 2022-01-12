@@ -17,9 +17,6 @@ import java.util.List;
 @WebServlet("/listaCategorias")
 public class ListCategoriesServlet extends HttpServlet {
 
-//    EntityManager entityManager = JPAUtil.getEntityManager();
-//    CategoryDao categoryDao = new CategoryDao(entityManager);
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -32,7 +29,7 @@ public class ListCategoriesServlet extends HttpServlet {
         entityManager.getTransaction().commit();
         entityManager.close();
 
-        request.setAttribute("categorias", categories);
+        request.setAttribute("category", categories);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/listCategory.jsp");
         requestDispatcher.forward(request, response);
