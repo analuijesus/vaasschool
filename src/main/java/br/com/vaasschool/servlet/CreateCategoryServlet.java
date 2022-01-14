@@ -16,26 +16,33 @@ import java.io.IOException;
 public class CreateCategoryServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         EntityManager entityManager = JPAUtil.getEntityManager();
         CategoryDao categoryDao = new CategoryDao(entityManager);
 
-        String name = request.getParameter("name");
-        String code = request.getParameter("code");
-        Integer order = Integer.parseInt(request.getParameter("order"));
-        String description = request.getParameter("description");
-        Boolean active = Boolean.parseBoolean(request.getParameter("active"));
-        String imagePath = request.getParameter("imagePath");
-        String colorCode = request.getParameter("colorCode");
+        try {
+            String name = request.getParameter("name");
+            String code = request.getParameter("code");
+            Integer order = Integer.parseInt(request.getParameter("order"));
+            String description = request.getParameter("description");
+            Boolean active = Boolean.parseBoolean(request.getParameter("active"));
+            String imagePath = request.getParameter("imagePath");
+            String colorCode = request.getParameter("colorCode");
 
-        entityManager.getTransaction().begin();
+            entityManager.getTransaction().begin();
 
-        Category category = new Category(name, code, description, order, active, imagePath, colorCode);
+            Category category = new Category(name, code, description, order, active, imagePath, colorCode);
 
-        categoryDao.save(category);
+            categoryDao.save(category);
+            entityManager.getTransaction().commit();
 
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            ex.printStackTrace();
 
+        } finally {
+            entityManager.close();
+        }
         response.sendRedirect("listaCategorias");
     }
 }

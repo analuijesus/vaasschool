@@ -108,6 +108,10 @@ public class Category implements Comparable<Category> {
         this.active = active;
     }
 
+    public void deactivate(){
+        this.active = false;
+    }
+
     public void setOrder(Integer order) {
         this.order = order;
     }

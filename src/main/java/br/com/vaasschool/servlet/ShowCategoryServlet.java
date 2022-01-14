@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/mostraCategoria")
-public class ShowCategoryServlet  extends HttpServlet {
+public class ShowCategoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,16 +22,22 @@ public class ShowCategoryServlet  extends HttpServlet {
         EntityManager entityManager = JPAUtil.getEntityManager();
         CategoryDao categoryDao = new CategoryDao(entityManager);
 
-        Long id = Long.parseLong(request.getParameter("id"));
-        entityManager.getTransaction().begin();
-        Category category = categoryDao.findById(id);
+        try {
+            Long id = Long.parseLong(request.getParameter("id"));
 
-        entityManager.getTransaction().commit();
-        entityManager.close();
+            Category category = categoryDao.findById(id);
 
-        request.setAttribute("category", category);
+            request.setAttribute("category", category);
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/formUpdateCategory.jsp");
-        requestDispatcher.forward(request, response);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/formUpdateCategory.jsp");
+            requestDispatcher.forward(request, response);
+
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            ex.printStackTrace();
+
+        } finally {
+            entityManager.close();
+        }
     }
 }

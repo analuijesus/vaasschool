@@ -46,10 +46,4 @@ public class CategoryDao {
                 .getSingleResult();
         return category;
     }
-
-    public Category disableCategory(Long id){
-        Category category = findById(id);
-        category.setActive(false);
-        return category;
-    }
 }

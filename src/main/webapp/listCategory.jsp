@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<a href="/vaasschool/formCreateCategory.jsp">
+<a href="/vaasschool/criaNovaCategoria">
     <button class="categoria">Cadastre uma Nova Categoria</button>
 </a>
 <br/><br>
@@ -47,7 +47,7 @@
                     <td>Inativa</td>
                 </c:otherwise>
             </c:choose>
-            <td><img src=${category.imagePath}</td>
+            <td><img src="${category.imagePath}"></td>
             <td>${category.colorCode}</td>
 
             <td><a href="/vaasschool/mostraCategoria?id=${category.id}">atualizar</a></td>
@@ -57,7 +57,6 @@
     </tbody>
 </table>
 
-<script type="text/javascript" src="js/jquery.js"></script>
 <script src="js/disableCategory.js"></script>
 
 </body>

@@ -23,15 +23,23 @@ public class ListCategoriesServlet extends HttpServlet {
         EntityManager entityManager = JPAUtil.getEntityManager();
         CategoryDao categoryDao = new CategoryDao(entityManager);
 
-        entityManager.getTransaction().begin();
-        List<Category> categories = categoryDao.findAll();
+        try {
+            entityManager.getTransaction().begin();
+            List<Category> categories = categoryDao.findAll();
 
-        entityManager.getTransaction().commit();
-        entityManager.close();
+            entityManager.getTransaction().commit();
 
-        request.setAttribute("category", categories);
+            request.setAttribute("category", categories);
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/listCategory.jsp");
-        requestDispatcher.forward(request, response);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/listCategory.jsp");
+            requestDispatcher.forward(request, response);
+
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            ex.printStackTrace();
+
+        } finally {
+            entityManager.close();
+        }
     }
 }

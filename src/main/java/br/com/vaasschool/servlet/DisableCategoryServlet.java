@@ -17,15 +17,25 @@ public class DisableCategoryServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         EntityManager entityManager = JPAUtil.getEntityManager();
         CategoryDao categoryDao = new CategoryDao(entityManager);
 
-        entityManager.getTransaction().begin();
-        Long id = Long.valueOf(request.getParameter("id"));
+        try {
+            entityManager.getTransaction().begin();
+            Long id = Long.valueOf(request.getParameter("id"));
 
-        categoryDao.disableCategory(id);
+            Category category = categoryDao.findById(id);
+            category.deactivate();
 
-        entityManager.getTransaction().commit();
-        entityManager.close();
+            entityManager.getTransaction().commit();
+
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            ex.printStackTrace();
+
+        } finally {
+            entityManager.close();
+        }
     }
 }

@@ -21,31 +21,38 @@ public class UpdateCategoryServlet extends HttpServlet {
         EntityManager entityManager = JPAUtil.getEntityManager();
         CategoryDao categoryDao = new CategoryDao(entityManager);
 
-        Long id = Long.parseLong(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String code = request.getParameter("code");
-        Integer order = Integer.parseInt(request.getParameter("order"));
-        String description = request.getParameter("description");
-        Boolean active = Boolean.parseBoolean(request.getParameter("active"));
-        String imagePath = request.getParameter("imagePath");
-        String colorCode = request.getParameter("colorCode");
+        try {
+            Long id = Long.parseLong(request.getParameter("id"));
+            String name = request.getParameter("name");
+            String code = request.getParameter("code");
+            Integer order = Integer.parseInt(request.getParameter("order"));
+            String description = request.getParameter("description");
+            Boolean active = Boolean.parseBoolean(request.getParameter("active"));
+            String imagePath = request.getParameter("imagePath");
+            String colorCode = request.getParameter("colorCode");
 
-        entityManager.getTransaction().begin();
-        Category category = categoryDao.findById(id);
+            entityManager.getTransaction().begin();
+            Category category = categoryDao.findById(id);
 
-        category.setId(id);
-        category.setName(name);
-        category.setCode(code);
-        category.setOrder(order);
-        category.setDescription(description);
-        category.setActive(active);
-        category.setImagePath(imagePath);
-        category.setColorCode(colorCode);
+            category.setId(id);
+            category.setName(name);
+            category.setCode(code);
+            category.setOrder(order);
+            category.setDescription(description);
+            category.setActive(active);
+            category.setImagePath(imagePath);
+            category.setColorCode(colorCode);
 
-        categoryDao.save(category);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+            categoryDao.save(category);
+            entityManager.getTransaction().commit();
 
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            ex.printStackTrace();
+
+        } finally {
+            entityManager.close();
+        }
         response.sendRedirect("listaCategorias");
     }
 }
