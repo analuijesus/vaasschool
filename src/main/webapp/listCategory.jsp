@@ -57,6 +57,7 @@
     </tbody>
 </table>
 
+<script src="js/JQuery.js"></script>
 <script src="js/disableCategory.js"></script>
 
 </body>

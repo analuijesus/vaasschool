@@ -29,7 +29,7 @@ public class ShowCategoryServlet extends HttpServlet {
 
             request.setAttribute("category", category);
 
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/formUpdateCategory.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/formCategory.jsp");
             requestDispatcher.forward(request, response);
 
         } catch (Exception ex) {

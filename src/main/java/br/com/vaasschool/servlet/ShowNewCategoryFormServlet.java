@@ -14,7 +14,7 @@ public class ShowNewCategoryFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/formUpdateCategory.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/formCategory.jsp");
         requestDispatcher.forward(request, response);
     }
 }
