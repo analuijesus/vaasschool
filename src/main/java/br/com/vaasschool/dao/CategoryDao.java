@@ -15,6 +15,16 @@ public class CategoryDao {
         this.entityManager = entityManager;
     }
 
+    public void save(Category category) {
+        if (category.getId() == null) {
+            this.entityManager.persist(category);
+            System.out.println("Curso Id " + category.getId() + " inserido com sucesso!");
+        } else {
+            this.entityManager.merge(category);
+            System.out.println("Curso Id " + category.getId() + " alterado com sucesso!");
+        }
+    }
+
     public List<Category> searchAllActiveInOrder() {
 
         Query jpqCategoryActive = entityManager.createQuery("""
@@ -28,5 +38,9 @@ public class CategoryDao {
 
     public List<Category> findAll() {
         return entityManager.createQuery("select category from Category category", Category.class).getResultList();
+    }
+
+    public Category findById(Long id) {
+        return entityManager.find(Category.class, id);
     }
 }
