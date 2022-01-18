@@ -52,6 +52,12 @@ public class Category implements Comparable<Category> {
         this.colorCode = colorCode;
     }
 
+    public Category(Long id, String name, String code, String description, Integer order, Boolean active, String imagePath, String colorCode) {
+        this(name, code, description, order, active, imagePath, colorCode);
+        this.id = id;
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -84,44 +90,8 @@ public class Category implements Comparable<Category> {
         return order;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setExplanatoryGuide(String explanatoryGuide) {
-        this.explanatoryGuide = explanatoryGuide;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
     public void deactivate(){
         this.active = false;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
     }
 
     public List<Subcategory> getSubcategories() {

@@ -29,16 +29,16 @@
 
     <tbody>
 
-    <c:forEach items="${category}" var="category">
+    <c:forEach items="${categories}" var="categories">
         <tr>
-            <td>${category.name}</td>
-            <td>${category.code}</td>
-            <td>${category.order}</td>
-            <td>${category.description}</td>
+            <td>${categories.name}</td>
+            <td>${categories.code}</td>
+            <td>${categories.order}</td>
+            <td>${categories.description}</td>
             <c:choose>
-                <c:when test="${category.active eq true}">
-                    <td id="category_${category.id}">
-                        <a href="#" onClick="disableNow(${category.id})">
+                <c:when test="${categories.active eq true}">
+                    <td id="category_${categories.id}">
+                        <a href="#" onClick="disableNow(${categories.id})">
                             Categoria Ativa! Clique para desativar
                         </a>
                     </td>
@@ -47,10 +47,10 @@
                     <td>Inativa</td>
                 </c:otherwise>
             </c:choose>
-            <td><img src="${category.imagePath}"></td>
-            <td>${category.colorCode}</td>
+            <td><img src="${categories.imagePath}"></td>
+            <td>${categories.colorCode}</td>
 
-            <td><a href="/vaasschool/mostraCategoria?id=${category.id}">atualizar</a></td>
+            <td><a href="/vaasschool/mostraCategoria?id=${categories.id}">atualizar</a></td>
         </tr>
     </c:forEach>
 

@@ -29,15 +29,14 @@ public class ListCategoriesServlet extends HttpServlet {
 
             entityManager.getTransaction().commit();
 
-            request.setAttribute("category", categories);
+            request.setAttribute("categories", categories);
 
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/listCategory.jsp");
             requestDispatcher.forward(request, response);
 
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
-            ex.printStackTrace();
-
+            throw ex;
         } finally {
             entityManager.close();
         }

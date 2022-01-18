@@ -38,8 +38,7 @@ public class CreateCategoryServlet extends HttpServlet {
 
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
-            ex.printStackTrace();
-
+            throw ex;
         } finally {
             entityManager.close();
         }

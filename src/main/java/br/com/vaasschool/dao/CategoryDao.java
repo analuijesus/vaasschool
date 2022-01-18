@@ -41,9 +41,6 @@ public class CategoryDao {
     }
 
     public Category findById(Long id) {
-        Category category = entityManager.createQuery("select category from Category category where category.id = :id", Category.class)
-                .setParameter("id", id)
-                .getSingleResult();
-        return category;
+        return entityManager.find(Category.class, id);
     }
 }

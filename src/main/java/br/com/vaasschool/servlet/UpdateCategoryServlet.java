@@ -32,24 +32,16 @@ public class UpdateCategoryServlet extends HttpServlet {
             String colorCode = request.getParameter("colorCode");
 
             entityManager.getTransaction().begin();
-            Category category = categoryDao.findById(id);
 
-            category.setId(id);
-            category.setName(name);
-            category.setCode(code);
-            category.setOrder(order);
-            category.setDescription(description);
-            category.setActive(active);
-            category.setImagePath(imagePath);
-            category.setColorCode(colorCode);
+            Category category = new Category(id, name, code, description, order, active, imagePath, colorCode);
+            categoryDao.findById(id);
 
             categoryDao.save(category);
             entityManager.getTransaction().commit();
 
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
-            ex.printStackTrace();
-
+            throw ex;
         } finally {
             entityManager.close();
         }

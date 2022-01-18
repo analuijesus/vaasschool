@@ -32,8 +32,7 @@ public class DisableCategoryServlet extends HttpServlet {
 
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
-            ex.printStackTrace();
-
+            throw ex;
         } finally {
             entityManager.close();
         }
