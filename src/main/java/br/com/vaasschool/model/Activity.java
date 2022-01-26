@@ -4,9 +4,12 @@ import br.com.vaasschool.model.validation.Validator;
 
 import javax.persistence.*;
 
-@Entity
-@DiscriminatorColumn(name = "type", columnDefinition = "ENUM")
+import static org.hibernate.type.EnumType.ENUM;
+
+
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "type", columnDefinition = "ENUM('EXPLANATION', 'VIDEO','QUESTION')")
+@Entity
 public abstract class Activity implements Comparable<Activity> {
 
     @Id

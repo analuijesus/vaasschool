@@ -80,6 +80,10 @@ public class Subcategory implements Comparable<Subcategory> {
         return category;
     }
 
+    public String getExplanatoryGuide() {
+        return explanatoryGuide;
+    }
+
     public List<Course> getCourses() {
         return courses;
     }

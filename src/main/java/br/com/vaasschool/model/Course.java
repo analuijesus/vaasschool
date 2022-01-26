@@ -110,6 +110,10 @@ public class Course {
         this.id = id;
     }
 
+    public boolean isPublic(){
+       return CourseVisibility.PUBLIC.equals(visibility);
+    }
+
     @Override
     public String toString() {
         return "Course{" +

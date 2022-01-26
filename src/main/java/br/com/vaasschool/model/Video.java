@@ -22,6 +22,5 @@ public class Video extends Activity{
 
     @Deprecated
     public Video() {
-
     }
 }
