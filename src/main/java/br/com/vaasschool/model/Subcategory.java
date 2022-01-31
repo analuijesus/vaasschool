@@ -1,8 +1,8 @@
 package br.com.vaasschool.model;
 
-import br.com.vaasschool.model.validation.Validator;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +13,11 @@ public class Subcategory implements Comparable<Subcategory> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "O nome da subcategoria deve ser preenchido.")
     private String name;
+
+    @NotBlank(message = "Insira um código válido.O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
     private String description;
 
@@ -24,6 +28,7 @@ public class Subcategory implements Comparable<Subcategory> {
     @Column(name = "order_visualization")
     private Integer order;
 
+    @NotNull(message = "A categoria deve ser preenchida.")
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
@@ -35,10 +40,6 @@ public class Subcategory implements Comparable<Subcategory> {
     }
 
     public Subcategory(String name, String code, String description, Boolean active, Integer order, Category category) {
-        Validator.notNullOrEmpty(name);
-        Validator.isCode(code);
-        Validator.notNull(category);
-
         this.name = name;
         this.code = code;
         this.description = description;

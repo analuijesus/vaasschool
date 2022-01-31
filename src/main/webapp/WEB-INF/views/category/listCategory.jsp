@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/resources/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/resources/css/style.css" rel="stylesheet">
 
 

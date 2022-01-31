@@ -6,13 +6,13 @@ import java.util.List;
 
 public class CategoryApiDto {
 
-    private String name;
-    private String code;
-    private Integer order;
-    private String explanatoryGuide;
-    private String colorCode;
-    private int totalCourses;
-    private List<SubcategoryApiDto> subcategoryApiDtos;
+    final private String name;
+    final private String code;
+    final private Integer order;
+    final private String explanatoryGuide;
+    final private String colorCode;
+    final private int totalCourses;
+    final private List<SubcategoryApiDto> subcategoryApiDtos;
 
     public CategoryApiDto(Category category) {
         this.name = category.getName();

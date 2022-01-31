@@ -115,19 +115,19 @@ public class CategoryForm {
         return new Category(name, code, description, explanatoryGuide, order, active, imagePath, colorCode);
     }
 
-    public static Category convert(CategoryForm categoryForm, CategoryRepository categoryRepository) {
-        Category category = categoryRepository.findById(categoryForm.getId())
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", categoryForm.code)));
+    public Category convert(CategoryRepository categoryRepository) {
+        Category category = categoryRepository.findById(getId())
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
 
-        category.setId(categoryForm.getId());
-        category.setName(categoryForm.getName());
-        category.setCode(categoryForm.getCode());
-        category.setDescription(categoryForm.getDescription());
-        category.setExplanatoryGuide(categoryForm.getExplanatoryGuide());
-        category.setActive(categoryForm.getActive());
-        category.setOrder(categoryForm.getOrder());
-        category.setImagePath(categoryForm.getImagePath());
-        category.setColorCode(categoryForm.getColorCode());
+        category.setId(getId());
+        category.setName(getName());
+        category.setCode(getCode());
+        category.setDescription(getDescription());
+        category.setExplanatoryGuide(getExplanatoryGuide());
+        category.setActive(getActive());
+        category.setOrder(getOrder());
+        category.setImagePath(getImagePath());
+        category.setColorCode(getColorCode());
 
         return category;
     }

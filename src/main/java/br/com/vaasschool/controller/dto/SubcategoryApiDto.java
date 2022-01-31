@@ -7,10 +7,10 @@ import java.util.List;
 
 public class SubcategoryApiDto {
 
-    private String name;
-    private String code;
-    private String explanatoryGuide;
-    private List<CourseApiDto> coursesApi;
+    final private String name;
+    final private String code;
+    final private String explanatoryGuide;
+    final private List<CourseApiDto> coursesApi;
 
     public SubcategoryApiDto(Subcategory subcategory) {
         this.name = subcategory.getName();

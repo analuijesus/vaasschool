@@ -1,8 +1,8 @@
 package br.com.vaasschool.model;
 
-import br.com.vaasschool.model.validation.Validator;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Course {
@@ -13,9 +13,15 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "O nome do curso precisa ser preenchido.")
     private String name;
+
+    @NotBlank(message = "Insira um código válido.O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
 
+    @NotNull(message = "Carga horária inválida. Deve estar entre " + MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH + " e " +
+            MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH)
     @Column(name = "estimated_time_to_finish", columnDefinition = "smallint")
     private int estimatedTimeToFinish;
 
@@ -27,6 +33,7 @@ public class Course {
     private String targetAudience;
 
     @Column(name = "instructor_name")
+    @NotBlank(message = "O nome do instrutor deve ser preenchido.")
     private String instructorName;
 
     @Column(columnDefinition = "text")
@@ -35,6 +42,7 @@ public class Course {
     @Column(name = "learned_skills")
     private String learnedSkills;
 
+    @NotNull(message = "O curso deve ter uma subcategoria associada.")
     @ManyToOne(fetch = FetchType.LAZY)
     private Subcategory subcategory;
 
@@ -43,14 +51,6 @@ public class Course {
     }
 
     public Course(String name, String code, int estimatedTimeToFinish, String instructorName, Subcategory subcategory) {
-        Validator.notNullOrEmpty(name, "O nome do curso precisa ser preenchido.");
-        Validator.isCode(code, "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).");
-        Validator.notNullOrEmpty(instructorName, "O nome do instrutor deve ser preenchido.");
-        Validator.notNull(subcategory, "O curso deve ter uma subcategoria associada.");
-        Validator.validInterval(estimatedTimeToFinish, MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH, MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH,
-                "Carga horária inválida. Deve estar entre " + MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH + " e " +
-                        MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH);
-
         this.name = name;
         this.code = code;
         this.estimatedTimeToFinish = estimatedTimeToFinish;
@@ -110,8 +110,8 @@ public class Course {
         this.id = id;
     }
 
-    public boolean isPublic(){
-       return CourseVisibility.PUBLIC.equals(visibility);
+    public boolean isPublic() {
+        return CourseVisibility.PUBLIC.equals(visibility);
     }
 
     @Override

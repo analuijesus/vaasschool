@@ -6,15 +6,15 @@ import java.util.List;
 
 public class CategoryDto {
 
-    private Long id;
-    private String name;
-    private String code;
-    private String description;
-    private String explanatoryGuide;
-    private Boolean active;
-    private Integer order;
-    private String imagePath;
-    private String colorCode;
+    final private Long id;
+    final private String name;
+    final private String code;
+    final private String description;
+    final private String explanatoryGuide;
+    final private Boolean active;
+    final private Integer order;
+    final private String imagePath;
+    final private String colorCode;
 
     public CategoryDto(Category category) {
         this.id = category.getId();
@@ -64,39 +64,4 @@ public class CategoryDto {
         return colorCode;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setExplanatoryGuide(String explanatoryGuide) {
-        this.explanatoryGuide = explanatoryGuide;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
-    }
 }

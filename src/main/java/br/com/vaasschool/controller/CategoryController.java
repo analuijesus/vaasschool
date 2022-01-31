@@ -25,7 +25,7 @@ public class CategoryController {
     }
 
     @GetMapping("/admin/categories")
-    public String getCategories(Model model) {
+    public String listCategories(Model model) {
         List<Category> categories = categoryRepository.findAll();
         List<CategoryDto> categoryDtos = categories.stream().map(CategoryDto::new).toList();
         model.addAttribute("categories", categoryDtos);
@@ -33,23 +33,23 @@ public class CategoryController {
     }
 
     @GetMapping("/admin/categories/new")
-    public String showNewCategory(Model model) {
+    public String showNew(Model model) {
         model.addAttribute("categoryForm", new CategoryForm());
         return "category/formCategory";
     }
 
     @PostMapping("/admin/categories/new")
-    public String newCategory(@Valid CategoryForm categoryForm, BindingResult bindingResult) {
+    public String registerNew(@Valid CategoryForm categoryForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "category/formCategory";
         }
-        Category category = categoryForm.toModel();
-        categoryRepository.save(category);
+//        Category category = ;
+        categoryRepository.save(categoryForm.toModel());
         return "redirect:/admin/categories";
     }
 
     @GetMapping("/admin/categories/{code}")
-    public String showUpdateCategory(@PathVariable String code, Model model) {
+    public String showUpdate(@PathVariable String code, Model model) {
         Category category = categoryRepository.findByCode(code)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
         model.addAttribute("categoryForm", CategoryForm.from(category));
@@ -57,12 +57,11 @@ public class CategoryController {
     }
 
     @PostMapping("/admin/categories/{code}")
-    public String updateCategory(@Valid CategoryForm categoryForm, BindingResult bindingResult, Model model) {
+    public String update(@Valid CategoryForm categoryForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return showUpdateCategory(categoryForm.getCode(), model);
+            return showUpdate(categoryForm.getCode(), model);
         }
-        System.out.println("Ana");
-        categoryRepository.save(CategoryForm.convert(categoryForm, categoryRepository));
+        categoryRepository.save(categoryForm.convert(categoryRepository));
         return "redirect:/admin/categories";
     }
 }

@@ -6,10 +6,10 @@ import java.util.List;
 
 public class CourseApiDto {
 
-    private String name;
-    private String code;
-    private int estimatedTimeToFinishTheCourse;
-    private String skillsLearnedInTheCourse;
+    final private String name;
+    final private String code;
+    final private int estimatedTimeToFinishTheCourse;
+    final private String skillsLearnedInTheCourse;
 
     public CourseApiDto(Course course) {
         this.name = course.getName();
