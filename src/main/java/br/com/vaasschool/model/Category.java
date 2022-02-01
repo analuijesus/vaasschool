@@ -1,8 +1,7 @@
 package br.com.vaasschool.model;
 
-import br.com.vaasschool.model.validation.Validator;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,11 @@ public class Category implements Comparable<Category> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "O nome da categoria precisa ser preenchida.")
     private String name;
+
+    @NotBlank(message = "Insira um código válido.O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
     private String description;
 
@@ -37,8 +40,6 @@ public class Category implements Comparable<Category> {
     }
 
     public Category(String name, String code) {
-        Validator.notNullOrEmpty(name);
-        Validator.isCode(code);
         this.name = name;
         this.code = code;
     }
@@ -52,11 +53,10 @@ public class Category implements Comparable<Category> {
         this.colorCode = colorCode;
     }
 
-    public Category(Long id, String name, String code, String description, Integer order, Boolean active, String imagePath, String colorCode) {
+    public Category(String name, String code, String description, String explanatoryGuide, Integer order, Boolean active, String imagePath, String colorCode) {
         this(name, code, description, order, active, imagePath, colorCode);
-        this.id = id;
+        this.explanatoryGuide = explanatoryGuide;
     }
-
 
     public Long getId() {
         return id;
@@ -90,7 +90,11 @@ public class Category implements Comparable<Category> {
         return order;
     }
 
-    public void deactivate(){
+    public String getExplanatoryGuide() {
+        return explanatoryGuide;
+    }
+
+    public void deactivate() {
         this.active = false;
     }
 
@@ -98,8 +102,40 @@ public class Category implements Comparable<Category> {
         return subcategories;
     }
 
-    public void addSubcategory(Subcategory subcategory) {
-        this.subcategories.add(subcategory);
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setExplanatoryGuide(String explanatoryGuide) {
+        this.explanatoryGuide = explanatoryGuide;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
     }
 
     public int getTotalCourseHours() {

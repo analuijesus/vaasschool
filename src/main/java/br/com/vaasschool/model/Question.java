@@ -1,26 +1,22 @@
 package br.com.vaasschool.model;
 
-import br.com.vaasschool.model.validation.Validator;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @DiscriminatorValue("Question")
 public class Question extends Activity{
 
-    private String statiment;
+    @NotBlank(message = "O enunciado deve ser preeenchido.")
+    private String statement;
 
     @Column(name = "question_type", columnDefinition = "ENUM")
     @Enumerated(EnumType.STRING)
     private QuestionType type = QuestionType.SINGLE_ANSWER;
 
-    public Question(String title, String code, Section section, String statiment) {
+    public Question(String title, String code, Section section, String statement) {
         super(title, code, section);
-
-        Validator.notNull(section);
-        Validator.notNullOrEmpty(title);
-
-        this.statiment = statiment;
+        this.statement = statement;
     }
 
     @Deprecated

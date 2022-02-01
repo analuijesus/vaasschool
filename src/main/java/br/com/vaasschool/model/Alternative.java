@@ -1,8 +1,8 @@
 package br.com.vaasschool.model;
 
-import br.com.vaasschool.model.validation.Validator;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Alternative implements Comparable<Alternative> {
@@ -10,6 +10,8 @@ public class Alternative implements Comparable<Alternative> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Um texto explicativo da alternativa deve ser preenchido.")
     private String text;
 
     @Column(name = "order_visualization")
@@ -17,13 +19,11 @@ public class Alternative implements Comparable<Alternative> {
     private Boolean correct;
     private String justification;
 
+    @NotNull(message = "A alternativa deve ter uma questão associada.")
     @ManyToOne (fetch = FetchType.LAZY)
     private Question question;
 
     public Alternative(String text, Boolean correct, Question question) {
-        Validator.notNull(question);
-        Validator.notNullOrEmpty(text);
-
         this.text = text;
         this.correct = correct;
         this.question = question;
