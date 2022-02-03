@@ -14,7 +14,8 @@ function disableNow(id) {
     httpRequest.send("id=" + id);
 }
 
-
-
-
-
+function finalizaAgora(id) {
+    $.post("desativaCategoria", {'id': id}, function () {
+        $("#category_" + id).html("Inativa");
+    });
+}

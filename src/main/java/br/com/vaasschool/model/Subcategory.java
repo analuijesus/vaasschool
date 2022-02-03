@@ -3,6 +3,7 @@ package br.com.vaasschool.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class Subcategory implements Comparable<Subcategory> {
     @NotBlank(message = "O nome da subcategoria deve ser preenchido.")
     private String name;
 
-    @NotBlank(message = "Insira um código válido.O código deve conter apenas letras minúsculas, números e hífen (-).")
+    @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
     private String description;
 
@@ -48,8 +49,9 @@ public class Subcategory implements Comparable<Subcategory> {
         this.category = category;
     }
 
-    public Subcategory(Long id, String name, String code, String description, Boolean active, Integer order, Category category) {
+    public Subcategory(Long id, String name, String code, String description, String explanatoryGuide, Boolean active, Integer order, Category category) {
         this(name, code, description, active, order, category);
+        this.explanatoryGuide = explanatoryGuide;
         this.id = id;
     }
 
@@ -85,6 +87,38 @@ public class Subcategory implements Comparable<Subcategory> {
         return explanatoryGuide;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setExplanatoryGuide(String explanatoryGuide) {
+        this.explanatoryGuide = explanatoryGuide;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public List<Course> getCourses() {
         return courses;
     }
@@ -103,6 +137,10 @@ public class Subcategory implements Comparable<Subcategory> {
 
     public int getNumberOfCourses() {
         return courses.size();
+    }
+
+    public String getCategoryCode(){
+        return category.getCode();
     }
 
     @Override

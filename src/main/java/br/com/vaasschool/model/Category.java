@@ -2,6 +2,7 @@ package br.com.vaasschool.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Category implements Comparable<Category> {
     @NotBlank(message = "O nome da categoria precisa ser preenchida.")
     private String name;
 
-    @NotBlank(message = "Insira um código válido.O código deve conter apenas letras minúsculas, números e hífen (-).")
+    @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
     private String description;
 

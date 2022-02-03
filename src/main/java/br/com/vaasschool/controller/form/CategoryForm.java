@@ -11,8 +11,8 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class CategoryForm {
 
     private Long id;
-    @NotNull(message = "O nome da Categoria não pode ser nula.")
-    @NotEmpty(message = "O nome da Categoria não pode ser vazia.")
+
+    @NotBlank(message = "O nome da categoria precisa ser preenchida.")
     private String name;
     @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;

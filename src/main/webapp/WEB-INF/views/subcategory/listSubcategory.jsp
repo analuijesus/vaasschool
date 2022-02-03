@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
@@ -8,17 +8,16 @@
     <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/resources/css/style.css" rel="stylesheet">
 
-
-    <title>Categorias</title>
+    <title>Subcategorias</title>
 </head>
 
 <body>
 <div class="container">
+    <h4>${categoryName}</h4>
+    <h2>Subcategorias</h2>
 
-    <h2>Categorias</h2>
-
-    <a href="/admin/categories/new">
-        <button type="button" class="btn btn-primary my-4">Nova Categoria</button>
+    <a href="/admin/subcategories/new">
+        <button type="button" class="btn btn-primary my-4">Nova Subcategorias</button>
     </a>
     <div class="table-responsive">
         <table class="table table-bordered">
@@ -32,14 +31,14 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${categories}" var="categories">
+            <c:forEach items="${subcategories}" var="subcategory">
                 <tr>
-                    <td>${categories.name}</td>
-                    <td>${categories.code}</td>
+                    <td>${subcategory.name}</td>
+                    <td>${subcategory.code}</td>
                     <c:choose>
-                        <c:when test="${categories.active eq true}">
-                            <td id="category_${categories.id}">
-                                <a href="#" onClick="finalizaAgora(${categories.id})">
+                        <c:when test="${subcategory.active eq true}">
+                            <td id="category_${subcategory.id}">
+                                <a href="#" onClick="disableNow(${subcategory.id})">
                                     Ativa
                                 </a>
                             </td>
@@ -48,11 +47,8 @@
                             <td>Inativa</td>
                         </c:otherwise>
                     </c:choose>
-                    <td><a href="/admin/subcategories/${categories.code}"><u>Subcategorias</u></a></td>
-                    <td><a href="/admin/categories/${categories.code}">
-                        <button type="button" class="btn btn-light" href="/admin/categories/${categories.code}">Editar
-                        </button>
-                    </a></td>
+                    <td><a href="/admin/courses/${categoryCode}/${subcategory.code}"><u>Cursos</u></a></td>
+                    <td><a href="/admin/subcategories/${categoryCode}/${subcategory.code}">Editar</a></td>
                 </tr>
             </c:forEach>
             </tbody>

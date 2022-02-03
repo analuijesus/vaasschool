@@ -3,6 +3,7 @@ package br.com.vaasschool.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Course {
@@ -17,7 +18,7 @@ public class Course {
     @NotBlank(message = "O nome do curso precisa ser preenchido.")
     private String name;
 
-    @NotBlank(message = "Insira um código válido.O código deve conter apenas letras minúsculas, números e hífen (-).")
+    @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
 
     @NotNull(message = "Carga horária inválida. Deve estar entre " + MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH + " e " +
@@ -114,6 +115,14 @@ public class Course {
         return CourseVisibility.PUBLIC.equals(visibility);
     }
 
+    public void publish() {
+        this.visibility = CourseVisibility.PUBLIC;
+    }
+
+    public String getSubcategoryName(){
+        return subcategory.getName();
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -127,9 +136,5 @@ public class Course {
                 ", learnedSkills='" + learnedSkills + '\'' +
                 ", subcategory=" + subcategory.getName() +
                 '}';
-    }
-
-    public void publish() {
-        this.visibility = CourseVisibility.PUBLIC;
     }
 }

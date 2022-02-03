@@ -43,7 +43,6 @@ public class CategoryController {
         if (bindingResult.hasErrors()) {
             return "category/formCategory";
         }
-//        Category category = ;
         categoryRepository.save(categoryForm.toModel());
         return "redirect:/admin/categories";
     }
@@ -64,4 +63,6 @@ public class CategoryController {
         categoryRepository.save(categoryForm.convert(categoryRepository));
         return "redirect:/admin/categories";
     }
+
+
 }

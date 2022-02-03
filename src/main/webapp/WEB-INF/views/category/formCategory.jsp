@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="title" value="${categoryForm.code == null ? 'Nova Categoria' : 'Editar Categoria'}"></c:set>
-<c:set var="actionCategoryUrl"
+<c:set var="actionSubcategoryUrl"
        value="${categoryForm.id == null ? '/admin/categories' : '/admin/categories/'.concat(categoryForm.code)}"></c:set>
 
 <html>
@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="container">
-    <form:form modelAttribute="categoryForm" action="${actionCategoryUrl}" method="post">
+    <form:form modelAttribute="categoryForm" action="${actionSubcategoryUrl}" method="post">
         <h2>${title}</h2>
         <div class="form-group">
             <label for="name">Nome</label>
