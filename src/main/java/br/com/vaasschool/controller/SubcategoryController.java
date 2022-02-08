@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
@@ -36,7 +37,7 @@ public class SubcategoryController {
     public String listSubcategory(@PathVariable String categoryCode, Model model) {
         Category category = categoryRepository.findByCode(categoryCode)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, categoryCode));
-        List<Subcategory> subcategories = subcategoryRepository.findAll();
+        List<Subcategory> subcategories = subcategoryRepository.findAllByOrderByOrder();
         List<SubcategoryDto> subCategoriesDtos = subcategories.stream().map(SubcategoryDto::new).toList();
 
         model.addAttribute("subcategories", subCategoriesDtos);
@@ -55,7 +56,7 @@ public class SubcategoryController {
         return "subcategory/formSubcategory";
     }
 
-    @PostMapping("/admin/subcategories")
+    @PostMapping("/admin/subcategories/new")
     public String registerNew(@Valid SubcategoryForm subcategoryForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return showNew(subcategoryForm, model);
@@ -70,25 +71,25 @@ public class SubcategoryController {
     }
 
     @GetMapping("/admin/subcategories/{categoryCode}/{subcategoryCode}")
-    public String showUpdate(@PathVariable String categoryCode, @PathVariable String subcategoryCode, Model model) {
+    public String showUpdate(@PathVariable("categoryCode") String categoryCode, @PathVariable("subcategoryCode")
+            String subcategoryCode, Model model) {
         List<Category> categories = categoryRepository.findAll();
 
-        Subcategory subCategory = subcategoryRepository.findByCode(subcategoryCode)
+        Subcategory subcategory = subcategoryRepository.findByCode(subcategoryCode)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
         Category category = categoryRepository.findByCode(categoryCode)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
-
         model.addAttribute("category", category);
         model.addAttribute("categories", categories);
-        model.addAttribute("subcategoryForm", new SubcategoryDto(subCategory));
+        model.addAttribute("subcategoryForm", new SubcategoryDto(subcategory));
         return "subcategory/formSubcategory";
     }
 
     @PostMapping("/admin/subcategories/{categoryCode}/{subcategoryCode}")
     @Transactional
-    public String update(@PathVariable String categoryCode, @PathVariable String subcategoryCode,
+    public String update(@PathVariable("categoryCode") String categoryCode, @PathVariable("subcategoryCode") String subcategoryCode,
                          @Valid SubcategoryForm subcategoryForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return showUpdate(categoryCode, subcategoryCode, model);
@@ -96,8 +97,19 @@ public class SubcategoryController {
         Category category = categoryRepository.findById(subcategoryForm.getCategoryId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
         Subcategory subcategory = subcategoryForm.convert(subcategoryRepository);
-//        subcategoryRepository.save(subcategory);
 
-        return "redirect:/admin/subcategories/" + subcategory.getCategory().getCode();
+        return "redirect:/admin/subcategories/" + categoryCode;
+    }
+
+    @PostMapping("/admin/deactivateSubcategory")
+    @Transactional
+    @ResponseBody
+    public void disableStatus(Long id, Model model) {
+        Subcategory subcategory = subcategoryRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", id)));
+
+        subcategoryRepository.setActiveFalse(id);
+
+        model.addAttribute("subcategory", subcategory);
     }
 }

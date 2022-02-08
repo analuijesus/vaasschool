@@ -29,8 +29,8 @@ public class CourseController {
     }
 
     @GetMapping("/admin/courses/{categoryCode}/{subcategoryCode}")
-    public String getAll(@PathVariable String subcategoryCode, @PathVariable String categoryCode,
-                         @PageableDefault(size = 5) Pageable pageable, Model model){
+    public String listCourses(@PathVariable("categoryCode") String categoryCode, @PathVariable("subcategoryCode") String subcategoryCode,
+                              @PageableDefault(size = 5) Pageable pageable, Model model){
 
         Subcategory subcategory = subcategoryRepository.findByCode(subcategoryCode)
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST));
@@ -44,7 +44,7 @@ public class CourseController {
         model.addAttribute("courses", courses);
         model.addAttribute("totalPages", coursesPageable.getTotalPages());
 
-        return "/course/listCourse";
+        return "course/listCourse";
     }
 
 }

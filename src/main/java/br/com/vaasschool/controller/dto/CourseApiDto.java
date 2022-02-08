@@ -2,8 +2,6 @@ package br.com.vaasschool.controller.dto;
 
 import br.com.vaasschool.model.Course;
 
-import java.util.List;
-
 public class CourseApiDto {
 
     final private String name;

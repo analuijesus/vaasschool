@@ -48,6 +48,7 @@
         <div class="form-group">
             <label for="explanatoryGuide">Guias de estudo</label>
             <form:textarea placeholder="Um texto apontando para formações para ajudar pessoas perdidas"
+                           value="${subcategoryForm.explanatoryGuide}"
                            id="explanatoryGuide" class="form-control" name="studyGuide" rows="4" cols="50"
                            path="explanatoryGuide"></form:textarea>
         </div>

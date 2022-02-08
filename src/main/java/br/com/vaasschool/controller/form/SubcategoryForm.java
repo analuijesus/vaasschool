@@ -18,7 +18,8 @@ public class SubcategoryForm {
     @NotBlank(message = "O nome da subcategoria precisa ser preenchida.")
     private String name;
 
-    @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).")
+    @NotBlank(message = "O código da subcategoria é obrigatório.")
+    @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido. O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
     private String description;
     private String explanatoryGuide;
@@ -29,7 +30,12 @@ public class SubcategoryForm {
     @NotNull(message = "A subcategoria deve ter uma categoria associada.")
     private Long categoryId;
 
-    public SubcategoryForm(Long id, String name, String code, String description, String studyGuide, boolean active,
+    private String categoryName;
+
+    public SubcategoryForm() {
+    }
+
+    public SubcategoryForm(Long id, String name, String code, String description, String explanatoryGuide, boolean active,
                            Integer order, Long categoryId) {
         this.id = id;
         this.name = name;
@@ -41,7 +47,16 @@ public class SubcategoryForm {
         this.categoryId = categoryId;
     }
 
-    public SubcategoryForm() {
+    public boolean isActive() {
+        return active;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public Long getId() {

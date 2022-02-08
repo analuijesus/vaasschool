@@ -18,7 +18,8 @@ public class Course {
     @NotBlank(message = "O nome do curso precisa ser preenchido.")
     private String name;
 
-    @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).")
+    @NotBlank(message = "O código do curso é obrigatório.")
+    @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido. O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
 
     @NotNull(message = "Carga horária inválida. Deve estar entre " + MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH + " e " +

@@ -14,7 +14,9 @@ public class CategoryForm {
 
     @NotBlank(message = "O nome da categoria precisa ser preenchida.")
     private String name;
-    @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).")
+
+    @NotBlank(message = "O código da categoria é obrigatório.")
+    @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido. O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
     private String description;
     private String explanatoryGuide;

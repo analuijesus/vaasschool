@@ -25,9 +25,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Código</th>
-                <th>Status</th>
-                <th></th>
-                <th></th>
+                <th colspan="3">Status</th>
             </tr>
             </thead>
             <tbody>
@@ -38,7 +36,7 @@
                     <c:choose>
                         <c:when test="${subcategory.active eq true}">
                             <td id="category_${subcategory.id}">
-                                <a href="#" onClick="disableNow(${subcategory.id})">
+                                <a href="#" onClick="deactivateSubcategory(${subcategory.id})">
                                     Ativa
                                 </a>
                             </td>
@@ -48,7 +46,10 @@
                         </c:otherwise>
                     </c:choose>
                     <td><a href="/admin/courses/${categoryCode}/${subcategory.code}"><u>Cursos</u></a></td>
-                    <td><a href="/admin/subcategories/${categoryCode}/${subcategory.code}">Editar</a></td>
+                    <td><a href="/admin/subcategories/${categoryCode}/${subcategory.code}">
+                        <button type="button" class="btn btn-light" href="/admin/categories/${categoryCode}/${subcategory.code}">Editar
+                        </button>
+                    </a></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -56,7 +57,8 @@
     </div>
 </div>
 
-<script src="/resources/js/disableCategory.js"></script>
+<script src="/resources/js/jQuery.js"></script>
+<script src="/resources/js/deactivate.js"></script>
 
 </body>
 </html>

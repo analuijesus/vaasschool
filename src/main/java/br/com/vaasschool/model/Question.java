@@ -14,13 +14,12 @@ public class Question extends Activity{
     @Enumerated(EnumType.STRING)
     private QuestionType type = QuestionType.SINGLE_ANSWER;
 
+    @Deprecated
+    public Question() {
+    }
+
     public Question(String title, String code, Section section, String statement) {
         super(title, code, section);
         this.statement = statement;
-    }
-
-    @Deprecated
-    public Question() {
-
     }
 }

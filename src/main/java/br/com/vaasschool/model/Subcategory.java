@@ -18,7 +18,8 @@ public class Subcategory implements Comparable<Subcategory> {
     @NotBlank(message = "O nome da subcategoria deve ser preenchido.")
     private String name;
 
-    @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido.Deve conter apenas letras minúsculas, números e hífen (-).")
+    @NotBlank(message = "O código da subcategoria é obrigatório.")
+    @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido. O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
     private String description;
 
@@ -143,6 +144,10 @@ public class Subcategory implements Comparable<Subcategory> {
         return category.getCode();
     }
 
+    public String getCategoryName(){
+        return category.getName();
+    }
+
     @Override
     public String toString() {
         return "Subcategory{" +
@@ -160,5 +165,4 @@ public class Subcategory implements Comparable<Subcategory> {
     public int compareTo(Subcategory anotherSubCategory) {
         return this.order.compareTo(anotherSubCategory.order);
     }
-
 }

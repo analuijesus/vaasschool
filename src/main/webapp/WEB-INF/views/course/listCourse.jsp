@@ -12,7 +12,7 @@
 
 </head>
 <body>
-<div class="container ">
+<div class="container">
     <h4>${subcategory.name}</h4>
     <h2>Cursos</h2>
 
@@ -25,8 +25,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Código</th>
-                <th>Visibilidade</th>
-                <th></th>
+                <th colspan="2">Visibilidade</th>
             </tr>
             </thead>
             <tbody>

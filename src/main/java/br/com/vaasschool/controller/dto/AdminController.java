@@ -1,7 +1,5 @@
 package br.com.vaasschool.controller.dto;
 
-import br.com.vaasschool.model.Category;
-import br.com.vaasschool.model.Course;
 import br.com.vaasschool.projection.CategoryProjection;
 import br.com.vaasschool.projection.CourseProjection;
 import br.com.vaasschool.repository.CategoryRepository;
@@ -30,12 +28,11 @@ public class AdminController {
 
     @GetMapping("/admin/dashboard")
     String dashboard(Model model) {
-        List<CourseProjection> instructorWithGreaterNumberOfCourses = courseRepository.findInstructorWithMoreCourses();
+        CourseProjection instructorWithGreaterNumberOfCourses = courseRepository.findInstructorWithMoreCourses();
         List<CategoryProjection> allCategoriesByQuantityCourses = categoryRepository.findCategoryByAmountOfCourse();
 
         model.addAttribute("instructorsWithMoreCourses", instructorWithGreaterNumberOfCourses);
         model.addAttribute("allCategories", allCategoriesByQuantityCourses);
         return "dashboard";
     }
-
 }

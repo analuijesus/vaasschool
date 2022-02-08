@@ -14,12 +14,12 @@ public class Explanation extends Activity{
     @NotBlank(message = "Um texto explicativo da atividade deve ser preenchido.")
     private String text;
 
+    @Deprecated
+    public Explanation() {
+    }
+
     public Explanation(String title, String code, Section section, String text) {
         super(title, code, section);
         this.text = text;
-    }
-
-    @Deprecated
-    public Explanation() {
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class CategoryController {
     }
 
     @GetMapping("/admin/categories/{code}")
-    public String showUpdate(@PathVariable String code, Model model) {
+    public String showUpdate(@PathVariable("code") String code, Model model) {
         Category category = categoryRepository.findByCode(code)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
         model.addAttribute("categoryForm", CategoryForm.from(category));
@@ -56,13 +57,24 @@ public class CategoryController {
     }
 
     @PostMapping("/admin/categories/{code}")
-    public String update(@Valid CategoryForm categoryForm, BindingResult bindingResult, Model model) {
+    @Transactional
+    public String update(@PathVariable("code") String code, @Valid CategoryForm categoryForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return showUpdate(categoryForm.getCode(), model);
+            return showUpdate(code, model);
         }
-        categoryRepository.save(categoryForm.convert(categoryRepository));
+        Category category = categoryForm.convert(categoryRepository);
         return "redirect:/admin/categories";
     }
 
+    @PostMapping("/admin/deactivateCategory")
+    @Transactional
+    @ResponseBody
+    public void disableStatus(Long id, Model model) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", id)));
 
+        categoryRepository.setActiveFalse(id);
+
+        model.addAttribute("category", category);
+    }
 }

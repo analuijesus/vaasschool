@@ -21,7 +21,7 @@ public class SubcategoryDto {
         this.explanatoryGuide = subcategory.getExplanatoryGuide();
         this.active = subcategory.getActive();
         this.order = subcategory.getOrder();
-        this.categoryName = subcategory.getCategory().getName(); //ENCAPSULAR
+        this.categoryName = subcategory.getCategoryName();
     }
 
     public Long getId() {
