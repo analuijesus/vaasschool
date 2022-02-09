@@ -34,7 +34,7 @@ public class SubcategoryController {
     }
 
     @GetMapping("/admin/subcategories/{categoryCode}")
-    public String listSubcategory(@PathVariable String categoryCode, Model model) {
+    public String listSubcategories(@PathVariable String categoryCode, Model model) {
         Category category = categoryRepository.findByCode(categoryCode)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, categoryCode));
         List<Subcategory> subcategories = subcategoryRepository.findAllByOrderByOrder();

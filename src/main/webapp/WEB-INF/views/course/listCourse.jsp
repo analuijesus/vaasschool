@@ -55,10 +55,12 @@
                     </c:forEach>
                 </ul>
             </nav>
-            <a href="/admin/courses/${categoryCode}/${subcategory.code}?page=${page.getNumber() - 1}"
-               class="page-link">Anterior</a>
-            <a href="/admin/courses/${categoryCode}/${subcategory.code}?page=${page.getNumber() + 1}"
-               class="page-link">Próximo</a>
+            <c:if test="${courses.size() >= 5}">
+                <a href="/admin/courses/${categoryCode}/${subcategory.code}?page=${page.getNumber() - 1}"
+                   class="page-link">Anterior</a>
+                <a href="/admin/courses/${categoryCode}/${subcategory.code}?page=${page.getNumber() + 1}"
+                   class="page-link">Próximo</a>
+            </c:if>
         </c:if>
     </div>
 </div>

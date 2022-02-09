@@ -46,5 +46,4 @@ public class CourseController {
 
         return "course/listCourse";
     }
-
 }

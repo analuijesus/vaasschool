@@ -7,8 +7,11 @@ import br.com.vaasschool.repository.CourseRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Controller
 public class AdminController {
@@ -28,7 +31,8 @@ public class AdminController {
 
     @GetMapping("/admin/dashboard")
     String dashboard(Model model) {
-        CourseProjection instructorWithGreaterNumberOfCourses = courseRepository.findInstructorWithMoreCourses();
+        CourseProjection instructorWithGreaterNumberOfCourses = courseRepository.findInstructorWithMoreCourses()
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
         List<CategoryProjection> allCategoriesByQuantityCourses = categoryRepository.findCategoryByAmountOfCourse();
 
         model.addAttribute("instructorsWithMoreCourses", instructorWithGreaterNumberOfCourses);

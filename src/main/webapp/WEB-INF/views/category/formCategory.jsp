@@ -35,7 +35,7 @@
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" id="active" name="active" value="${categoryForm.active ? 'checked' : ''}"/>
+                <input type="checkbox" id="active" name="active" ${categoryForm.active ? 'checked' : ''}/>
                 Categoria Ativa?
             </label>
         </div>
