@@ -23,15 +23,14 @@ public class Alternative implements Comparable<Alternative> {
     @ManyToOne (fetch = FetchType.LAZY)
     private Question question;
 
+    @Deprecated
+    public Alternative() {
+    }
+
     public Alternative(String text, Boolean correct, Question question) {
         this.text = text;
         this.correct = correct;
         this.question = question;
-    }
-
-    @Deprecated
-    public Alternative() {
-
     }
 
     @Override

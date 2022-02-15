@@ -2,8 +2,6 @@ package br.com.vaasschool.controller.dto;
 
 import br.com.vaasschool.model.Category;
 
-import java.util.List;
-
 public class CategoryDto {
 
     final private Long id;

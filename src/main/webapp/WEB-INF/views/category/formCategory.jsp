@@ -35,7 +35,8 @@
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" id="active" name="active" value="${categoryForm.active == false}" /> Categoria Ativa?
+                <input type="checkbox" id="active" name="active" ${categoryForm.active ? 'checked' : ''}/>
+                Categoria Ativa?
             </label>
         </div>
         <div class="form-group">
@@ -47,16 +48,20 @@
         </div>
         <div class="form-group">
             <label for="explanatoryGuide">Guia de estudo</label>
-            <form:textarea placeholder="Um texto apontando para formações para ajudar pessoas perdidas" value="${categoryForm.explanatoryGuide}"
-                           id="explanatoryGuide" name="explanatoryGuide" class="form-control" rows="4" cols="60" path="explanatoryGuide"/>
+            <form:textarea placeholder="Um texto apontando para formações para ajudar pessoas perdidas"
+                           value="${categoryForm.explanatoryGuide}"
+                           id="explanatoryGuide" name="explanatoryGuide" class="form-control" rows="4" cols="60"
+                           path="explanatoryGuide"/>
         </div>
         <div class="form-group">
             <label for="imagePath">Caminho do ícone</label>
-            <form:input placeholder="por exemplo: /images/categorias/programação.svg" type="text" id="imagePath" name="imagePath" class="form-control" value="${categoryForm.imagePath}" path="imagePath"/>
+            <form:input placeholder="por exemplo: /images/categorias/programação.svg" type="text" id="imagePath"
+                        name="imagePath" class="form-control" value="${categoryForm.imagePath}" path="imagePath"/>
         </div>
         <div class="form-group">
             <label for="colorCode">Cor</label>
-            <form:input placeholder="por exemplo: #fcc14a" type="color" id="colorCode" name="colorCode" class="form-control" value="${categoryForm.colorCode}" path="colorCode"/>
+            <form:input placeholder="por exemplo: #fcc14a" type="color" id="colorCode" name="colorCode"
+                        class="form-control" value="${categoryForm.colorCode}" path="colorCode"/>
         </div>
         <div class="form-group">
             <label for="description">Descrição</label>
@@ -64,9 +69,11 @@
                         type="textarea" id="description" name="description" class="form-control"
                         value="${categoryForm.description}" path="description"/>
         </div>
-        <form:input type="hidden" name="id" value="${categoryForm.id}" path="id"/>
-        <button type="submit" class="btn btn-primary">Enviar</button>
 
+        <div class="form-group">
+            <form:input type="hidden" name="id" value="${categoryForm.id}" path="id"/>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
     </form:form>
 </div>
 </body>

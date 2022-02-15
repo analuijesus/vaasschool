@@ -8,17 +8,16 @@
     <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/resources/css/style.css" rel="stylesheet">
 
-
-    <title>Categorias</title>
+    <title>Subcategorias</title>
 </head>
 
 <body>
 <div class="container">
+    <h4>${categoryName}</h4>
+    <h2>Subcategorias</h2>
 
-    <h2>Categorias</h2>
-
-    <a href="/admin/categories/new">
-        <button type="button" class="btn btn-primary my-4">Nova Categoria</button>
+    <a href="/admin/subcategories/new">
+        <button type="button" class="btn btn-primary my-4">Nova Subcategorias</button>
     </a>
     <div class="table-responsive">
         <table class="table table-bordered">
@@ -30,14 +29,14 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${categories}" var="category">
+            <c:forEach items="${subcategories}" var="subcategory">
                 <tr>
-                    <td>${category.name}</td>
-                    <td>${category.code}</td>
+                    <td>${subcategory.name}</td>
+                    <td>${subcategory.code}</td>
                     <c:choose>
-                        <c:when test="${category.active eq true}">
-                            <td id="category_${category.id}">
-                                <a href="#" onClick="deactivateCategory(${category.id})">
+                        <c:when test="${subcategory.active eq true}">
+                            <td id="category_${subcategory.id}">
+                                <a href="#" onClick="deactivateSubcategory(${subcategory.id})">
                                     Ativa
                                 </a>
                             </td>
@@ -46,9 +45,9 @@
                             <td>Inativa</td>
                         </c:otherwise>
                     </c:choose>
-                    <td><a href="/admin/subcategories/${category.code}"><u>Subcategorias</u></a></td>
-                    <td><a href="/admin/categories/${category.code}">
-                        <button type="button" class="btn btn-light" href="/admin/categories/${category.code}">Editar
+                    <td><a href="/admin/courses/${categoryCode}/${subcategory.code}"><u>Cursos</u></a></td>
+                    <td><a href="/admin/subcategories/${categoryCode}/${subcategory.code}">
+                        <button type="button" class="btn btn-light" href="/admin/categories/${categoryCode}/${subcategory.code}">Editar
                         </button>
                     </a></td>
                 </tr>
