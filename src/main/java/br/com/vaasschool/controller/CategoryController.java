@@ -1,6 +1,8 @@
 package br.com.vaasschool.controller;
 
+import br.com.vaasschool.controller.api.dto.CategoryApiDto;
 import br.com.vaasschool.controller.dto.CategoryDto;
+import br.com.vaasschool.controller.dto.CategoryPageDto;
 import br.com.vaasschool.controller.form.CategoryForm;
 import br.com.vaasschool.model.Category;
 import br.com.vaasschool.repository.CategoryRepository;
@@ -64,6 +66,16 @@ public class CategoryController {
         }
         Category category = categoryForm.convert(categoryRepository);
         return "redirect:/admin/categories";
+    }
+
+    @GetMapping(value = {"/category/{categoryCode}", "/"})
+    public String publicPage(@PathVariable("categoryCode") String code, Model model) {
+        Category category = categoryRepository.findByCode(code)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
+
+        model.addAttribute("category", new CategoryPageDto(category));
+
+        return "category/pageCategory";
     }
 
     @PostMapping("/admin/deactivateCategory")

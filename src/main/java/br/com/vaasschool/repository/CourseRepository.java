@@ -22,4 +22,5 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
             """, nativeQuery = true)
     Optional<CourseProjection> findInstructorWithMoreCourses();
 
+    Optional<Course> findByCode(String courseCode);
 }

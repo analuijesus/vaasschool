@@ -13,6 +13,7 @@ import javax.validation.constraints.Positive;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 public class SubcategoryForm {
+
     private Long id;
 
     @NotBlank(message = "O nome da subcategoria precisa ser preenchida.")
@@ -29,7 +30,6 @@ public class SubcategoryForm {
 
     @NotNull(message = "A subcategoria deve ter uma categoria associada.")
     private Long categoryId;
-
     private String categoryName;
 
     public SubcategoryForm() {
@@ -131,13 +131,13 @@ public class SubcategoryForm {
         Subcategory subcategory = subcategoryRepository.findById(getId())
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
 
-        subcategory.setId(getId());
-        subcategory.setName(getName());
-        subcategory.setCode(getCode());
-        subcategory.setDescription(getDescription());
-        subcategory.setExplanatoryGuide(getExplanatoryGuide());
-        subcategory.setActive(getActive());
-        subcategory.setOrder(getOrder());
+        subcategory.setId(id);
+        subcategory.setName(name);
+        subcategory.setCode(code);
+        subcategory.setDescription(description);
+        subcategory.setExplanatoryGuide(explanatoryGuide);
+        subcategory.setActive(active);
+        subcategory.setOrder(order);
         subcategory.setCategory(subcategory.getCategory());
 
         return subcategory;
@@ -145,6 +145,6 @@ public class SubcategoryForm {
 
     public static SubcategoryForm from(Subcategory subcategory) {
         return new SubcategoryForm(subcategory.getId(), subcategory.getName(), subcategory.getCode(), subcategory.getDescription(),
-                subcategory.getExplanatoryGuide(), subcategory.getActive(), subcategory.getOrder(), subcategory.getCategory().getId());
+                subcategory.getExplanatoryGuide(), subcategory.getActive(), subcategory.getOrder(), subcategory.getCategoryId());
     }
 }

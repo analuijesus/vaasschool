@@ -1,4 +1,4 @@
-package br.com.vaasschool.controller.dto;
+package br.com.vaasschool.controller;
 
 import br.com.vaasschool.projection.CategoryProjection;
 import br.com.vaasschool.projection.CourseProjection;

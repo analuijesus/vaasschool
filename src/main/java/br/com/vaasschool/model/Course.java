@@ -1,5 +1,7 @@
 package br.com.vaasschool.model;
 
+import br.com.vaasschool.controller.form.CourseForm;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -60,7 +62,8 @@ public class Course {
         this.subcategory = subcategory;
     }
 
-    public Course(String name, String code, int estimatedTimeToFinish, CourseVisibility visibility, String targetAudience, String instructorName, String summary, String learnedSkills, Subcategory subcategory) {
+    public Course(String name, String code, int estimatedTimeToFinish, CourseVisibility visibility, String targetAudience,
+                  String instructorName, String summary, String learnedSkills, Subcategory subcategory) {
         this(name, code, estimatedTimeToFinish, instructorName, subcategory);
         this.visibility = visibility;
         this.targetAudience = targetAudience;
@@ -120,8 +123,65 @@ public class Course {
         this.visibility = CourseVisibility.PUBLIC;
     }
 
-    public String getSubcategoryName(){
+    public String getSubcategoryName() {
         return subcategory.getName();
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSubcategory(Subcategory subcategory) {
+        this.subcategory = subcategory;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setEstimatedTimeToFinish(int estimatedTimeToFinish) {
+        this.estimatedTimeToFinish = estimatedTimeToFinish;
+    }
+
+    public void setVisibility(CourseVisibility visibility) {
+        this.visibility = visibility;
+    }
+
+    public void setTargetAudience(String targetAudience) {
+        this.targetAudience = targetAudience;
+    }
+
+    public void setInstructorName(String instructorName) {
+        this.instructorName = instructorName;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setLearnedSkills(String learnedSkills) {
+        this.learnedSkills = learnedSkills;
+    }
+
+    public String getSubcategoryCode() {
+        return subcategory.getCode();
+    }
+
+    public Long getSubcategoryId() {
+        return subcategory.getId();
+    }
+
+    public void update(CourseForm courseForm, Subcategory subcategory) {
+        this.id = courseForm.getId();
+        this.name = courseForm.getName();
+        this.code = courseForm.getCode();
+        this.estimatedTimeToFinish = courseForm.getEstimatedTimeToFinish();
+        this.visibility = courseForm.getVisibility();
+        this.targetAudience = courseForm.getTargetAudience();
+        this.instructorName = courseForm.getInstructorName();
+        this.learnedSkills = courseForm.getLearnedSkills();
+        this.summary = courseForm.getSummary();
+        this.subcategory = subcategory;
     }
 
     @Override

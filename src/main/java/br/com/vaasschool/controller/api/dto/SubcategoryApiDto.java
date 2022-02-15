@@ -1,5 +1,6 @@
-package br.com.vaasschool.controller.dto;
+package br.com.vaasschool.controller.api.dto;
 
+import br.com.vaasschool.controller.api.dto.CourseApiDto;
 import br.com.vaasschool.model.Course;
 import br.com.vaasschool.model.Subcategory;
 
@@ -16,9 +17,7 @@ public class SubcategoryApiDto {
         this.name = subcategory.getName();
         this.code = subcategory.getCode();
         this.explanatoryGuide = subcategory.getExplanatoryGuide();
-        this.coursesApi = subcategory.getCourses().stream()
-                .filter(Course::isPublic)
-                .map(CourseApiDto::new).toList();
+        this.coursesApi = subcategory.getCourses().stream().filter(Course::isPublic).map(CourseApiDto::new).toList();
     }
 
     public String getName() {

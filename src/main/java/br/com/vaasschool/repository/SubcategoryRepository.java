@@ -18,4 +18,6 @@ public interface SubcategoryRepository extends JpaRepository<Subcategory, Long> 
     @Modifying
     @Query("update Subcategory subcategory set subcategory.active = false where subcategory.id = :id")
     void setActiveFalse (@Param("id") Long id);
+
+    List<Subcategory> findAllByOrderByName();
 }

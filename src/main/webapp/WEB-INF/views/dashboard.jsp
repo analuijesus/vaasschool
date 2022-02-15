@@ -9,7 +9,7 @@
     <link href="/resources/css/style.css" rel="stylesheet">
 
     <title>Dashboard</title>
-</head>
+
 <body>
 <div class="container">
     <h1>Dashboard</h1>

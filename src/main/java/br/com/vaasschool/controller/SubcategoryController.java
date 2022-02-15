@@ -89,13 +89,15 @@ public class SubcategoryController {
 
     @PostMapping("/admin/subcategories/{categoryCode}/{subcategoryCode}")
     @Transactional
-    public String update(@PathVariable("categoryCode") String categoryCode, @PathVariable("subcategoryCode") String subcategoryCode,
+    public String update(@PathVariable("categoryCode") String categoryCode,
+                         @PathVariable("subcategoryCode") String subcategoryCode,
                          @Valid SubcategoryForm subcategoryForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return showUpdate(categoryCode, subcategoryCode, model);
         }
         Category category = categoryRepository.findById(subcategoryForm.getCategoryId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+
         Subcategory subcategory = subcategoryForm.convert(subcategoryRepository);
 
         return "redirect:/admin/subcategories/" + categoryCode;

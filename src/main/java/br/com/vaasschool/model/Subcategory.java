@@ -148,6 +148,10 @@ public class Subcategory implements Comparable<Subcategory> {
         return category.getName();
     }
 
+    public Long getCategoryId() {
+        return category.getId();
+    }
+
     @Override
     public String toString() {
         return "Subcategory{" +
@@ -165,4 +169,5 @@ public class Subcategory implements Comparable<Subcategory> {
     public int compareTo(Subcategory anotherSubCategory) {
         return this.order.compareTo(anotherSubCategory.order);
     }
+
 }

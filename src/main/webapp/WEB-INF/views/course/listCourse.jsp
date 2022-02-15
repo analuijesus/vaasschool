@@ -34,7 +34,7 @@
                     <td>${course.name}</td>
                     <td>${course.code}</td>
                     <td>${course.visibility.description}</td>
-                    <td><a href="/admin/subcategories/${categoryCode}/${subcategory.code}/${course.code}">
+                    <td><a href="/admin/courses/${categoryCode}/${subcategory.code}/${course.code}">
                         <button type="button" class="btn btn-light"
                                 href="/admin/courses/${categoryCode}/${subcategory.code}/${course.code}"> Editar
                         </button>
