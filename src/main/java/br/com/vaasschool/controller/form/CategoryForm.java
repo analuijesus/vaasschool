@@ -29,16 +29,16 @@ public class CategoryForm {
     public CategoryForm() {
     }
 
-    public CategoryForm(Long id, String name, String code, String description, String explanatoryGuide, Boolean active, Integer order, String imagePath, String colorCode) {
-        this.id = id;
-        this.name = name;
-        this.code = code;
-        this.description = description;
-        this.explanatoryGuide = explanatoryGuide;
-        this.active = active;
-        this.order = order;
-        this.imagePath = imagePath;
-        this.colorCode = colorCode;
+    public CategoryForm(Category category) {
+        this.id = category.getId();
+        this.name = category.getName();
+        this.code = category.getCode();
+        this.description = category.getDescription();
+        this.explanatoryGuide = category.getExplanatoryGuide();
+        this.active = category.getActive();
+        this.order = category.getOrder();
+        this.imagePath = category.getImagePath();
+        this.colorCode = category.getColorCode();
     }
 
     public String getName() {
@@ -115,28 +115,5 @@ public class CategoryForm {
 
     public Category toModel() {
         return new Category(name, code, description, explanatoryGuide, order, active, imagePath, colorCode);
-    }
-
-    public Category convert(CategoryRepository categoryRepository) {
-        Category category = categoryRepository.findById(getId())
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
-
-        category.setId(getId());
-        category.setName(getName());
-        category.setCode(getCode());
-        category.setDescription(getDescription());
-        category.setExplanatoryGuide(getExplanatoryGuide());
-        category.setActive(getActive());
-        category.setOrder(getOrder());
-        category.setImagePath(getImagePath());
-        category.setColorCode(getColorCode());
-
-        return category;
-    }
-
-    public static CategoryForm from(Category category) {
-        return new CategoryForm(category.getId(), category.getName(), category.getCode(), category.getDescription(),
-                category.getExplanatoryGuide(), category.getActive(), category.getOrder(), category.getImagePath(),
-                category.getColorCode());
     }
 }

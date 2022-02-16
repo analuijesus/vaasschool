@@ -1,5 +1,6 @@
 package br.com.vaasschool.model;
 
+import br.com.vaasschool.controller.form.CategoryForm;
 import br.com.vaasschool.repository.CategoryRepository;
 
 import javax.persistence.*;
@@ -150,6 +151,18 @@ public class Category implements Comparable<Category> {
         return subcategories.stream()
                 .filter(Subcategory::getActive)
                 .toList();
+    }
+
+    public void update(CategoryForm categoryForm) {
+        this.id = categoryForm.getId();
+        this.name = categoryForm.getName();
+        this.code = categoryForm.getCode();
+        this.description = categoryForm.getDescription();
+        this.explanatoryGuide = categoryForm.getExplanatoryGuide();
+        this.active = categoryForm.getActive();
+        this.order = categoryForm.getOrder();
+        this.imagePath = categoryForm.getImagePath();
+        this.colorCode = categoryForm.getColorCode();
     }
 
     @Override

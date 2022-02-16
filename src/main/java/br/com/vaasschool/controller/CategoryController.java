@@ -53,10 +53,12 @@ public class CategoryController {
     }
 
     @GetMapping("/admin/categories/{code}")
-    public String showUpdate(@PathVariable("code") String code, Model model) {
+    public String showUpdate(@PathVariable("code") String code, Model model, CategoryForm courseForm, BindingResult bindingResult) {
         Category category = categoryRepository.findByCode(code)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
-        model.addAttribute("categoryForm", CategoryForm.from(category));
+
+        model.addAttribute("categoryForm", bindingResult.hasErrors() ? courseForm : new CategoryForm(category));
+
         return "category/formCategory";
     }
 
@@ -64,10 +66,13 @@ public class CategoryController {
     @Transactional
     public String update(@PathVariable("code") String code, @Valid CategoryForm categoryForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return showUpdate(code, model);
+            return showUpdate(code, model, categoryForm, bindingResult);
         }
 
-        categoryForm.convert(categoryRepository);
+        Category category = categoryRepository.findByCode(code)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
+
+        category.update(categoryForm);
 
         return "redirect:/admin/categories";
     }
