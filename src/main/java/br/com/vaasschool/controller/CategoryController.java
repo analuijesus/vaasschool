@@ -66,7 +66,9 @@ public class CategoryController {
         if (bindingResult.hasErrors()) {
             return showUpdate(code, model);
         }
-        Category category = categoryForm.convert(categoryRepository);
+
+        categoryForm.convert(categoryRepository);
+
         return "redirect:/admin/categories";
     }
 

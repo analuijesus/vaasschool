@@ -95,10 +95,10 @@ public class SubcategoryController {
         if (bindingResult.hasErrors()) {
             return showUpdate(categoryCode, subcategoryCode, model);
         }
-        Category category = categoryRepository.findById(subcategoryForm.getCategoryId())
+        categoryRepository.findById(subcategoryForm.getCategoryId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category %s not found", categoryCode)));
 
-        Subcategory subcategory = subcategoryForm.convert(subcategoryRepository);
+        subcategoryForm.convert(subcategoryRepository);
 
         return "redirect:/admin/subcategories/" + categoryCode;
     }
