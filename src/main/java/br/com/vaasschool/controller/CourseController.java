@@ -46,7 +46,7 @@ public class CourseController {
                               @PageableDefault(size = 5) Pageable pageable, Model model) {
 
         Subcategory subcategory = subcategoryRepository.findByCode(subcategoryCode)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Subcategory %s not found", subcategoryCode)));
 
         Page<Course> coursesPageable = courseRepository.findAllBySubcategory(subcategory, pageable);
 
@@ -67,7 +67,6 @@ public class CourseController {
 
         model.addAttribute("visibility", CourseVisibility.values());
         model.addAttribute("subcategories", subcategories);
-//        model.addAttribute("courseForm", courseForm == null ? new CourseForm() : courseForm);
         return "course/formCourse";
     }
 
@@ -77,7 +76,7 @@ public class CourseController {
             return showNew(courseForm, model);
         }
         Subcategory subcategory = subcategoryRepository.findById(courseForm.getSubcategoryId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Subcategory %s not found", courseForm.getSubcategoryId())));
 
         Course course = courseForm.toModel(subcategory);
         courseRepository.save(course);
@@ -92,13 +91,13 @@ public class CourseController {
         List<Subcategory> subcategories = subcategoryRepository.findAll();
 
         Category category = categoryRepository.findByCode(categoryCode)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category %s not found", categoryCode)));
 
         Subcategory subcategory = subcategoryRepository.findByCode(subcategoryCode)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Subcategory %s not found", subcategoryCode)));
 
         Course course = courseRepository.findByCode(courseCode)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Course %s not found", courseCode)));
 
         model.addAttribute("visibility", CourseVisibility.values());
         model.addAttribute("category", category);
@@ -120,7 +119,7 @@ public class CourseController {
         }
 
         Subcategory subcategory = subcategoryRepository.findById(courseForm.getSubcategoryId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Subcategory %s not found", subcategoryCode)));
 
         Course course = courseRepository.findById(courseForm.getId())
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Course %s not found", courseCode)));

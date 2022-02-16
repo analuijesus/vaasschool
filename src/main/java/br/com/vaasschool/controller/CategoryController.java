@@ -1,6 +1,5 @@
 package br.com.vaasschool.controller;
 
-import br.com.vaasschool.controller.api.dto.CategoryApiDto;
 import br.com.vaasschool.controller.dto.CategoryDto;
 import br.com.vaasschool.controller.dto.CategoryPageDto;
 import br.com.vaasschool.controller.form.CategoryForm;
@@ -9,7 +8,10 @@ import br.com.vaasschool.repository.CategoryRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;

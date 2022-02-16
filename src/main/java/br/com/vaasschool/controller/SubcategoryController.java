@@ -62,7 +62,7 @@ public class SubcategoryController {
             return showNew(subcategoryForm, model);
         }
         Category category = categoryRepository.findById(subcategoryForm.getCategoryId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category %s not found", subcategoryForm.getCategoryId())));
 
         Subcategory subcategory = subcategoryForm.toModel(category);
         subcategoryRepository.save(subcategory);
@@ -76,10 +76,10 @@ public class SubcategoryController {
         List<Category> categories = categoryRepository.findAll();
 
         Subcategory subcategory = subcategoryRepository.findByCode(subcategoryCode)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Subcategory %s not found", subcategoryCode)));
 
         Category category = categoryRepository.findByCode(categoryCode)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category %s not found", categoryCode)));
 
         model.addAttribute("category", category);
         model.addAttribute("categories", categories);
@@ -96,7 +96,7 @@ public class SubcategoryController {
             return showUpdate(categoryCode, subcategoryCode, model);
         }
         Category category = categoryRepository.findById(subcategoryForm.getCategoryId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category %s not found", categoryCode)));
 
         Subcategory subcategory = subcategoryForm.convert(subcategoryRepository);
 
@@ -108,7 +108,7 @@ public class SubcategoryController {
     @ResponseBody
     public void disableStatus(Long id, Model model) {
         Subcategory subcategory = subcategoryRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", id)));
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Subcategory %s not found", id)));
 
         subcategoryRepository.setActiveFalse(id);
 
