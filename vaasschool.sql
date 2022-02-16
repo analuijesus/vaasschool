@@ -108,7 +108,6 @@ create table `User`
 (
     `id`       bigint PRIMARY KEY AUTO_INCREMENT,
     `email`    varchar(255) not null,
-    `name`     varchar(255) not null,
     `password` varchar(255) not null
 );
 
@@ -118,8 +117,8 @@ create table `Profile`
     `name`    varchar(255) not null
 );
 
-insert into User(email, name, password)
-values ('admin@gmail.com', 'admin', '$2a$10$XZ/wDtEKvMFtfQ9.QuYkbeP96pxUWAkgIhsz2e3ZcJFsUyeszVtx.');
+insert into User(email, password)
+values ('admin@gmail.com', '$2a$10$XZ/wDtEKvMFtfQ9.QuYkbeP96pxUWAkgIhsz2e3ZcJFsUyeszVtx.');
 insert into Category (name, code, order_visualization, description, active, imagem_path, color_code)
 values ('Programação', 'programacao', 1,
         'Programe nas principais linguagens e plataformas. Iniciantes são bem vindos nos cursos de lógica e JavaScript.',
