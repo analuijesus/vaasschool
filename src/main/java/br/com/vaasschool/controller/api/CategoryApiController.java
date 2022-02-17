@@ -21,7 +21,7 @@ public class CategoryApiController {
         this.categoryRepository = categoryRepository;
     }
 
-    @GetMapping(path = "/api/categories", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/api/categories", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_XML_VALUE})
     @Cacheable(value = "listOfCategories")
     public ResponseEntity<List<CategoryApiDto>> listActiveCategories() {
         List<Category> categories = categoryRepository.findAllByActiveIsTrue();

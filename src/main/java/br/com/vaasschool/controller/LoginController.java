@@ -20,7 +20,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginPage(Model model) {
-        List<Category> categories = categoryRepository.findByActiveCategoryActiveSubcategoryAndPublicCourse();
+        List<Category> categories = categoryRepository.findByActiveCategoryAndActiveSubcategoryAndPublicCourse();
         List<CategoryLoginDto> categoryWithSubcategories = categories.stream().map(CategoryLoginDto::new).toList();
 
         model.addAttribute("categories", categoryWithSubcategories);

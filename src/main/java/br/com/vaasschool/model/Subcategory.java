@@ -1,5 +1,9 @@
 package br.com.vaasschool.model;
 
+import br.com.vaasschool.controller.form.SubcategoryForm;
+import br.com.vaasschool.repository.SubcategoryRepository;
+import org.springframework.web.server.ResponseStatusException;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -7,6 +11,8 @@ import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Entity
 public class Subcategory implements Comparable<Subcategory> {
@@ -139,6 +145,17 @@ public class Subcategory implements Comparable<Subcategory> {
 
     public Long getCategoryId() {
         return category.getId();
+    }
+
+    public void update(SubcategoryForm subcategoryForm, Category category) {
+        this.id = subcategoryForm.getId();
+        this.name = subcategoryForm.getName();
+        this.code = subcategoryForm.getCode();
+        this.description = subcategoryForm.getDescription();
+        this.explanatoryGuide = subcategoryForm.getExplanatoryGuide();
+        this.active =  subcategoryForm.getActive();
+        this.order = subcategoryForm.getOrder();
+        this.category = category;
     }
 
     @Override

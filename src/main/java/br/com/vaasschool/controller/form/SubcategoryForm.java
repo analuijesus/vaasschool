@@ -123,25 +123,4 @@ public class SubcategoryForm {
     public Subcategory toModel(Category category) {
         return new Subcategory(name, code, description, explanatoryGuide, active, order, category);
     }
-
-    public Subcategory convert(SubcategoryRepository subcategoryRepository) {
-        Subcategory subcategory = subcategoryRepository.findById(getId())
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
-
-        subcategory.setId(id);
-        subcategory.setName(name);
-        subcategory.setCode(code);
-        subcategory.setDescription(description);
-        subcategory.setExplanatoryGuide(explanatoryGuide);
-        subcategory.setActive(active);
-        subcategory.setOrder(order);
-        subcategory.setCategory(subcategory.getCategory());
-
-        return subcategory;
-    }
-
-    public static SubcategoryForm from(Subcategory subcategory) {
-        return new SubcategoryForm(subcategory.getId(), subcategory.getName(), subcategory.getCode(), subcategory.getDescription(),
-                subcategory.getExplanatoryGuide(), subcategory.getActive(), subcategory.getOrder(), subcategory.getCategoryId());
-    }
 }

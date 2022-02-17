@@ -43,5 +43,5 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
             group by category.id         
             order by category.order_visualization
             """, nativeQuery = true)
-    List<Category> findByActiveCategoryActiveSubcategoryAndPublicCourse();
+    List<Category> findByActiveCategoryAndActiveSubcategoryAndPublicCourse();
 }
