@@ -12,10 +12,8 @@ import javax.validation.constraints.Pattern;
 public class CourseForm {
 
     private Long id;
-
     @NotBlank(message = "O nome do curso precisa ser preenchido.")
     private String name;
-
     @NotBlank(message = "O código do curso é obrigatório.")
     @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido. O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;

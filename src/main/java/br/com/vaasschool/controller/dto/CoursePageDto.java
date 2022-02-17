@@ -4,8 +4,8 @@ import br.com.vaasschool.model.Course;
 
 public class CoursePageDto {
 
-    private final String name;
-    private final int estimatedTimeToFinish;
+    final private String name;
+    final private int estimatedTimeToFinish;
 
     public CoursePageDto(Course course) {
         this.name = course.getName();

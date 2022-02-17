@@ -15,25 +15,19 @@ public class Category implements Comparable<Category> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotBlank(message = "O nome da categoria precisa ser preenchida.")
     private String name;
-
     @NotBlank(message = "O código da categoria é obrigatório.")
     @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido. O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
     private String description;
-
     @Column(name = "explanatory_guide")
     private String explanatoryGuide;
     private Boolean active = false;
-
     @Column(name = "order_visualization")
     private Integer order;
-
     @Column(name = "imagem_path")
     private String imagePath;
-
     @Column(name = "color_code")
     private String colorCode = "3383FF";
 

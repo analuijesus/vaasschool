@@ -49,8 +49,8 @@ public class SubcategoryController {
 
     @GetMapping("/admin/subcategories/new")
     public String showNew(SubcategoryForm subcategoryForm, Model model) {
-
         List<Category> categories = categoryRepository.findAllByOrderByName();
+
         model.addAttribute("categories", categories);
         model.addAttribute("subcategoryForm", subcategoryForm == null ? new SubcategoryForm() : subcategoryForm);
         return "subcategory/formSubcategory";

@@ -14,26 +14,20 @@ public class Subcategory implements Comparable<Subcategory> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotBlank(message = "O nome da subcategoria deve ser preenchido.")
     private String name;
-
     @NotBlank(message = "O código da subcategoria é obrigatório.")
     @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido. O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
     private String description;
-
     @Column(name = "explanatory_guide")
     private String explanatoryGuide;
     private Boolean active = false;
-
     @Column(name = "order_visualization")
     private Integer order;
-
     @NotNull(message = "A categoria deve ser preenchida.")
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
-
     @OneToMany(mappedBy = "subcategory")
     private List<Course> courses = new ArrayList<>();
 
@@ -41,19 +35,14 @@ public class Subcategory implements Comparable<Subcategory> {
     public Subcategory() {
     }
 
-    public Subcategory(String name, String code, String description, Boolean active, Integer order, Category category) {
+    public Subcategory(String name, String code, String description, String explanatoryGuide, Boolean active, Integer order, Category category) {
         this.name = name;
         this.code = code;
         this.description = description;
+        this.explanatoryGuide = explanatoryGuide;
         this.active = active;
         this.order = order;
         this.category = category;
-    }
-
-    public Subcategory(Long id, String name, String code, String description, String explanatoryGuide, Boolean active, Integer order, Category category) {
-        this(name, code, description, active, order, category);
-        this.explanatoryGuide = explanatoryGuide;
-        this.id = id;
     }
 
     public Long getId() {

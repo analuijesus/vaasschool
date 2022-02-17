@@ -44,7 +44,6 @@ public class CourseController {
     public String listCourses(@PathVariable("categoryCode") String categoryCode,
                               @PathVariable("subcategoryCode") String subcategoryCode,
                               @PageableDefault(size = 5) Pageable pageable, Model model) {
-
         Subcategory subcategory = subcategoryRepository.findByCode(subcategoryCode)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Subcategory %s not found", subcategoryCode)));
 
@@ -62,7 +61,6 @@ public class CourseController {
 
     @GetMapping("/admin/courses/new")
     public String showNew(CourseForm courseForm, Model model) {
-
         List<Subcategory> subcategories = subcategoryRepository.findAllByOrderByName();
 
         model.addAttribute("visibility", CourseVisibility.values());
@@ -113,7 +111,6 @@ public class CourseController {
                          @PathVariable("subcategoryCode") String subcategoryCode,
                          @PathVariable("courseCode") String courseCode,
                          @Valid CourseForm courseForm, BindingResult bindingResult, Model model) {
-
         if (bindingResult.hasErrors()) {
             return showUpdate(categoryCode, subcategoryCode, courseCode, courseForm, bindingResult, model);
         }

@@ -6,10 +6,10 @@ import java.util.List;
 
 public class CategoryLoginDto {
 
-    private String name;
-    private String code;
-    private String imagePath;
-    private List<SubcategoryLoginDto> subcategoryLoginDtos;
+    final private String name;
+    final private String code;
+    final private String imagePath;
+    final private List<SubcategoryLoginDto> subcategoryLoginDtos;
 
     public CategoryLoginDto(Category category) {
         this.name = category.getName();

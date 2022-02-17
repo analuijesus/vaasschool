@@ -7,9 +7,9 @@ import java.util.List;
 
 public class SubcategoryPageDto {
 
-    private final String name;
-    private final String code;
-    private final List<CoursePageDto> coursePageDtos;
+    final private String name;
+    final private String code;
+    final private List<CoursePageDto> coursePageDtos;
 
     public SubcategoryPageDto(Subcategory subcategory) {
         this.name = subcategory.getName();

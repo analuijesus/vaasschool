@@ -4,8 +4,8 @@ import br.com.vaasschool.model.Subcategory;
 
 public class SubcategoryLoginDto {
 
-    private String name;
-    private String code;
+    final private String name;
+    final private String code;
 
     public SubcategoryLoginDto(Subcategory subcategory) {
         this.name = subcategory.getName();

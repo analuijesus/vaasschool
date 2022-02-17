@@ -15,10 +15,8 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class SubcategoryForm {
 
     private Long id;
-
     @NotBlank(message = "O nome da subcategoria precisa ser preenchida.")
     private String name;
-
     @NotBlank(message = "O código da subcategoria é obrigatório.")
     @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido. O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
@@ -27,7 +25,6 @@ public class SubcategoryForm {
     private boolean active;
     @Positive(message = "A ordem deve ser um número positivo ou vazio.")
     private Integer order;
-
     @NotNull(message = "A subcategoria deve ter uma categoria associada.")
     private Long categoryId;
     private String categoryName;
@@ -124,7 +121,7 @@ public class SubcategoryForm {
     }
 
     public Subcategory toModel(Category category) {
-        return new Subcategory(id, name, code, description, explanatoryGuide, active, order, category);
+        return new Subcategory(name, code, description, explanatoryGuide, active, order, category);
     }
 
     public Subcategory convert(SubcategoryRepository subcategoryRepository) {

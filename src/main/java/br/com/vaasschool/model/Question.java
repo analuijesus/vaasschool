@@ -9,7 +9,6 @@ public class Question extends Activity{
 
     @NotBlank(message = "O enunciado deve ser preeenchido.")
     private String statement;
-
     @Column(name = "question_type", columnDefinition = "ENUM")
     @Enumerated(EnumType.STRING)
     private QuestionType type = QuestionType.SINGLE_ANSWER;

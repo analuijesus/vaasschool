@@ -16,36 +16,27 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotBlank(message = "O nome do curso precisa ser preenchido.")
     private String name;
-
     @NotBlank(message = "O código do curso é obrigatório.")
     @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido. O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
-
     @NotNull(message = "Carga horária inválida. Deve estar entre " + MIN_VALUE_FOR_ESTIMATED_TIME_TO_FINISH + " e " +
             MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH)
     @Column(name = "estimated_time_to_finish", columnDefinition = "smallint")
     private int estimatedTimeToFinish;
-
     @Column(columnDefinition = "ENUM")
     @Enumerated(EnumType.STRING)
     private CourseVisibility visibility = CourseVisibility.PRIVATE;
-
     @Column(name = "target_audience")
     private String targetAudience;
-
     @Column(name = "instructor_name")
     @NotBlank(message = "O nome do instrutor deve ser preenchido.")
     private String instructorName;
-
     @Column(columnDefinition = "text")
     private String summary;
-
     @Column(name = "learned_skills")
     private String learnedSkills;
-
     @NotNull(message = "O curso deve ter uma subcategoria associada.")
     @ManyToOne(fetch = FetchType.LAZY)
     private Subcategory subcategory;

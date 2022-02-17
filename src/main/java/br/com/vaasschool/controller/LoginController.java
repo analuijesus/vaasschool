@@ -25,6 +25,6 @@ public class LoginController {
 
         model.addAttribute("categories", categoryWithSubcategories);
 
-        return "login";
+        return "login/login";
     }
 }

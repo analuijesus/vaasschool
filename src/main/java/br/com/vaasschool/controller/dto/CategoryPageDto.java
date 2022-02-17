@@ -6,9 +6,9 @@ import java.util.List;
 
 public class CategoryPageDto {
 
-    private final String name;
-    private final String imagePath;
-    private final List<SubcategoryPageDto> subcategoryPageDtos;
+    final private String name;
+    final private String imagePath;
+    final private List<SubcategoryPageDto> subcategoryPageDtos;
 
     public CategoryPageDto(Category category) {
         this.name = category.getName();
