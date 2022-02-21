@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -77,14 +78,21 @@ public class CategoryController {
         return "redirect:/admin/categories";
     }
 
-    @GetMapping(value = {"/category/{categoryCode}", "/"})
+    @GetMapping("/category/{categoryCode}")
     public String publicPage(@PathVariable("categoryCode") String code, Model model) {
+
         Category category = categoryRepository.findByCode(code)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
 
         model.addAttribute("category", new CategoryPageDto(category));
 
         return "category/pageCategory";
+    }
+
+    @GetMapping( "/")
+    public String publicPageRedirect() {
+
+        return "redirect:/category/programacao";
     }
 
     @PostMapping("/admin/deactivateCategory")
