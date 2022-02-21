@@ -25,7 +25,7 @@ public class Course {
             MAX_VALUE_FOR_ESTIMATED_TIME_TO_FINISH)
     @Column(name = "estimated_time_to_finish", columnDefinition = "smallint")
     private int estimatedTimeToFinish;
-    @Column(columnDefinition = "ENUM")
+//    @Column(columnDefinition = "ENUM")
     @Enumerated(EnumType.STRING)
     private CourseVisibility visibility = CourseVisibility.PRIVATE;
     @Column(name = "target_audience")
