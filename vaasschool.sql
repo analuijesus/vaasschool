@@ -128,8 +128,8 @@ create table User_Profile
     FOREIGN KEY (`id_profile`) REFERENCES `Profile` (`id`)
 );
 
-insert into User_Profile(id_user, id_profile) value (1, 1);
-insert into User_Profile(id_user, id_profile) value (2, 2);
+insert into User_Profile(id_user, id_profile) value (4, 4);
+insert into User_Profile(id_user, id_profile) value (14, 14);
 
 insert into Profile(name)
 values ('ROLE_MODERATOR');

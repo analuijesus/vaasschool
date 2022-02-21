@@ -91,7 +91,6 @@ public class CategoryController {
 
     @GetMapping( "/")
     public String publicPageRedirect() {
-
         return "redirect:/category/programacao";
     }
 
