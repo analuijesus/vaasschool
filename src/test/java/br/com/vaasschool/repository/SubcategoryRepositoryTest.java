@@ -5,7 +5,6 @@ import br.com.vaasschool.model.Subcategory;
 import br.com.vaasschool.util.builder.CategoryBuilder;
 import br.com.vaasschool.util.builder.SubcategoryBuilder;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -13,6 +12,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -29,24 +30,29 @@ public class SubcategoryRepositoryTest {
     @Autowired
     private TestEntityManager entityManager;
 
-    private Category category;
+    @Test
+    public void shouldModifyActiveToFalseWhenActiveIsTrue() {
+        Subcategory subcategory = aSubcategory("java-jdbc", true);
 
+        subcategoryRepository.setActiveFalse(subcategory.getId());
+        entityManager.clear();
+        Optional<Subcategory> possibleCategory = subcategoryRepository.findById(subcategory.getId());
 
-//    @Test
-//    public void deveModificarParaFalseQuandoAActiveForTrue() {
-//        Subcategory subcategory = aSubcategory("programacao", true);
-//
-//        subcategoryRepository.setActiveFalse(subcategory.getId());
-//        assertThat(subcategory.getId())
-//    }
-//
-//    @Test
-//    public void deveManterComoFalseQuandoAActiveForFalso() {
-//        Subcategory subcategory = aSubcategory("programacao", false);
-//
-//        subcategoryRepository.setActiveFalse(subcategory.getId());
-//        assertThat(subcategory.getId())
-//    }
+        assertThat(possibleCategory.get().getActive())
+                .isFalse();
+    }
+
+    @Test
+    public void shouldKeepAsFalseWhenActiveIsFalse(){
+        Subcategory subcategory = aSubcategory("java-jdbc", false);
+
+        subcategoryRepository.setActiveFalse(subcategory.getId());
+        entityManager.clear();
+        Optional<Subcategory> possibleCategory = subcategoryRepository.findById(subcategory.getId());
+
+        assertThat(possibleCategory.get().getActive())
+                .isFalse();
+    }
 
     private Subcategory aSubcategory(String code, boolean active) {
         Subcategory subcategory = new SubcategoryBuilder()
@@ -56,10 +62,24 @@ public class SubcategoryRepositoryTest {
                 .withExplanatoryGuide("test repository")
                 .withActive(active)
                 .withOrder(2)
-                .withCategory(category)
+                .withCategory(aCategory())
                 .create();
         entityManager.persist(subcategory);
 
         return subcategory;
+    }
+
+    private Category aCategory() {
+        Category category = new CategoryBuilder()
+                .withName("Programação")
+                .withCode("programacao")
+                .withDescription("Programe nas principais linguagens e plataformas. Iniciantes são bem vindos nos cursos de lógica e JavaScript.")
+                .withOrder(1)
+                .withActive(true)
+                .withImagePath("https://www.alura.com.br/assets/api/formacoes/categorias/512/programacao-transparent.png")
+                .withColorCode("#00c86f")
+                .create();
+        entityManager.persist(category);
+        return category;
     }
 }

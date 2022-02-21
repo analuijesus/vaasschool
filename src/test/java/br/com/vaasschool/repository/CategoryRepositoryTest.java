@@ -4,6 +4,7 @@ import br.com.vaasschool.model.Category;
 import br.com.vaasschool.model.Course;
 import br.com.vaasschool.model.CourseVisibility;
 import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.projection.CategoryProjection;
 import br.com.vaasschool.util.builder.CategoryBuilder;
 import br.com.vaasschool.util.builder.CourseBuilder;
 import br.com.vaasschool.util.builder.SubcategoryBuilder;
@@ -17,7 +18,11 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
+import static br.com.vaasschool.model.CourseVisibility.PRIVATE;
+import static br.com.vaasschool.model.CourseVisibility.PUBLIC;
+import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -33,110 +38,84 @@ public class CategoryRepositoryTest {
     private TestEntityManager entityManager;
 
     @Test
-    public void shouldBringAllWhenTheCategoryIsActiveAndSubcategoryActiveAndPublicCourse() {
-        aCourse("java-jdbc", CourseVisibility.PUBLIC,
+    public void shouldBringAllByOrderWhenTheCategoryIsActiveAndSubcategoryActiveAndPublicCourse() {
+        aCourse("java-jdbc", PUBLIC,
                 aSubcategory("java", true,
                         aCategory("programacao", true)));
-        aCourse("python-estatistica", CourseVisibility.PUBLIC,
+        aCourse("python-estatistica", PUBLIC,
                 aSubcategory("python", true,
                         aCategory("data-science", true)));
+        aCourse("java-mobile", PUBLIC,
+                aSubcategory("dart", true,
+                        aCategory("mobile", false)));
+        aCourse("react", PRIVATE,
+                aSubcategory("javascript", true,
+                        aCategory("front-end", true)));
 
         List<Category> categories = categoryRepository.findByActiveCategoryAndActiveSubcategoryAndPublicCourse();
 
         assertThat(categories)
                 .hasSize(2)
-                .allMatch(Category::getActive);
+                .extracting(Category::getCode, Category::getActive)
+                .containsExactly(
+                        tuple("programacao", true),
+                        tuple("data-science", true)
+                );
     }
 
     @Test
-    public void shouldBringOnlyWhenTheCategoryIsActiveAndSubcategoryIsActiveAndPublicCourse() {
-        aCourse("java-jdbc", CourseVisibility.PUBLIC,
-                aSubcategory("java", true,
-                        aCategory("programacao", true)));
-        aCourse("python-estatistica", CourseVisibility.PRIVATE,
-                aSubcategory("python", false,
-                        aCategory("data-science", false)));
-
-        List<Category> categories = categoryRepository.findByActiveCategoryAndActiveSubcategoryAndPublicCourse();
-
-        assertThat(categories)
-                .hasSize(1)
-                .allMatch(Category::getActive);
-    }
-
-    @Test
-    public void shouldIgnoreWhenHavingAPrivateCourseEvenWithTheActiveSubcategoryAndActiveCategory() {
-        aCourse("java-jdbc", CourseVisibility.PUBLIC,
-                aSubcategory("java", true,
-                        aCategory("programacao", true)));
-        aCourse("python-estatistica", CourseVisibility.PRIVATE,
-                aSubcategory("python", true,
-                        aCategory("data-science", true)));
-
-        List<Category> categories = categoryRepository.findByActiveCategoryAndActiveSubcategoryAndPublicCourse();
-
-        assertThat(categories)
-                .hasSize(1)
-                .allMatch(Category::getActive);
-    }
-
-    @Test
-    public void shouldIgnoreWhenHavingSubcategoryFalseEvenWithPublicCourseAndActiveCategory() {
-        aCourse("python-estatistica", CourseVisibility.PUBLIC,
-                aSubcategory("python", false,
-                        aCategory("data-science", true)));
-
-        List<Category> categories = categoryRepository.findByActiveCategoryAndActiveSubcategoryAndPublicCourse();
-
-        assertThat(categories)
-                .hasSize(0);
-    }
-
-    @Test
-    public void shouldIgnoreWhenHavingWithACategoryFalseSamePublicCourseAndSubcategoryActive() {
-        aCourse("python-estatistica", CourseVisibility.PUBLIC,
-                aSubcategory("python", true,
-                        aCategory("data-science", false)));
-
-        List<Category> categories = categoryRepository.findByActiveCategoryAndActiveSubcategoryAndPublicCourse();
-
-        assertThat(categories)
-                .hasSize(0)
-                .allMatch(Category::getActive);
-    }
-
-    @Test
-    public void shouldIgnoreWhenTheCourseIsPrivateEvenWithAvitvaCategoryAndActiveSubcategory() {
-        aCourse("python-estatistica", CourseVisibility.PRIVATE,
-                aSubcategory("python", true,
-                        aCategory("data-science", true)));
-
-        List<Category> categories = categoryRepository.findByActiveCategoryAndActiveSubcategoryAndPublicCourse();
-
-        assertThat(categories)
-                .isEmpty();
-    }
-
-
-    @Test
-    public void deveModificarAActiveParaFalseQuandoAActiveForTrue() {
+    public void shouldModifyActiveToFalseWhenActiveIsTrue() {
         Category category = aCategory("programacao", true);
 
         categoryRepository.setActiveFalse(category.getId());
+        entityManager.clear();
+        Optional<Category> possibleCategory = categoryRepository.findById(category.getId());
 
-        assertThat(category.getActive())
+        assertThat(possibleCategory.get().getActive())
                 .isFalse();
     }
 
-//    @Test
-//    public void deveManterComoFalseQuandoAActiveForFalso(){
-//        Category category = aCategory("programacao", false);
-//
-//        categoryRepository.setActiveFalse(category.getId());
-//        assertThat(category.getId())
-//    }
+    @Test
+    public void shouldKeepAsFalseWhenActiveIsFalse() {
+        Category category = aCategory("programacao", false);
 
-//    testar o método findCategoryByAmountOfCourse(), mas como?
+        categoryRepository.setActiveFalse(category.getId());
+        entityManager.clear();
+        Optional<Category> possibleCategory = categoryRepository.findById(category.getId());
+
+        assertThat(possibleCategory.get().getActive())
+                .isFalse();
+    }
+
+    @Test
+    public void shouldBringTheNameOfTheCategoryWithAmountOfCourses() {
+        aCourse("java-jdbc", PUBLIC,
+                aSubcategory("java", true,
+                        aCategory("programacao", true)));
+        aCourse("python-estatistica", PUBLIC,
+                aSubcategory("python", true,
+                        aCategory("data-science", true)));
+        aCourse("java-mobile", PUBLIC,
+                aSubcategory("dart", true,
+                        aCategory("mobile", false)));
+        aCourse("react", PRIVATE,
+                aSubcategory("javascript", true,
+                        aCategory("front-end", true)));
+
+        aSubcategory("javascript-bootstrap", true,
+                aCategory("front-end-1", true));
+
+        aCategory("front-end-2", true);
+
+        List<CategoryProjection> categoryByAmountOfCourse = categoryRepository.findCategoryByAmountOfCourse();
+
+        assertThat(categoryByAmountOfCourse)
+                .hasSize(1)
+                .extracting(CategoryProjection::getName, CategoryProjection::getNumberOfCourses)
+                .containsExactly(
+                        tuple("Programação", 4)
+                );
+    }
 
     private Category aCategory(String code, boolean active) {
         Category category = new CategoryBuilder()
