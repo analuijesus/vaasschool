@@ -1,4 +1,4 @@
-package br.com.vaasschool.controller.dto;
+package br.com.vaasschool.controller.api.dto;
 
 import br.com.vaasschool.model.Course;
 

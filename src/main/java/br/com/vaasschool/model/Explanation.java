@@ -10,7 +10,6 @@ public class Explanation extends Activity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotBlank(message = "Um texto explicativo da atividade deve ser preenchido.")
     private String text;
 

@@ -13,18 +13,14 @@ public abstract class Activity implements Comparable<Activity> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotBlank(message = "O título deve ser preenchido.")
     private String title;
-
     @NotBlank(message = "O código da atividade é obrigatório.")
     @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido. O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
-
     @Column(name = "order_visualization")
     private Integer order;
     private Boolean active = false;
-
     @NotNull(message = "A atividade deve ter uma seção associada.")
     @ManyToOne(fetch = FetchType.LAZY)
     private Section section;

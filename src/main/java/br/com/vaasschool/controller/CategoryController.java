@@ -1,13 +1,17 @@
 package br.com.vaasschool.controller;
 
 import br.com.vaasschool.controller.dto.CategoryDto;
+import br.com.vaasschool.controller.dto.CategoryPageDto;
 import br.com.vaasschool.controller.form.CategoryForm;
 import br.com.vaasschool.model.Category;
 import br.com.vaasschool.repository.CategoryRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
@@ -49,10 +53,12 @@ public class CategoryController {
     }
 
     @GetMapping("/admin/categories/{code}")
-    public String showUpdate(@PathVariable("code") String code, Model model) {
+    public String showUpdate(@PathVariable("code") String code, Model model, CategoryForm courseForm, BindingResult bindingResult) {
         Category category = categoryRepository.findByCode(code)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
-        model.addAttribute("categoryForm", CategoryForm.from(category));
+
+        model.addAttribute("categoryForm", bindingResult.hasErrors() ? courseForm : new CategoryForm(category));
+
         return "category/formCategory";
     }
 
@@ -60,10 +66,25 @@ public class CategoryController {
     @Transactional
     public String update(@PathVariable("code") String code, @Valid CategoryForm categoryForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return showUpdate(code, model);
+            return showUpdate(code, model, categoryForm, bindingResult);
         }
-        Category category = categoryForm.convert(categoryRepository);
+
+        Category category = categoryRepository.findByCode(code)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
+
+        category.update(categoryForm);
+
         return "redirect:/admin/categories";
+    }
+
+    @GetMapping(value = {"/category/{categoryCode}", "/"})
+    public String publicPage(@PathVariable("categoryCode") String code, Model model) {
+        Category category = categoryRepository.findByCode(code)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
+
+        model.addAttribute("category", new CategoryPageDto(category));
+
+        return "category/pageCategory";
     }
 
     @PostMapping("/admin/deactivateCategory")

@@ -49,8 +49,8 @@ public class SubcategoryController {
 
     @GetMapping("/admin/subcategories/new")
     public String showNew(SubcategoryForm subcategoryForm, Model model) {
-
         List<Category> categories = categoryRepository.findAllByOrderByName();
+
         model.addAttribute("categories", categories);
         model.addAttribute("subcategoryForm", subcategoryForm == null ? new SubcategoryForm() : subcategoryForm);
         return "subcategory/formSubcategory";
@@ -62,7 +62,7 @@ public class SubcategoryController {
             return showNew(subcategoryForm, model);
         }
         Category category = categoryRepository.findById(subcategoryForm.getCategoryId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category %s not found", subcategoryForm.getCategoryId())));
 
         Subcategory subcategory = subcategoryForm.toModel(category);
         subcategoryRepository.save(subcategory);
@@ -76,10 +76,10 @@ public class SubcategoryController {
         List<Category> categories = categoryRepository.findAll();
 
         Subcategory subcategory = subcategoryRepository.findByCode(subcategoryCode)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Subcategory %s not found", subcategoryCode)));
 
         Category category = categoryRepository.findByCode(categoryCode)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category %s not found", categoryCode)));
 
         model.addAttribute("category", category);
         model.addAttribute("categories", categories);
@@ -89,14 +89,20 @@ public class SubcategoryController {
 
     @PostMapping("/admin/subcategories/{categoryCode}/{subcategoryCode}")
     @Transactional
-    public String update(@PathVariable("categoryCode") String categoryCode, @PathVariable("subcategoryCode") String subcategoryCode,
+    public String update(@PathVariable("categoryCode") String categoryCode,
+                         @PathVariable("subcategoryCode") String subcategoryCode,
                          @Valid SubcategoryForm subcategoryForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return showUpdate(categoryCode, subcategoryCode, model);
         }
+
         Category category = categoryRepository.findById(subcategoryForm.getCategoryId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
-        Subcategory subcategory = subcategoryForm.convert(subcategoryRepository);
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category %s not found", categoryCode)));
+
+        Subcategory subcategory = subcategoryRepository.findById(subcategoryForm.getId())
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Subcategory %s not found", subcategoryForm.getId())));
+
+        subcategory.update(subcategoryForm, category);
 
         return "redirect:/admin/subcategories/" + categoryCode;
     }
@@ -106,7 +112,7 @@ public class SubcategoryController {
     @ResponseBody
     public void disableStatus(Long id, Model model) {
         Subcategory subcategory = subcategoryRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", id)));
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Subcategory %s not found", id)));
 
         subcategoryRepository.setActiveFalse(id);
 

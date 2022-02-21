@@ -4,7 +4,7 @@
 
 <c:set var="title" value="${subcategoryForm.code == null ? 'Nova Subcategoria' : 'Editar Subcategoria'}"></c:set>
 <c:set var="actionSubcategoryUrl"
-       value="${subcategoryForm.id == null ? '/admin/subcategories' : '/admin/subcategories/'.concat(category.code).concat('/').concat(subcategoryForm.code)}"></c:set>
+       value="${subcategoryForm.id == null ? '/admin/subcategories/new' : '/admin/subcategories/'.concat(category.code).concat('/').concat(subcategoryForm.code)}"></c:set>
 
 <html>
 <head>

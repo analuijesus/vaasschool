@@ -13,11 +13,10 @@ import javax.validation.constraints.Positive;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 public class SubcategoryForm {
-    private Long id;
 
+    private Long id;
     @NotBlank(message = "O nome da subcategoria precisa ser preenchida.")
     private String name;
-
     @NotBlank(message = "O código da subcategoria é obrigatório.")
     @Pattern(regexp = "([a-z0-9^-]+)", message = "Insira um código válido. O código deve conter apenas letras minúsculas, números e hífen (-).")
     private String code;
@@ -26,10 +25,8 @@ public class SubcategoryForm {
     private boolean active;
     @Positive(message = "A ordem deve ser um número positivo ou vazio.")
     private Integer order;
-
     @NotNull(message = "A subcategoria deve ter uma categoria associada.")
     private Long categoryId;
-
     private String categoryName;
 
     public SubcategoryForm() {
@@ -124,27 +121,6 @@ public class SubcategoryForm {
     }
 
     public Subcategory toModel(Category category) {
-        return new Subcategory(id, name, code, description, explanatoryGuide, active, order, category);
-    }
-
-    public Subcategory convert(SubcategoryRepository subcategoryRepository) {
-        Subcategory subcategory = subcategoryRepository.findById(getId())
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, String.format("Category %s not found", code)));
-
-        subcategory.setId(getId());
-        subcategory.setName(getName());
-        subcategory.setCode(getCode());
-        subcategory.setDescription(getDescription());
-        subcategory.setExplanatoryGuide(getExplanatoryGuide());
-        subcategory.setActive(getActive());
-        subcategory.setOrder(getOrder());
-        subcategory.setCategory(subcategory.getCategory());
-
-        return subcategory;
-    }
-
-    public static SubcategoryForm from(Subcategory subcategory) {
-        return new SubcategoryForm(subcategory.getId(), subcategory.getName(), subcategory.getCode(), subcategory.getDescription(),
-                subcategory.getExplanatoryGuide(), subcategory.getActive(), subcategory.getOrder(), subcategory.getCategory().getId());
+        return new Subcategory(name, code, description, explanatoryGuide, active, order, category);
     }
 }

@@ -30,5 +30,18 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     @Modifying
     @Query("update Category category set category.active = false where category.id = :id")
-    void setActiveFalse (@Param("id") Long id);
+    void setActiveFalse(@Param("id") Long id);
+
+    @Query(value = """
+            select distinct *
+            from Category category 
+            left join Subcategory subcategory on category.id = subcategory.category_id 
+            left join Course course on subcategory.id = course.subcategory_id
+            where category.active = true
+            and subcategory.active = true
+            and course.visibility = 'PUBLIC'   
+            group by category.id         
+            order by category.order_visualization
+            """, nativeQuery = true)
+    List<Category> findByActiveCategoryAndActiveSubcategoryAndPublicCourse();
 }

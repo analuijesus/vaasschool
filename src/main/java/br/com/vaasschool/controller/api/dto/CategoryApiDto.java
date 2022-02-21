@@ -1,4 +1,4 @@
-package br.com.vaasschool.controller.dto;
+package br.com.vaasschool.controller.api.dto;
 
 import br.com.vaasschool.model.Category;
 
@@ -21,8 +21,7 @@ public class CategoryApiDto {
         this.explanatoryGuide = category.getExplanatoryGuide();
         this.colorCode = category.getColorCode();
         this.totalCourses = category.getNumberOfCourses();
-        this.subcategoryApiDtos = category.getActiveSubcategories().stream()
-                .map(SubcategoryApiDto::new).toList();
+        this.subcategoryApiDtos = category.getActiveSubcategories().stream().map(SubcategoryApiDto::new).toList();
     }
 
     public String getName() {

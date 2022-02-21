@@ -10,15 +10,12 @@ public class Alternative implements Comparable<Alternative> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotBlank(message = "Um texto explicativo da alternativa deve ser preenchido.")
     private String text;
-
     @Column(name = "order_visualization")
     private Integer order;
     private Boolean correct;
     private String justification;
-
     @NotNull(message = "A alternativa deve ter uma questão associada.")
     @ManyToOne (fetch = FetchType.LAZY)
     private Question question;

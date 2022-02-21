@@ -4,7 +4,7 @@
 
 <c:set var="title" value="${categoryForm.code == null ? 'Nova Categoria' : 'Editar Categoria'}"></c:set>
 <c:set var="actionCategoryUrl"
-       value="${categoryForm.id == null ? '/admin/categories' : '/admin/categories/'.concat(categoryForm.code)}"></c:set>
+       value="${categoryForm.id == null ? '/admin/categories/new' : '/admin/categories/'.concat(categoryForm.code)}"></c:set>
 
 <html>
 <head>
