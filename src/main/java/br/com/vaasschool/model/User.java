@@ -17,7 +17,10 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
-    @ManyToMany(mappedBy = "name", fetch = FetchType.EAGER)
+    @JoinTable(name = "User_Profile",
+            joinColumns = @JoinColumn( name = "id_user", referencedColumnName = "id", table = "User"),
+            inverseJoinColumns = @JoinColumn(name = "id_profile", referencedColumnName = "id", table = "Profile"))
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Profile> profiles = new ArrayList<>();
 
     @Override
