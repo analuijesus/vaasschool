@@ -118,15 +118,15 @@ public class CategoryRepositoryTest {
     }
 
 
-//    @Test
-//    public void deveModificarAActiveParaFalseQuandoAActiveForTrue() {
-//        Category category = aCategory("programacao", true);
-//
-//        categoryRepository.setActiveFalse(category.getId());
-//
-//        assertThat(category.getActive())
-//                .isFalse();
-//    }
+    @Test
+    public void deveModificarAActiveParaFalseQuandoAActiveForTrue() {
+        Category category = aCategory("programacao", true);
+
+        categoryRepository.setActiveFalse(category.getId());
+
+        assertThat(category.getActive())
+                .isFalse();
+    }
 
 //    @Test
 //    public void deveManterComoFalseQuandoAActiveForFalso(){
