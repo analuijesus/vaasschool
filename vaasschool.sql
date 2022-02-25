@@ -1,5 +1,7 @@
-create database vaasschool;
-use vaasschool;
+create
+database `vaasschool-test`;
+use
+`vaasschool-test`;
 
 create table `Category`
 (
@@ -104,21 +106,39 @@ create table `Alternative`
     FOREIGN KEY (`question_id`) REFERENCES `Question` (`id`)
 );
 
-create table `User`
-(
-    `id`       bigint PRIMARY KEY AUTO_INCREMENT,
-    `email`    varchar(255) not null,
-    `password` varchar(255) not null
-);
-
 create table `Profile`
 (
-    `id`      bigint PRIMARY KEY AUTO_INCREMENT,
-    `name`    varchar(255) not null
+    `id`   bigint PRIMARY KEY AUTO_INCREMENT,
+    `name` varchar(255) not null
 );
 
+create table `User`
+(
+    `id`         bigint PRIMARY KEY AUTO_INCREMENT,
+    `email`      varchar(255) not null,
+    `password`   varchar(255) not null
+);
+
+create table User_Profile
+(
+    `id_user`    bigint,
+    `id_profile` bigint,
+    PRIMARY KEY (id_user, id_profile),
+    FOREIGN KEY (`id_user`) REFERENCES `User` (`id`),
+    FOREIGN KEY (`id_profile`) REFERENCES `Profile` (`id`)
+);
+
+insert into User_Profile(id_user, id_profile) value (4, 4);
+insert into User_Profile(id_user, id_profile) value (14, 14);
+
+insert into Profile(name)
+values ('ROLE_MODERATOR');
+insert into Profile(name)
+values ('ROLE_STUDENT');
 insert into User(email, password)
 values ('admin@gmail.com', '$2a$10$XZ/wDtEKvMFtfQ9.QuYkbeP96pxUWAkgIhsz2e3ZcJFsUyeszVtx.');
+insert into User(email, password)
+values ('aluno@gmail.com', '$2a$10$XZ/wDtEKvMFtfQ9.QuYkbeP96pxUWAkgIhsz2e3ZcJFsUyeszVtx.');
 insert into Category (name, code, order_visualization, description, active, imagem_path, color_code)
 values ('Programação', 'programacao', 1,
         'Programe nas principais linguagens e plataformas. Iniciantes são bem vindos nos cursos de lógica e JavaScript.',

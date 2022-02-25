@@ -21,8 +21,8 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Query(value = """
             select category.name, count(course.id) as numberOfCourses 
             from Category category 
-            left join Subcategory subcategory on category.id = subcategory.category_id 
-            left join Course course on subcategory.id = course.subcategory_id 
+            join Subcategory subcategory on category.id = subcategory.category_id 
+            join Course course on subcategory.id = course.subcategory_id 
             group by category.name 
             order by count(course.id) desc;
             """, nativeQuery = true)
@@ -35,8 +35,8 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Query(value = """
             select distinct *
             from Category category 
-            left join Subcategory subcategory on category.id = subcategory.category_id 
-            left join Course course on subcategory.id = course.subcategory_id
+            join Subcategory subcategory on category.id = subcategory.category_id 
+            join Course course on subcategory.id = course.subcategory_id
             where category.active = true
             and subcategory.active = true
             and course.visibility = 'PUBLIC'   
