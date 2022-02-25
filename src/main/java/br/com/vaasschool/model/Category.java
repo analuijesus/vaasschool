@@ -1,7 +1,6 @@
 package br.com.vaasschool.model;
 
 import br.com.vaasschool.controller.form.CategoryForm;
-import br.com.vaasschool.repository.CategoryRepository;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -26,7 +25,7 @@ public class Category implements Comparable<Category> {
     private Boolean active = false;
     @Column(name = "order_visualization")
     private Integer order;
-    @Column(name = "imagem_path")
+    @Column(name = "image_path")
     private String imagePath;
     @Column(name = "color_code")
     private String colorCode = "3383FF";
