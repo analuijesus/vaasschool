@@ -58,18 +58,18 @@ public class SubcategoryFormValidatorTest {
         verify(errors, never()).rejectValue(anyString(), anyString());
     }
 
-//    @Test
-//    void shouldGiveErrorWhenTheNameIsEqualButTheIdDifferent() {
-//        when(subcategoryRepository.existsByCodeWithDifferentId(eq("persistencia-com-net"), not(eq(1L)))).thenReturn(true);
-//
-//        SubcategoryForm form = new SubcategoryForm();
-//        form.setId(999L);
-//        form.setCode("persistencia-com-net");
-//
-//        subcategoryFormValidator.validate(form, errors);
-//
-//        verify(errors).rejectValue("code", "existing.updated.subcategory.code");
-//    }
+    @Test
+    void shouldGiveErrorWhenTheNameIsEqualButTheIdDifferent() {
+        when(subcategoryRepository.existsByCodeWithDifferentId(eq("persistencia-com-net"), not(eq(1L)))).thenReturn(true);
+
+        SubcategoryForm form = new SubcategoryForm();
+        form.setId(999L);
+        form.setCode("persistencia-com-net");
+
+        subcategoryFormValidator.validate(form, errors);
+
+        verify(errors).rejectValue("code", "existing.updated.subcategory.code");
+    }
 
     @Test
     void shouldAcceptWhenCodeIsDifferentButIdIsTheEqual() {

@@ -1,9 +1,12 @@
 package br.com.vaasschool.model;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@NoArgsConstructor(onConstructor = @__(@Deprecated))
 @Entity
 public class Alternative implements Comparable<Alternative> {
 
@@ -19,10 +22,6 @@ public class Alternative implements Comparable<Alternative> {
     @NotNull(message = "A alternativa deve ter uma questão associada.")
     @ManyToOne (fetch = FetchType.LAZY)
     private Question question;
-
-    @Deprecated
-    public Alternative() {
-    }
 
     public Alternative(String text, Boolean correct, Question question) {
         this.text = text;

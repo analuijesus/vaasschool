@@ -4,6 +4,7 @@ import br.com.vaasschool.model.Course;
 import br.com.vaasschool.model.CourseVisibility;
 import br.com.vaasschool.model.Subcategory;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class CourseForm {
 
     private Long id;
@@ -31,9 +33,6 @@ public class CourseForm {
     @NotNull(message = "O curso deve ter uma subcategoria associada.")
     private Long subcategoryId;
     private String subcategoryName;
-
-    public CourseForm() {
-    }
 
     public CourseForm(Course course){
         this.id = course.getId();

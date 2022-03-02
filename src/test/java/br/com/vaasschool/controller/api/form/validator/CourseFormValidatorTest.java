@@ -58,18 +58,18 @@ public class CourseFormValidatorTest {
         verify(errors, never()).rejectValue(anyString(), anyString());
     }
 
-//    @Test
-//    void shouldGiveErrorWhenTheNameIsEqualButTheIdDifferent() {
-//        when(categoryRepository.existsByCodeWithDifferentId(eq("mocks-java-mockito"), not(eq(1L)))).thenReturn(true);
-//
-//        CourseForm form = new CourseForm();
-//        form.setId(999L);
-//        form.setCode("mocks-java-mockito");
-//
-//        courseFormValidator.validate(form, errors);
-//
-//        verify(errors).rejectValue("code", "existing.updated.course.code");
-//    }
+    @Test
+    void shouldGiveErrorWhenTheNameIsEqualButTheIdDifferent() {
+        when(courseRepository.existsByCodeWithDifferentId(eq("mocks-java-mockito"), not(eq(1L)))).thenReturn(true);
+
+        CourseForm form = new CourseForm();
+        form.setId(999L);
+        form.setCode("mocks-java-mockito");
+
+        courseFormValidator.validate(form, errors);
+
+        verify(errors).rejectValue("code", "existing.updated.course.code");
+    }
 
     @Test
     void shouldAcceptWhenCodeIsDifferentButIdIsTheEqual() {

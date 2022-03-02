@@ -1,10 +1,13 @@
 package br.com.vaasschool.model;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@NoArgsConstructor(onConstructor = @__(@Deprecated))
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type", columnDefinition = "ENUM('EXPLANATION', 'VIDEO','QUESTION')")
 @Entity
@@ -24,10 +27,6 @@ public abstract class Activity implements Comparable<Activity> {
     @NotNull(message = "A atividade deve ter uma seção associada.")
     @ManyToOne(fetch = FetchType.LAZY)
     private Section section;
-
-    @Deprecated
-    public Activity() {
-    }
 
     public Activity(String title, String code, Section section) {
         this.title = title;

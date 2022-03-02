@@ -56,18 +56,18 @@ public class CategoryFormValidatorTest {
         verify(errors, never()).rejectValue(anyString(), anyString());
     }
 
-//    @Test
-//    void shouldGiveErrorWhenTheNameIsEqualButTheIdDifferent() {
-//        when(categoryRepository.existsByCodeWithDifferentId(eq("devops"), not(eq(1L)))).thenReturn(true);
-//
-//        CategoryForm form = new CategoryForm();
-//        form.setId(999L);
-//        form.setCode("devops");
-//
-//        categoryFormValidator.validate(form, errors);
-//
-//        verify(errors).rejectValue("code", "existing.updated.category.code");
-//    }
+    @Test
+    void shouldGiveErrorWhenTheNameIsEqualButTheIdDifferent() {
+        when(categoryRepository.existsByCodeWithDifferentId(eq("devops"), not(eq(1L)))).thenReturn(true);
+
+        CategoryForm form = new CategoryForm();
+        form.setId(999L);
+        form.setCode("devops");
+
+        categoryFormValidator.validate(form, errors);
+
+        verify(errors).rejectValue("code", "existing.updated.category.code");
+    }
 
     @Test
     void shouldAcceptWhenCodeIsDifferentButIdIsTheEqual() {

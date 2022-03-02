@@ -2,6 +2,7 @@ package br.com.vaasschool.controller.form;
 
 import br.com.vaasschool.model.Category;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
@@ -10,6 +11,7 @@ import javax.validation.constraints.Positive;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class CategoryForm {
 
     private Long id;
@@ -25,9 +27,6 @@ public class CategoryForm {
     private Integer order;
     private String imagePath;
     private String colorCode;
-
-    public CategoryForm() {
-    }
 
     public CategoryForm(Category category) {
         this.id = category.getId();

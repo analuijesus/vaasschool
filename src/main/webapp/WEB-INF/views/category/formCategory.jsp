@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/templates" %>
 
-<c:set var="title" value="${categoryForm.code == null ? 'Nova Categoria' : 'Editar Categoria'}"></c:set>
+<c:set var="title" value="${categoryForm.id == null ? 'Nova Categoria' : 'Editar Categoria'}"></c:set>
 <c:set var="actionCategoryUrl"
        value="${categoryForm.id == null ? '/admin/categories/new' : '/admin/categories/'.concat(categoryForm.code)}"></c:set>
 

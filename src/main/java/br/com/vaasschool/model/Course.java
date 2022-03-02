@@ -2,6 +2,7 @@ package br.com.vaasschool.model;
 
 import br.com.vaasschool.controller.form.CourseForm;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -13,6 +14,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor(onConstructor = @__(@Deprecated))
 @Entity
 public class Course {
 
@@ -46,10 +48,6 @@ public class Course {
     @NotNull(message = "O curso deve ter uma subcategoria associada.")
     @ManyToOne(fetch = FetchType.LAZY)
     private Subcategory subcategory;
-
-    @Deprecated
-    public Course() {
-    }
 
     public Course(String name, String code, int estimatedTimeToFinish, String instructorName, Subcategory subcategory) {
         this.name = name;

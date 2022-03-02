@@ -2,6 +2,7 @@ package br.com.vaasschool.model;
 
 import br.com.vaasschool.controller.form.CategoryForm;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor(onConstructor = @__(@Deprecated))
 @Entity
 public class Category implements Comparable<Category> {
 
@@ -38,10 +40,6 @@ public class Category implements Comparable<Category> {
 
     @OneToMany(mappedBy = "category")
     private List<Subcategory> subcategories = new ArrayList<>();
-
-    @Deprecated
-    public Category() {
-    }
 
     public Category(String name, String code) {
         this.name = name;
@@ -72,7 +70,7 @@ public class Category implements Comparable<Category> {
 
     public List<Subcategory> getActiveSubcategories() {
         return subcategories.stream()
-                .filter(Subcategory::getActive)
+                .filter(Subcategory::isActive)
                 .toList();
     }
 

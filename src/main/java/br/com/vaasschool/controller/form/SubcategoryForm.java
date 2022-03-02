@@ -3,6 +3,7 @@ package br.com.vaasschool.controller.form;
 import br.com.vaasschool.model.Category;
 import br.com.vaasschool.model.Subcategory;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Positive;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class SubcategoryForm {
 
     private Long id;
@@ -28,9 +30,6 @@ public class SubcategoryForm {
     @NotNull(message = "A subcategoria deve ter uma categoria associada.")
     private Long categoryId;
     private String categoryName;
-
-    public SubcategoryForm() {
-    }
 
     public SubcategoryForm(Long id, String name, String code, String description, String explanatoryGuide, boolean active,
                            Integer order, Long categoryId) {

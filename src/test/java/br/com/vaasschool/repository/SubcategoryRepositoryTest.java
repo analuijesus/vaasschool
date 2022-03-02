@@ -38,7 +38,7 @@ public class SubcategoryRepositoryTest {
         entityManager.clear();
         Optional<Subcategory> possibleCategory = subcategoryRepository.findById(subcategory.getId());
 
-        assertThat(possibleCategory.get().getActive())
+        assertThat(possibleCategory.get().isActive())
                 .isFalse();
     }
 
@@ -50,7 +50,7 @@ public class SubcategoryRepositoryTest {
         entityManager.clear();
         Optional<Subcategory> possibleCategory = subcategoryRepository.findById(subcategory.getId());
 
-        assertThat(possibleCategory.get().getActive())
+        assertThat(possibleCategory.get().isActive())
                 .isFalse();
     }
 

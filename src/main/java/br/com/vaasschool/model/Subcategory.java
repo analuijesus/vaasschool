@@ -2,6 +2,7 @@ package br.com.vaasschool.model;
 
 import br.com.vaasschool.controller.form.SubcategoryForm;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor(onConstructor = @__(@Deprecated))
 @Entity
 public class Subcategory implements Comparable<Subcategory> {
 
@@ -38,10 +40,6 @@ public class Subcategory implements Comparable<Subcategory> {
     private Category category;
     @OneToMany(mappedBy = "subcategory")
     private List<Course> courses = new ArrayList<>();
-
-    @Deprecated
-    public Subcategory() {
-    }
 
     public Subcategory(String name, String code, String description, String explanatoryGuide, boolean active, Integer order, Category category) {
         this.name = name;

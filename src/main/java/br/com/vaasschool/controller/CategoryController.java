@@ -3,7 +3,6 @@ package br.com.vaasschool.controller;
 import br.com.vaasschool.controller.dto.CategoryDto;
 import br.com.vaasschool.controller.dto.CategoryPageDto;
 import br.com.vaasschool.controller.form.CategoryForm;
-import br.com.vaasschool.controller.form.validator.CategoryFormUpdateValidator;
 import br.com.vaasschool.controller.form.validator.CategoryFormValidator;
 import br.com.vaasschool.model.Category;
 import br.com.vaasschool.repository.CategoryRepository;
@@ -25,24 +24,16 @@ public class CategoryController {
 
     private final CategoryRepository categoryRepository;
     private final CategoryFormValidator categoryFormValidator;
-//    private final CategoryFormUpdateValidator categoryFormUpdateValidator;
 
-    public CategoryController(CategoryRepository categoryRepository,
-                              CategoryFormValidator categoryFormValidator) {
+    public CategoryController(CategoryRepository categoryRepository, CategoryFormValidator categoryFormValidator) {
         this.categoryRepository = categoryRepository;
         this.categoryFormValidator = categoryFormValidator;
-//        this.categoryFormUpdateValidator = categoryFormUpdateValidator;
     }
 
     @InitBinder("categoryForm")
-    void initBinderNewCategory(WebDataBinder webDataBinder){
+    void initBinder(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(categoryFormValidator);
     }
-
-//    @InitBinder("categoryForm")
-//    void initBinderUpdateCategory(WebDataBinder webDataBinder){
-//        webDataBinder.addValidators(categoryFormUpdateValidator);
-//    }
 
     @GetMapping("/admin/categories")
     public String listCategories(Model model) {
@@ -103,7 +94,7 @@ public class CategoryController {
         return "category/pageCategory";
     }
 
-    @GetMapping( "/")
+    @GetMapping("/")
     public String publicPageRedirect() {
         return "redirect:/category/programacao";
     }
