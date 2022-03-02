@@ -2,6 +2,7 @@ package br.com.vaasschool.controller;
 
 import br.com.vaasschool.controller.dto.CourseDto;
 import br.com.vaasschool.controller.form.CourseForm;
+import br.com.vaasschool.controller.form.validator.CourseFormValidator;
 import br.com.vaasschool.model.Category;
 import br.com.vaasschool.model.Course;
 import br.com.vaasschool.model.CourseVisibility;
@@ -16,7 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.server.ResponseStatusException;
@@ -33,11 +36,18 @@ public class CourseController {
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
     private final CourseRepository courseRepository;
+    private final CourseFormValidator courseFormValidator;
 
-    public CourseController(CategoryRepository categoryRepository, CourseRepository courseRepository, SubcategoryRepository subcategoryRepository) {
+    public CourseController(CategoryRepository categoryRepository, CourseRepository courseRepository, SubcategoryRepository subcategoryRepository, CourseFormValidator courseFormValidator) {
         this.categoryRepository = categoryRepository;
         this.courseRepository = courseRepository;
         this.subcategoryRepository = subcategoryRepository;
+        this.courseFormValidator = courseFormValidator;
+    }
+
+    @InitBinder("courseForm")
+    void initBinder(WebDataBinder webDataBinder){
+        webDataBinder.addValidators(courseFormValidator);
     }
 
     @GetMapping("/admin/courses/{categoryCode}/{subcategoryCode}")

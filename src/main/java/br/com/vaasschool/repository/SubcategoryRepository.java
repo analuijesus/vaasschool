@@ -15,9 +15,18 @@ public interface SubcategoryRepository extends JpaRepository<Subcategory, Long> 
 
     List<Subcategory> findAllByOrderByOrder();
 
+    @Deprecated
+    boolean existsByCodeAndIdNot(String code, Long id);
+
+    default boolean existsByCodeWithDifferentId(String code, Long id){
+        return existsByCodeAndIdNot(code, id);
+    }
+
     @Modifying
     @Query("update Subcategory subcategory set subcategory.active = false where subcategory.id = :id")
     void setActiveFalse (@Param("id") Long id);
 
     List<Subcategory> findAllByOrderByName();
+
+    boolean existsByCode(String code);
 }

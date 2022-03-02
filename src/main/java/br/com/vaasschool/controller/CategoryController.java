@@ -3,15 +3,15 @@ package br.com.vaasschool.controller;
 import br.com.vaasschool.controller.dto.CategoryDto;
 import br.com.vaasschool.controller.dto.CategoryPageDto;
 import br.com.vaasschool.controller.form.CategoryForm;
+import br.com.vaasschool.controller.form.validator.CategoryFormUpdateValidator;
+import br.com.vaasschool.controller.form.validator.CategoryFormValidator;
 import br.com.vaasschool.model.Category;
 import br.com.vaasschool.repository.CategoryRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
@@ -24,10 +24,25 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
+    private final CategoryFormValidator categoryFormValidator;
+//    private final CategoryFormUpdateValidator categoryFormUpdateValidator;
 
-    public CategoryController(CategoryRepository categoryRepository) {
+    public CategoryController(CategoryRepository categoryRepository,
+                              CategoryFormValidator categoryFormValidator) {
         this.categoryRepository = categoryRepository;
+        this.categoryFormValidator = categoryFormValidator;
+//        this.categoryFormUpdateValidator = categoryFormUpdateValidator;
     }
+
+    @InitBinder("categoryForm")
+    void initBinderNewCategory(WebDataBinder webDataBinder){
+        webDataBinder.addValidators(categoryFormValidator);
+    }
+
+//    @InitBinder("categoryForm")
+//    void initBinderUpdateCategory(WebDataBinder webDataBinder){
+//        webDataBinder.addValidators(categoryFormUpdateValidator);
+//    }
 
     @GetMapping("/admin/categories")
     public String listCategories(Model model) {

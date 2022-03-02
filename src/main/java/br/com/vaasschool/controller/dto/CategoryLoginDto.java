@@ -1,9 +1,11 @@
 package br.com.vaasschool.controller.dto;
 
 import br.com.vaasschool.model.Category;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class CategoryLoginDto {
 
     final private String name;
@@ -16,18 +18,6 @@ public class CategoryLoginDto {
         this.code = category.getCode();
         this.imagePath = category.getImagePath();
         this.subcategoryLoginDtos = category.getSubcategories().stream().map(SubcategoryLoginDto::new).toList();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getImagePath() {
-        return imagePath;
     }
 
     public List<SubcategoryLoginDto> getSubcategoryLoginDtos() {

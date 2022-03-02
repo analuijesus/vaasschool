@@ -18,6 +18,13 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     List<Category> findAllByOrderByName();
 
+    @Deprecated
+    boolean existsByCodeAndIdNot(String code, Long id);
+
+    default boolean existsByCodeWithDifferentId(String code, Long id){
+        return existsByCodeAndIdNot(code, id);
+    }
+
     @Query(value = """
             select category.name, count(course.id) as numberOfCourses 
             from Category category 
@@ -44,4 +51,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
             order by category.order_visualization
             """, nativeQuery = true)
     List<Category> findByActiveCategoryAndActiveSubcategoryAndPublicCourse();
+
+    boolean existsByCode(String code);
 }

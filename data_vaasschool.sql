@@ -1,28 +1,23 @@
-create database vaasschool-test`;
-use `vaasschool-test`;
 
+insert into Profile(name) values ('ROLE_MODERATOR');
+insert into Profile(name) values ('ROLE_STUDENT');
 
-insert into User_Profile(id_user, id_profile) value (4, 4);
-insert into User_Profile(id_user, id_profile) value (14, 14);
+insert into User(email, password) values ('admin@gmail.com', '$2a$10$XZ/wDtEKvMFtfQ9.QuYkbeP96pxUWAkgIhsz2e3ZcJFsUyeszVtx.');
+insert into User(email, password)values ('aluno@gmail.com', '$2a$10$XZ/wDtEKvMFtfQ9.QuYkbeP96pxUWAkgIhsz2e3ZcJFsUyeszVtx.');
 
-insert into Category (name, code, order_visualization, description, active, imagem_path, color_code)
+insert into Profile_User(user_id, profile_id) values (1, 1);
+insert into Profile_User(user_id, profile_id) values (2, 2);
+
+insert into Category (name, code, order_visualization, description, active, image_path, color_code)
 values ('Programação', 'programacao', 1,'Programe nas principais linguagens e plataformas. Iniciantes são bem vindos nos cursos de lógica e JavaScript.',
         true, 'https://www.alura.com.br/assets/api/formacoes/categorias/512/programacao-transparent.png', '#00c86f');
-insert into Category (name, code, order_visualization, description, active, imagem_path, color_code)
+insert into Category (name, code, order_visualization, description, active, image_path, color_code)
 values ('DevOps', 'devops', 2, 'Aprenda Git. Entenda a entrega contínua. Estude Linux. Gerencie servidores na nuvem. Explore o mundo de Internet das coisas e da robótica.',
         true, 'https://www.alura.com.br/assets/api/formacoes/categorias/512/devops-transparent.png', '#f16165');
-insert into Category (name, code, order_visualization, description, active, imagem_path, color_code)
+insert into Category (name, code, order_visualization, description, active, image_path, color_code)
 values ('Business', 'business', 3, 'Agilidade. Práticas de gestão. Vendas. Liderança.', false,'https://www.alura.com.br/assets/api/formacoes/categorias/512/inovacao-gestao-transparent.png', '#ff8c2a');
 
 
-insert into Profile(name)
-values ('ROLE_MODERATOR');
-insert into Profile(name)
-values ('ROLE_STUDENT');
-insert into User(email, password)
-values ('admin@gmail.com', '$2a$10$XZ/wDtEKvMFtfQ9.QuYkbeP96pxUWAkgIhsz2e3ZcJFsUyeszVtx.');
-insert into User(email, password)
-values ('aluno@gmail.com', '$2a$10$XZ/wDtEKvMFtfQ9.QuYkbeP96pxUWAkgIhsz2e3ZcJFsUyeszVtx.');
 insert into Subcategory (name, code, order_visualization, description, active, category_id)
 values ('Java', 'java', 1,
         'Java é uma grande plataforma presente em todo lugar: de corporações à bancos e governo. Desenvolva aplicações robustas com um back-end e construa APIs.',
@@ -39,6 +34,7 @@ insert into Subcategory (name, code, order_visualization, description, active, c
 values ('Builds e Controle de versão', 'builds-e-controle-de-versao', 1,
         'As ferramentas mais utilizadas para desenvolvimento: controle de versão com Git e Github além de build da aplicação através de Maven.',
         true, (select id from Category where code = 'devops'));
+
 insert into Course (name, code, estimated_time_to_finish, visibility, target_audience, instructor_name, summary,
                     learned_skills, subcategory_id)
 values ('Git e Github para Sobrevivência', 'git-e-github-para-sobrevivencia', 6, 'PUBLIC',

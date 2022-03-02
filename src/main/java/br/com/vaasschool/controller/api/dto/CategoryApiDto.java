@@ -1,9 +1,11 @@
 package br.com.vaasschool.controller.api.dto;
 
 import br.com.vaasschool.model.Category;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class CategoryApiDto {
 
     final private String name;
@@ -22,33 +24,5 @@ public class CategoryApiDto {
         this.colorCode = category.getColorCode();
         this.totalCourses = category.getNumberOfCourses();
         this.subcategoryApiDtos = category.getActiveSubcategories().stream().map(SubcategoryApiDto::new).toList();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public String getExplanatoryGuide() {
-        return explanatoryGuide;
-    }
-
-    public String getColorCode() {
-        return colorCode;
-    }
-
-    public int getTotalCourses() {
-        return totalCourses;
-    }
-
-    public List<SubcategoryApiDto> getSubcategoryApiDtos() {
-        return subcategoryApiDtos;
     }
 }

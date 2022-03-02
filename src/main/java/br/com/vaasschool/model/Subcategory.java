@@ -1,8 +1,9 @@
 package br.com.vaasschool.model;
 
 import br.com.vaasschool.controller.form.SubcategoryForm;
-import br.com.vaasschool.repository.SubcategoryRepository;
-import org.springframework.web.server.ResponseStatusException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -12,8 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-
+@Getter
+@Setter
+@ToString
 @Entity
 public class Subcategory implements Comparable<Subcategory> {
 
@@ -28,7 +30,7 @@ public class Subcategory implements Comparable<Subcategory> {
     private String description;
     @Column(name = "explanatory_guide")
     private String explanatoryGuide;
-    private Boolean active = false;
+    private boolean active = false;
     @Column(name = "order_visualization")
     private Integer order;
     @NotNull(message = "A categoria deve ser preenchida.")
@@ -41,7 +43,7 @@ public class Subcategory implements Comparable<Subcategory> {
     public Subcategory() {
     }
 
-    public Subcategory(String name, String code, String description, String explanatoryGuide, Boolean active, Integer order, Category category) {
+    public Subcategory(String name, String code, String description, String explanatoryGuide, boolean active, Integer order, Category category) {
         this.name = name;
         this.code = code;
         this.description = description;
@@ -49,74 +51,6 @@ public class Subcategory implements Comparable<Subcategory> {
         this.active = active;
         this.order = order;
         this.category = category;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public String getExplanatoryGuide() {
-        return explanatoryGuide;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setExplanatoryGuide(String explanatoryGuide) {
-        this.explanatoryGuide = explanatoryGuide;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
     }
 
     public String getCourseNames() {
@@ -135,11 +69,11 @@ public class Subcategory implements Comparable<Subcategory> {
         return courses.size();
     }
 
-    public String getCategoryCode(){
+    public String getCategoryCode() {
         return category.getCode();
     }
 
-    public String getCategoryName(){
+    public String getCategoryName() {
         return category.getName();
     }
 
@@ -153,22 +87,9 @@ public class Subcategory implements Comparable<Subcategory> {
         this.code = subcategoryForm.getCode();
         this.description = subcategoryForm.getDescription();
         this.explanatoryGuide = subcategoryForm.getExplanatoryGuide();
-        this.active =  subcategoryForm.getActive();
+        this.active = subcategoryForm.isActive();
         this.order = subcategoryForm.getOrder();
         this.category = category;
-    }
-
-    @Override
-    public String toString() {
-        return "Subcategory{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", description='" + description + '\'' +
-                ", explanatoryGuide='" + explanatoryGuide + '\'' +
-                ", active=" + active +
-                ", order=" + order +
-                ", category=" + category.getName() +
-                '}';
     }
 
     @Override

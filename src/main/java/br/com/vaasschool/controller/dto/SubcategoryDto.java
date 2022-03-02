@@ -1,7 +1,9 @@
 package br.com.vaasschool.controller.dto;
 
 import br.com.vaasschool.model.Subcategory;
+import lombok.Getter;
 
+@Getter
 public class SubcategoryDto {
 
     final private Long id;
@@ -19,40 +21,8 @@ public class SubcategoryDto {
         this.code = subcategory.getCode();
         this.description = subcategory.getDescription();
         this.explanatoryGuide = subcategory.getExplanatoryGuide();
-        this.active = subcategory.getActive();
+        this.active = subcategory.isActive();
         this.order = subcategory.getOrder();
         this.categoryName = subcategory.getCategoryName();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getExplanatoryGuide() {
-        return explanatoryGuide;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public Integer getOrder() {
-        return order;
     }
 }

@@ -1,13 +1,15 @@
 package br.com.vaasschool.controller.form;
 
 import br.com.vaasschool.model.Category;
-import br.com.vaasschool.repository.CategoryRepository;
-import org.springframework.web.server.ResponseStatusException;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-
+@Getter
+@Setter
 public class CategoryForm {
 
     private Long id;
@@ -37,78 +39,6 @@ public class CategoryForm {
         this.order = category.getOrder();
         this.imagePath = category.getImagePath();
         this.colorCode = category.getColorCode();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getExplanatoryGuide() {
-        return explanatoryGuide;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public String getColorCode() {
-        return colorCode;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setExplanatoryGuide(String explanatoryGuide) {
-        this.explanatoryGuide = explanatoryGuide;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
     }
 
     public Category toModel() {

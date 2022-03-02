@@ -1,21 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="template" tagdir="/WEB-INF/tags/templates" %>
 
 <c:set var="title" value="${subcategoryForm.code == null ? 'Nova Subcategoria' : 'Editar Subcategoria'}"></c:set>
 <c:set var="actionSubcategoryUrl"
        value="${subcategoryForm.id == null ? '/admin/subcategories/new' : '/admin/subcategories/'.concat(category.code).concat('/').concat(subcategoryForm.code)}"></c:set>
 
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-
-    <title>${title}</title>
-</head>
-<body>
-<div class="container">
+<template:form-admin-templates title="${title}">
     <form:form modelAttribute="subcategoryForm" action="${actionSubcategoryUrl}" method="post">
         <h2>${title}</h2>
         <div class="form-group">
@@ -62,7 +54,6 @@
         <div class="form-group">
             <label for="category">Categoria</label>
             <select id="category" class="form-control" name="categoryId" required>
-                <option value="">Selecione</option>
                 <c:forEach items="${categories}" var="category">
                     <option value="${category.id}" ${category.name == subcategoryForm.categoryName ? 'selected' : ''}>${category.name}</option>
                 </c:forEach>
@@ -73,6 +64,4 @@
             <button type="submit" class="btn btn-primary">Enviar</button>
         </div>
     </form:form>
-</div>
-</body>
-</html>
+</template:form-admin-templates>

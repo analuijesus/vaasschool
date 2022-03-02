@@ -1,6 +1,9 @@
 package br.com.vaasschool.model;
 
 import br.com.vaasschool.controller.form.CategoryForm;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -8,6 +11,9 @@ import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@ToString
 @Entity
 public class Category implements Comparable<Category> {
 
@@ -56,82 +62,6 @@ public class Category implements Comparable<Category> {
         this.explanatoryGuide = explanatoryGuide;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public String getColorCode() {
-        return colorCode;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public String getExplanatoryGuide() {
-        return explanatoryGuide;
-    }
-
-    public List<Subcategory> getSubcategories() {
-        return subcategories;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setExplanatoryGuide(String explanatoryGuide) {
-        this.explanatoryGuide = explanatoryGuide;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
-    }
-
     public int getTotalCourseHours() {
         return subcategories.stream().mapToInt(Subcategory::getTotalCourseHours).sum();
     }
@@ -161,19 +91,5 @@ public class Category implements Comparable<Category> {
     @Override
     public int compareTo(Category anotherCategory) {
         return this.order.compareTo(anotherCategory.order);
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", description='" + description + '\'' +
-                ", explanatoryGuide='" + explanatoryGuide + '\'' +
-                ", active=" + active +
-                ", order=" + order +
-                ", imagePath='" + imagePath + '\'' +
-                ", colorCode='" + colorCode + '\'' +
-                '}';
     }
 }

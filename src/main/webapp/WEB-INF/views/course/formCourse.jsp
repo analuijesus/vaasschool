@@ -1,21 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="template" tagdir="/WEB-INF/tags/templates" %>
 
 <c:set var="title" value="${courseForm.code == null ? 'Novo Curso' : 'Editar Curso'}"></c:set>
 <c:set var="actionCourseUrl" value="${courseForm.id == null ? '/admin/courses/new' : '/admin/courses/'
 .concat(category.code).concat('/').concat(subcategory.code).concat('/').concat(courseForm.code)}"></c:set>
 
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-
-    <title>${title}</title>
-</head>
-<body>
-<div class="container">
+<template:form-admin-templates title="${title}">
     <form:form modelAttribute="courseForm" action="${actionCourseUrl}" method="post">
         <h2>${title}</h2>
         <div class="form-group">
@@ -63,7 +55,8 @@
             <label for="instructorName">Nome do instrutor</label>
             <form:input
                     placeholder="nome do instrutor que irá ministrar este curso."
-                    id="instructorName" class="form-control" type="text" name="instructorName" value="${courseForm.instructorName}" path="instructorName"/>
+                    id="instructorName" class="form-control" type="text" name="instructorName"
+                    value="${courseForm.instructorName}" path="instructorName"/>
             <form:errors path="instructorName" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
@@ -83,7 +76,6 @@
         <div class="form-group">
             <label for="subcategory">Subcategoria</label>
             <select id="subcategory" class="form-control" name="subcategoryId" required>
-                <option value="">Selecione</option>
                 <c:forEach items="${subcategories}" var="subcategory">
                     <option value="${subcategory.id}" ${subcategory.name == courseForm.subcategoryName ? 'selected' : ''}>${subcategory.name}</option>
                 </c:forEach>
@@ -94,6 +86,4 @@
             <button type="submit" class="btn btn-primary">Enviar</button>
         </div>
     </form:form>
-</div>
-</body>
-</html>
+</template:form-admin-templates>

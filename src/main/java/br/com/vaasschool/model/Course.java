@@ -1,12 +1,18 @@
 package br.com.vaasschool.model;
 
 import br.com.vaasschool.controller.form.CourseForm;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@Getter
+@Setter
+@ToString
 @Entity
 public class Course {
 
@@ -62,50 +68,6 @@ public class Course {
         this.learnedSkills = learnedSkills;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public CourseVisibility getVisibility() {
-        return visibility;
-    }
-
-    public String getTargetAudience() {
-        return targetAudience;
-    }
-
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public String getLearnedSkills() {
-        return learnedSkills;
-    }
-
-    public Subcategory getSubcategory() {
-        return subcategory;
-    }
-
-    public int getEstimatedTimeToFinish() {
-        return estimatedTimeToFinish;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public boolean isPublic() {
         return CourseVisibility.PUBLIC.equals(visibility);
     }
@@ -116,42 +78,6 @@ public class Course {
 
     public String getSubcategoryName() {
         return subcategory.getName();
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSubcategory(Subcategory subcategory) {
-        this.subcategory = subcategory;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setEstimatedTimeToFinish(int estimatedTimeToFinish) {
-        this.estimatedTimeToFinish = estimatedTimeToFinish;
-    }
-
-    public void setVisibility(CourseVisibility visibility) {
-        this.visibility = visibility;
-    }
-
-    public void setTargetAudience(String targetAudience) {
-        this.targetAudience = targetAudience;
-    }
-
-    public void setInstructorName(String instructorName) {
-        this.instructorName = instructorName;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public void setLearnedSkills(String learnedSkills) {
-        this.learnedSkills = learnedSkills;
     }
 
     public String getSubcategoryCode() {
@@ -173,20 +99,5 @@ public class Course {
         this.learnedSkills = courseForm.getLearnedSkills();
         this.summary = courseForm.getSummary();
         this.subcategory = subcategory;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", estimatedTimeToFinish=" + estimatedTimeToFinish +
-                ", visibility=" + visibility +
-                ", targetAudience='" + targetAudience + '\'' +
-                ", instructorName='" + instructorName + '\'' +
-                ", summary='" + summary + '\'' +
-                ", learnedSkills='" + learnedSkills + '\'' +
-                ", subcategory=" + subcategory.getName() +
-                '}';
     }
 }
