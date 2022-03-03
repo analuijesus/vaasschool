@@ -7,6 +7,7 @@ import br.com.vaasschool.model.Category;
 import br.com.vaasschool.model.Subcategory;
 import br.com.vaasschool.repository.CategoryRepository;
 import br.com.vaasschool.repository.SubcategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,18 +22,13 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+@AllArgsConstructor
 @Controller
 public class SubcategoryController {
 
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
     private final SubcategoryFormValidator subcategoryFormValidator;
-
-    public SubcategoryController(CategoryRepository categoryRepository, SubcategoryRepository subcategoryRepository, SubcategoryFormValidator subcategoryFormValidator) {
-        this.categoryRepository = categoryRepository;
-        this.subcategoryRepository = subcategoryRepository;
-        this.subcategoryFormValidator = subcategoryFormValidator;
-    }
 
     @InitBinder("subcategoryForm")
     void initBinder(WebDataBinder webDataBinder){

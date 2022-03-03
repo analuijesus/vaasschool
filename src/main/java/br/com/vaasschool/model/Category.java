@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor(onConstructor = @__(@Deprecated))
 @Entity

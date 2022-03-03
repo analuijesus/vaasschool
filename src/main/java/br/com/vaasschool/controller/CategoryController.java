@@ -6,6 +6,8 @@ import br.com.vaasschool.controller.form.CategoryForm;
 import br.com.vaasschool.controller.form.validator.CategoryFormValidator;
 import br.com.vaasschool.model.Category;
 import br.com.vaasschool.repository.CategoryRepository;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,16 +21,12 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+@AllArgsConstructor
 @Controller
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
     private final CategoryFormValidator categoryFormValidator;
-
-    public CategoryController(CategoryRepository categoryRepository, CategoryFormValidator categoryFormValidator) {
-        this.categoryRepository = categoryRepository;
-        this.categoryFormValidator = categoryFormValidator;
-    }
 
     @InitBinder("categoryForm")
     void initBinder(WebDataBinder webDataBinder) {

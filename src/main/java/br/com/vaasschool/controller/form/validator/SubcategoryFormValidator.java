@@ -26,11 +26,11 @@ public class SubcategoryFormValidator implements Validator {
 
         if (form.getId() != null) {
             if (subcategoryRepository.existsByCodeWithDifferentId(form.getCode(), form.getId())) {
-                errors.rejectValue("code", "existing.updated.subcategory.code");
+                errors.rejectValue("code", "subcategory.code.existing");
             }
         } else {
             if (subcategoryRepository.existsByCode(form.getCode())) {
-                errors.rejectValue("code", "code.of.the.new.existing.subcategory");
+                errors.rejectValue("code", "subcategory.code.existing");
             }
         }
     }

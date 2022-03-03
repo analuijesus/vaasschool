@@ -26,14 +26,14 @@ public class SubcategoryFormValidatorTest {
     }
 
     @Test
-    void ShouldGiveErrorWhenCategoryCodeExists() {
+    void shouldGiveErrorWhenCategoryCodeExists() {
         SubcategoryForm form = new SubcategoryForm();
         form.setCode("java-e-persistencia");
 
         when(subcategoryRepository.existsByCode("java-e-persistencia")).thenReturn(true);
 
         subcategoryFormValidator.validate(form, errors);
-        verify(errors).rejectValue("code", "code.of.the.new.existing.subcategory");
+        verify(errors).rejectValue("code", "subcategory.code.existing");
     }
 
     @Test
@@ -46,7 +46,7 @@ public class SubcategoryFormValidatorTest {
     }
 
     @Test
-    void shouldAllowWhenCodeAndTheIdAreSameAsExisting() {
+    void shouldAcceptWhenCodeAndTheIdAreSameAsExisting() {
         when(subcategoryRepository.existsByCodeWithDifferentId(eq("persistencia-com-net"), not(eq(1L)))).thenReturn(true);
 
         SubcategoryForm form = new SubcategoryForm();
@@ -68,7 +68,7 @@ public class SubcategoryFormValidatorTest {
 
         subcategoryFormValidator.validate(form, errors);
 
-        verify(errors).rejectValue("code", "existing.updated.subcategory.code");
+        verify(errors).rejectValue("code", "subcategory.code.existing");
     }
 
     @Test

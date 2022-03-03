@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor(onConstructor = @__(@Deprecated))
 @Entity

@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor(onConstructor = @__(@Deprecated))
 @Entity

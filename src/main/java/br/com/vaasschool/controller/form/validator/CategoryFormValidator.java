@@ -26,11 +26,11 @@ public class CategoryFormValidator implements Validator {
 
         if (form.getId() != null) {
             if (categoryRepository.existsByCodeWithDifferentId(form.getCode(), form.getId())) {
-                errors.rejectValue("code", "existing.updated.category.code");
+                errors.rejectValue("code", "category.code.existing");
             }
         } else {
             if (categoryRepository.existsByCode(form.getCode())) {
-                errors.rejectValue("code", "code.of.the.new.existing.category");
+                errors.rejectValue("code", "category.code.existing");
             }
         }
     }

@@ -10,6 +10,7 @@ import br.com.vaasschool.model.Subcategory;
 import br.com.vaasschool.repository.CategoryRepository;
 import br.com.vaasschool.repository.CourseRepository;
 import br.com.vaasschool.repository.SubcategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -30,6 +31,7 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+@AllArgsConstructor
 @Controller
 public class CourseController {
 
@@ -37,13 +39,6 @@ public class CourseController {
     private final SubcategoryRepository subcategoryRepository;
     private final CourseRepository courseRepository;
     private final CourseFormValidator courseFormValidator;
-
-    public CourseController(CategoryRepository categoryRepository, CourseRepository courseRepository, SubcategoryRepository subcategoryRepository, CourseFormValidator courseFormValidator) {
-        this.categoryRepository = categoryRepository;
-        this.courseRepository = courseRepository;
-        this.subcategoryRepository = subcategoryRepository;
-        this.courseFormValidator = courseFormValidator;
-    }
 
     @InitBinder("courseForm")
     void initBinder(WebDataBinder webDataBinder){

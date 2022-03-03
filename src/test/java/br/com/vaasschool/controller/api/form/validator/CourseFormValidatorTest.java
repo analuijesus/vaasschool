@@ -26,14 +26,14 @@ public class CourseFormValidatorTest {
     }
 
     @Test
-    void ShouldGiveErrorWhenCourseCodeExists() {
+    void shouldGiveErrorWhenCourseCodeExists() {
         CourseForm form = new CourseForm();
         form.setCode("mocks-java-mockito");
 
         when(courseRepository.existsByCode("mocks-java-mockito")).thenReturn(true);
 
         courseFormValidator.validate(form, errors);
-        verify(errors).rejectValue("code", "code.of.the.new.existing.course");
+        verify(errors).rejectValue("code", "course.code.existing");
     }
 
     @Test
@@ -46,7 +46,7 @@ public class CourseFormValidatorTest {
     }
 
     @Test
-    void shouldAllowWhenCodeAndTheIdAreEqualAsExisting() {
+    void shouldAcceptWhenCodeAndTheIdAreEqualAsExisting() {
         when(courseRepository.existsByCodeWithDifferentId(eq("mocks-java-mockito"), not(eq(1L)))).thenReturn(true);
 
         CourseForm form = new CourseForm();
@@ -68,7 +68,7 @@ public class CourseFormValidatorTest {
 
         courseFormValidator.validate(form, errors);
 
-        verify(errors).rejectValue("code", "existing.updated.course.code");
+        verify(errors).rejectValue("code", "course.code.existing");
     }
 
     @Test

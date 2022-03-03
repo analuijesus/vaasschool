@@ -24,14 +24,14 @@ public class CategoryFormValidatorTest {
     }
 
     @Test
-    void ShouldGiveErrorWhenCategoryCodeExists() {
+    void shouldGiveErrorWhenCategoryCodeExists() {
         CategoryForm form = new CategoryForm();
         form.setCode("programacao");
 
         when(categoryRepository.existsByCode("programacao")).thenReturn(true);
 
         categoryFormValidator.validate(form, errors);
-        verify(errors).rejectValue("code", "code.of.the.new.existing.category");
+        verify(errors).rejectValue("code", "category.code.existing");
     }
 
     @Test
@@ -44,7 +44,7 @@ public class CategoryFormValidatorTest {
     }
 
     @Test
-    void shouldAllowWhenCodeAndTheIdAreSameAsExisting() {
+    void shouldAcceptWhenCodeAndTheIdAreSameAsExisting() {
         when(categoryRepository.existsByCodeWithDifferentId(eq("devops"), not(eq(1L)))).thenReturn(true);
 
         CategoryForm form = new CategoryForm();
@@ -66,7 +66,7 @@ public class CategoryFormValidatorTest {
 
         categoryFormValidator.validate(form, errors);
 
-        verify(errors).rejectValue("code", "existing.updated.category.code");
+        verify(errors).rejectValue("code", "category.code.existing");
     }
 
     @Test

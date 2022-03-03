@@ -26,11 +26,11 @@ public class CourseFormValidator implements Validator {
 
         if (form.getId() != null) {
             if (courseRepository.existsByCodeWithDifferentId(form.getCode(), form.getId())) {
-                errors.rejectValue("code", "existing.updated.course.code");
+                errors.rejectValue("code", "course.code.existing");
             }
         } else {
             if (courseRepository.existsByCode(form.getCode())) {
-                errors.rejectValue("code", "code.of.the.new.existing.course");
+                errors.rejectValue("code", "course.code.existing");
             }
         }
     }
