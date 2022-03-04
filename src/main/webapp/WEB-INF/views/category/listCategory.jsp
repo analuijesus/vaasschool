@@ -3,7 +3,6 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/templates" %>
 
 <template:list-admin-templates title="Categorias">
-    <div class="container">
         <h2>Categorias</h2>
 
         <a href="/admin/categories/new">
@@ -45,8 +44,4 @@
                 </tbody>
             </table>
         </div>
-    </div>
-
-    <script src="/resources/js/jQuery.js"></script>
-    <script src="/resources/js/deactivate.js"></script>
 </template:list-admin-templates>

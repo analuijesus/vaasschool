@@ -1,6 +1,6 @@
 package br.com.vaasschool.repository;
 
-import br.com.vaasschool.model.User;
+import br.com.vaasschool.controller.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,7 +1,7 @@
 package br.com.vaasschool.controller.api;
 
 import br.com.vaasschool.controller.api.dto.CategoryApiDto;
-import br.com.vaasschool.model.Category;
+import br.com.vaasschool.controller.model.Category;
 import br.com.vaasschool.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;

@@ -1,8 +1,8 @@
 package br.com.vaasschool.controller.form;
 
-import br.com.vaasschool.model.Course;
-import br.com.vaasschool.model.CourseVisibility;
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.model.Course;
+import br.com.vaasschool.controller.model.CourseVisibility;
+import br.com.vaasschool.controller.model.Subcategory;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,7 +1,7 @@
 package br.com.vaasschool.controller.dto;
 
-import br.com.vaasschool.model.Course;
-import br.com.vaasschool.model.CourseVisibility;
+import br.com.vaasschool.controller.model.Course;
+import br.com.vaasschool.controller.model.CourseVisibility;
 import lombok.Getter;
 
 @Getter

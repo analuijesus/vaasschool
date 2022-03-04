@@ -2,18 +2,16 @@ package br.com.vaasschool.controller.form.validator;
 
 import br.com.vaasschool.controller.form.CourseForm;
 import br.com.vaasschool.repository.CourseRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+@AllArgsConstructor
 @Component
 public class CourseFormValidator implements Validator {
 
     private final CourseRepository courseRepository;
-
-    public CourseFormValidator(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
-    }
 
     @Override
     public boolean supports(Class<?> clazz) {

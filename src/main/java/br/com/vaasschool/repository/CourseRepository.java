@@ -1,7 +1,7 @@
 package br.com.vaasschool.repository;
 
-import br.com.vaasschool.model.Course;
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.model.Course;
+import br.com.vaasschool.controller.model.Subcategory;
 import br.com.vaasschool.projection.CourseProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,6 +1,6 @@
 package br.com.vaasschool.controller.dto;
 
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.model.Subcategory;
 import lombok.Getter;
 
 @Getter

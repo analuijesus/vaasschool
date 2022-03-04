@@ -1,7 +1,7 @@
 package br.com.vaasschool.controller;
 
 import br.com.vaasschool.controller.dto.CategoryLoginDto;
-import br.com.vaasschool.model.Category;
+import br.com.vaasschool.controller.model.Category;
 import br.com.vaasschool.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

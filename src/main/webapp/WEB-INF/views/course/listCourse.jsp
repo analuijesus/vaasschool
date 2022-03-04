@@ -3,7 +3,6 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/templates" %>
 
 <template:list-admin-templates title="Cursos">
-<div class="container">
     <h4>${subcategory.name}</h4>
     <h2>Cursos</h2>
 
@@ -54,5 +53,4 @@
             </c:if>
         </c:if>
     </div>
-</div>
 </template:list-admin-templates>

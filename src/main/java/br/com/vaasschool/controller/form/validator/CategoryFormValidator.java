@@ -2,18 +2,16 @@ package br.com.vaasschool.controller.form.validator;
 
 import br.com.vaasschool.controller.form.CategoryForm;
 import br.com.vaasschool.repository.CategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+@AllArgsConstructor
 @Component
 public class CategoryFormValidator implements Validator {
 
     private final CategoryRepository categoryRepository;
-
-    public CategoryFormValidator(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
 
     @Override
     public boolean supports(Class<?> clazz) {

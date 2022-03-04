@@ -1,10 +1,10 @@
 package br.com.vaasschool.controller.api;
 
 import br.com.vaasschool.controller.api.dto.CategoryApiDto;
-import br.com.vaasschool.model.Category;
-import br.com.vaasschool.model.Course;
-import br.com.vaasschool.model.CourseVisibility;
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.model.Category;
+import br.com.vaasschool.controller.model.Course;
+import br.com.vaasschool.controller.model.CourseVisibility;
+import br.com.vaasschool.controller.model.Subcategory;
 import br.com.vaasschool.repository.CategoryRepository;
 import br.com.vaasschool.repository.CourseRepository;
 import br.com.vaasschool.repository.SubcategoryRepository;
@@ -29,7 +29,7 @@ import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.List;
 
-import static br.com.vaasschool.model.CourseVisibility.PUBLIC;
+import static br.com.vaasschool.controller.model.CourseVisibility.PUBLIC;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -1,6 +1,6 @@
 package br.com.vaasschool.repository;
 
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.model.Subcategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

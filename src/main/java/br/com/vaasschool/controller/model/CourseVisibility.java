@@ -1,4 +1,4 @@
-package br.com.vaasschool.model;
+package br.com.vaasschool.controller.model;
 
 public enum CourseVisibility {
     PRIVATE("Privado"),

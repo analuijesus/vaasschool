@@ -1,7 +1,7 @@
 package br.com.vaasschool.controller.form;
 
-import br.com.vaasschool.model.Category;
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.model.Category;
+import br.com.vaasschool.controller.model.Subcategory;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

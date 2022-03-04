@@ -1,6 +1,6 @@
 package br.com.vaasschool.swagger;
 
-import br.com.vaasschool.model.User;
+import br.com.vaasschool.controller.model.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;

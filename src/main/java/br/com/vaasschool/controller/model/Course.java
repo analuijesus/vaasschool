@@ -1,9 +1,8 @@
-package br.com.vaasschool.model;
+package br.com.vaasschool.controller.model;
 
 import br.com.vaasschool.controller.form.CourseForm;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;

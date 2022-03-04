@@ -1,6 +1,6 @@
 package br.com.vaasschool.controller.api.dto;
 
-import br.com.vaasschool.model.Category;
+import br.com.vaasschool.controller.model.Category;
 import lombok.Getter;
 
 import java.util.List;

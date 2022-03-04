@@ -1,9 +1,8 @@
-package br.com.vaasschool.model;
+package br.com.vaasschool.controller.model;
 
 import br.com.vaasschool.controller.form.SubcategoryForm;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -12,7 +11,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @ToString
@@ -50,14 +48,6 @@ public class Subcategory implements Comparable<Subcategory> {
         this.category = category;
     }
 
-    public String getCourseNames() {
-        return courses.stream().map(Course::getName).collect(Collectors.joining(" , "));
-    }
-
-    public void addCourse(Course course) {
-        this.courses.add(course);
-    }
-
     public int getTotalCourseHours() {
         return courses.stream().mapToInt(Course::getEstimatedTimeToFinish).sum();
     }
@@ -72,10 +62,6 @@ public class Subcategory implements Comparable<Subcategory> {
 
     public String getCategoryName() {
         return category.getName();
-    }
-
-    public Long getCategoryId() {
-        return category.getId();
     }
 
     public void update(SubcategoryForm subcategoryForm, Category category) {

@@ -1,7 +1,7 @@
 package br.com.vaasschool.repository;
 
-import br.com.vaasschool.model.Category;
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.model.Category;
+import br.com.vaasschool.controller.model.Subcategory;
 import br.com.vaasschool.util.builder.CategoryBuilder;
 import br.com.vaasschool.util.builder.SubcategoryBuilder;
 import org.junit.Test;

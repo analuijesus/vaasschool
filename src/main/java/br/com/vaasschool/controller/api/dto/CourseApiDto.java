@@ -1,6 +1,6 @@
 package br.com.vaasschool.controller.api.dto;
 
-import br.com.vaasschool.model.Course;
+import br.com.vaasschool.controller.model.Course;
 import lombok.Getter;
 
 @Getter
