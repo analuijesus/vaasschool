@@ -1,6 +1,6 @@
 package br.com.vaasschool.repository;
 
-import br.com.vaasschool.model.Category;
+import br.com.vaasschool.controller.model.Category;
 import br.com.vaasschool.projection.CategoryProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,6 +17,13 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     Optional<Category> findByCode(String code);
 
     List<Category> findAllByOrderByName();
+
+    @Deprecated
+    boolean existsByCodeAndIdNot(String code, Long id);
+
+    default boolean existsByCodeWithDifferentId(String code, Long id){
+        return existsByCodeAndIdNot(code, id);
+    }
 
     @Query(value = """
             select category.name, count(course.id) as numberOfCourses 
@@ -44,4 +51,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
             order by category.order_visualization
             """, nativeQuery = true)
     List<Category> findByActiveCategoryAndActiveSubcategoryAndPublicCourse();
+
+    boolean existsByCode(String code);
 }

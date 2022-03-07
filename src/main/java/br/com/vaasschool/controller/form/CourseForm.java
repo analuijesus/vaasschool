@@ -1,14 +1,19 @@
 package br.com.vaasschool.controller.form;
 
-import br.com.vaasschool.model.Course;
-import br.com.vaasschool.model.CourseVisibility;
-import br.com.vaasschool.model.Subcategory;
-import br.com.vaasschool.repository.CourseRepository;
+import br.com.vaasschool.controller.model.Course;
+import br.com.vaasschool.controller.model.CourseVisibility;
+import br.com.vaasschool.controller.model.Subcategory;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class CourseForm {
 
     private Long id;
@@ -29,9 +34,6 @@ public class CourseForm {
     private Long subcategoryId;
     private String subcategoryName;
 
-    public CourseForm() {
-    }
-
     public CourseForm(Course course){
         this.id = course.getId();
         this.name = course.getName();
@@ -43,94 +45,6 @@ public class CourseForm {
         this.summary = course.getSummary();
         this.learnedSkills = course.getLearnedSkills();
         this.subcategoryId = course.getSubcategoryId();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public int getEstimatedTimeToFinish() {
-        return estimatedTimeToFinish;
-    }
-
-    public void setEstimatedTimeToFinish(int estimatedTimeToFinish) {
-        this.estimatedTimeToFinish = estimatedTimeToFinish;
-    }
-
-    public CourseVisibility getVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(CourseVisibility visibility) {
-        this.visibility = visibility;
-    }
-
-    public String getTargetAudience() {
-        return targetAudience;
-    }
-
-    public void setTargetAudience(String targetAudience) {
-        this.targetAudience = targetAudience;
-    }
-
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public void setInstructorName(String instructorName) {
-        this.instructorName = instructorName;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public String getLearnedSkills() {
-        return learnedSkills;
-    }
-
-    public void setLearnedSkills(String learnedSkills) {
-        this.learnedSkills = learnedSkills;
-    }
-
-    public Long getSubcategoryId() {
-        return subcategoryId;
-    }
-
-    public void setSubcategoryId(Long subcategoryId) {
-        this.subcategoryId = subcategoryId;
-    }
-
-    public String getSubcategoryName() {
-        return subcategoryName;
-    }
-
-    public void setSubcategoryName(String subcategoryName) {
-        this.subcategoryName = subcategoryName;
     }
 
     public Course toModel(Subcategory subcategory){

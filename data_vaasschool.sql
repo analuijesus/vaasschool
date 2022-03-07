@@ -1,155 +1,23 @@
-create
-database `vaasschool-test`;
-use
-`vaasschool-test`;
 
-create table `Category`
-(
-    `id`                  bigint PRIMARY KEY AUTO_INCREMENT,
-    `name`                varchar(75)  not null,
-    `code`                varchar(255) not null unique,
-    `description`         varchar(255) not null,
-    `explanatory_guide`   varchar(255),
-    `active`              bit(1) default 0,
-    `order_visualization` int          not null,
-    `imagem_path`         varchar(255) not null,
-    `color_code`          varchar(7)   not null
-);
+insert into Profile(name) values ('ROLE_MODERATOR');
+insert into Profile(name) values ('ROLE_STUDENT');
 
-create table `Subcategory`
-(
-    `id`                  bigint PRIMARY KEY AUTO_INCREMENT,
-    `name`                varchar(75)  not null,
-    `code`                varchar(255) not null unique,
-    `description`         varchar(255) not null,
-    `explanatory_guide`   varchar(255),
-    `active`              bit(1) default 0,
-    `order_visualization` int          not null,
-    `category_id`         bigint       not null,
-    FOREIGN KEY (`category_id`) REFERENCES `Category` (`id`)
-);
+insert into User(email, password) values ('admin@gmail.com', '$2a$10$XZ/wDtEKvMFtfQ9.QuYkbeP96pxUWAkgIhsz2e3ZcJFsUyeszVtx.');
+insert into User(email, password)values ('aluno@gmail.com', '$2a$10$XZ/wDtEKvMFtfQ9.QuYkbeP96pxUWAkgIhsz2e3ZcJFsUyeszVtx.');
 
-create table `Course`
-(
-    `id`                       bigint PRIMARY KEY AUTO_INCREMENT,
-    `name`                     varchar(75)  not null,
-    `code`                     varchar(255) not null unique,
-    `estimated_time_to_finish` smallint     not null,
-    `visibility`               ENUM ('PUBLIC','PRIVATE') default 'PRIVATE',
-    `target_audience`          varchar(255),
-    `instructor_name`          varchar(75)  not null,
-    `summary`                  text,
-    `learned_skills`           varchar(255),
-    `subcategory_id`           bigint       not null,
-    FOREIGN KEY (`subcategory_id`) REFERENCES `Subcategory` (`id`)
-);
+insert into Profile_User(user_id, profile_id) values (1, 1);
+insert into Profile_User(user_id, profile_id) values (2, 2);
 
-create table `Section`
-(
-    `id`                  bigint PRIMARY KEY AUTO_INCREMENT,
-    `name`                varchar(75)  not null,
-    `code`                varchar(255) not null unique,
-    `active`              bit(1) default 0,
-    `test`                bit(1) default 0,
-    `order_visualization` int,
-    `course_id`           bigint       not null,
-    FOREIGN KEY (`course_id`) REFERENCES `Course` (`id`)
-);
-
-create table `Activity`
-(
-    `id`                  bigint PRIMARY KEY AUTO_INCREMENT,
-    `title`               varchar(255) not null,
-    `code`                varchar(255) not null unique,
-    `order_visualization` int,
-    `active`              bit(1) default 0,
-    `type`                ENUM ('Explanation', 'Video', 'Question'),
-    `section_id`          bigint       not null,
-    FOREIGN KEY (`section_id`) REFERENCES `Section` (`id`)
-);
-
-create table `Explanation`
-(
-    `id`          bigint PRIMARY KEY AUTO_INCREMENT,
-    `text`        varchar(255),
-    `activity_id` bigint not null,
-    FOREIGN KEY (`activity_id`) REFERENCES `Activity` (`id`)
-);
-
-create table `Video`
-(
-    `id`            bigint PRIMARY KEY AUTO_INCREMENT,
-    `url`           varchar(255) not null,
-    `minutes`       int,
-    `transcription` varchar(255),
-    `activity_id`   bigint       not null,
-    FOREIGN KEY (`activity_id`) REFERENCES `Activity` (`id`)
-);
-
-create table `Question`
-(
-    `id`            bigint PRIMARY KEY AUTO_INCREMENT,
-    `statement`     varchar(255),
-    `question_type` ENUM ('SINGLE_ANSWER','MULTIPLE_ANSWERS','TRUE_FALSE') default 'SINGLE_ANSWER',
-    `activity_id`   bigint not null,
-    FOREIGN KEY (`activity_id`) REFERENCES `Activity` (`id`)
-);
-
-create table `Alternative`
-(
-    `id`                  bigint PRIMARY KEY AUTO_INCREMENT,
-    `text`                varchar(255) not null,
-    `order_visualization` int,
-    `correct`             bit(1),
-    `justification`       varchar(255),
-    `question_id`         bigint       not null,
-    FOREIGN KEY (`question_id`) REFERENCES `Question` (`id`)
-);
-
-create table `Profile`
-(
-    `id`   bigint PRIMARY KEY AUTO_INCREMENT,
-    `name` varchar(255) not null
-);
-
-create table `User`
-(
-    `id`         bigint PRIMARY KEY AUTO_INCREMENT,
-    `email`      varchar(255) not null,
-    `password`   varchar(255) not null
-);
-
-create table User_Profile
-(
-    `id_user`    bigint,
-    `id_profile` bigint,
-    PRIMARY KEY (id_user, id_profile),
-    FOREIGN KEY (`id_user`) REFERENCES `User` (`id`),
-    FOREIGN KEY (`id_profile`) REFERENCES `Profile` (`id`)
-);
-
-insert into User_Profile(id_user, id_profile) value (4, 4);
-insert into User_Profile(id_user, id_profile) value (14, 14);
-
-insert into Profile(name)
-values ('ROLE_MODERATOR');
-insert into Profile(name)
-values ('ROLE_STUDENT');
-insert into User(email, password)
-values ('admin@gmail.com', '$2a$10$XZ/wDtEKvMFtfQ9.QuYkbeP96pxUWAkgIhsz2e3ZcJFsUyeszVtx.');
-insert into User(email, password)
-values ('aluno@gmail.com', '$2a$10$XZ/wDtEKvMFtfQ9.QuYkbeP96pxUWAkgIhsz2e3ZcJFsUyeszVtx.');
-insert into Category (name, code, order_visualization, description, active, imagem_path, color_code)
-values ('Programação', 'programacao', 1,
-        'Programe nas principais linguagens e plataformas. Iniciantes são bem vindos nos cursos de lógica e JavaScript.',
+insert into Category (name, code, order_visualization, description, active, image_path, color_code)
+values ('Programação', 'programacao', 1,'Programe nas principais linguagens e plataformas. Iniciantes são bem vindos nos cursos de lógica e JavaScript.',
         true, 'https://www.alura.com.br/assets/api/formacoes/categorias/512/programacao-transparent.png', '#00c86f');
-insert into Category (name, code, order_visualization, description, active, imagem_path, color_code)
-values ('DevOps', 'devops', 2,
-        'Aprenda Git. Entenda a entrega contínua. Estude Linux. Gerencie servidores na nuvem. Explore o mundo de Internet das coisas e da robótica.',
+insert into Category (name, code, order_visualization, description, active, image_path, color_code)
+values ('DevOps', 'devops', 2, 'Aprenda Git. Entenda a entrega contínua. Estude Linux. Gerencie servidores na nuvem. Explore o mundo de Internet das coisas e da robótica.',
         true, 'https://www.alura.com.br/assets/api/formacoes/categorias/512/devops-transparent.png', '#f16165');
-insert into Category (name, code, order_visualization, description, active, imagem_path, color_code)
-values ('Business', 'business', 3, 'Agilidade. Práticas de gestão. Vendas. Liderança.', false,
-        'https://www.alura.com.br/assets/api/formacoes/categorias/512/inovacao-gestao-transparent.png', '#ff8c2a');
+insert into Category (name, code, order_visualization, description, active, image_path, color_code)
+values ('Business', 'business', 3, 'Agilidade. Práticas de gestão. Vendas. Liderança.', false,'https://www.alura.com.br/assets/api/formacoes/categorias/512/inovacao-gestao-transparent.png', '#ff8c2a');
+
+
 insert into Subcategory (name, code, order_visualization, description, active, category_id)
 values ('Java', 'java', 1,
         'Java é uma grande plataforma presente em todo lugar: de corporações à bancos e governo. Desenvolva aplicações robustas com um back-end e construa APIs.',
@@ -166,6 +34,7 @@ insert into Subcategory (name, code, order_visualization, description, active, c
 values ('Builds e Controle de versão', 'builds-e-controle-de-versao', 1,
         'As ferramentas mais utilizadas para desenvolvimento: controle de versão com Git e Github além de build da aplicação através de Maven.',
         true, (select id from Category where code = 'devops'));
+
 insert into Course (name, code, estimated_time_to_finish, visibility, target_audience, instructor_name, summary,
                     learned_skills, subcategory_id)
 values ('Git e Github para Sobrevivência', 'git-e-github-para-sobrevivencia', 6, 'PUBLIC',

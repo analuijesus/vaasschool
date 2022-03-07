@@ -1,4 +1,4 @@
-package br.com.vaasschool.model;
+package br.com.vaasschool.controller.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,9 +17,9 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
-    @JoinTable(name = "User_Profile",
-            joinColumns = @JoinColumn( name = "id_user", referencedColumnName = "id", table = "User"),
-            inverseJoinColumns = @JoinColumn(name = "id_profile", referencedColumnName = "id", table = "Profile"))
+    @JoinTable(name = "Profile_User",
+            joinColumns = @JoinColumn( name = "user_id", referencedColumnName = "id", table = "User"),
+            inverseJoinColumns = @JoinColumn(name = "profile_id", referencedColumnName = "id", table = "Profile"))
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Profile> profiles = new ArrayList<>();
 

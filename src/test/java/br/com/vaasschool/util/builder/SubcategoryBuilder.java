@@ -1,7 +1,7 @@
 package br.com.vaasschool.util.builder;
 
-import br.com.vaasschool.model.Category;
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.model.Category;
+import br.com.vaasschool.controller.model.Subcategory;
 
 public class SubcategoryBuilder {
 

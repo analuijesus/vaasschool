@@ -1,5 +1,12 @@
 package br.com.vaasschool.controller.form;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class UserForm {
 
     private String email;
@@ -7,22 +14,6 @@ public class UserForm {
 
     public UserForm(String email, String password) {
         this.email = email;
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
     }
 }

@@ -1,7 +1,9 @@
 package br.com.vaasschool.controller.api.dto;
 
-import br.com.vaasschool.model.Course;
+import br.com.vaasschool.controller.model.Course;
+import lombok.Getter;
 
+@Getter
 public class CourseApiDto {
 
     final private String name;
@@ -14,21 +16,5 @@ public class CourseApiDto {
         this.code = course.getCode();
         this.estimatedTimeToFinishTheCourse = course.getEstimatedTimeToFinish();
         this.skillsLearnedInTheCourse = course.getLearnedSkills();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public int getEstimatedTimeToFinishTheCourse() {
-        return estimatedTimeToFinishTheCourse;
-    }
-
-    public String getSkillsLearnedInTheCourse() {
-        return skillsLearnedInTheCourse;
     }
 }

@@ -1,9 +1,9 @@
 package br.com.vaasschool.repository;
 
-import br.com.vaasschool.model.Category;
-import br.com.vaasschool.model.Course;
-import br.com.vaasschool.model.CourseVisibility;
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.model.Category;
+import br.com.vaasschool.controller.model.Course;
+import br.com.vaasschool.controller.model.CourseVisibility;
+import br.com.vaasschool.controller.model.Subcategory;
 import br.com.vaasschool.projection.CourseProjection;
 import br.com.vaasschool.util.builder.CategoryBuilder;
 import br.com.vaasschool.util.builder.CourseBuilder;
@@ -19,8 +19,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
-import static br.com.vaasschool.model.CourseVisibility.PRIVATE;
-import static br.com.vaasschool.model.CourseVisibility.PUBLIC;
+import static br.com.vaasschool.controller.model.CourseVisibility.PRIVATE;
+import static br.com.vaasschool.controller.model.CourseVisibility.PUBLIC;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @RunWith(SpringRunner.class)

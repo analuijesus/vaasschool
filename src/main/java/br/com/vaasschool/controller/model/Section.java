@@ -1,10 +1,13 @@
-package br.com.vaasschool.model;
+package br.com.vaasschool.controller.model;
+
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@NoArgsConstructor(onConstructor = @__(@Deprecated))
 @Entity
 public class Section implements Comparable<Section>{
 
@@ -23,10 +26,6 @@ public class Section implements Comparable<Section>{
     @NotNull(message = "A seção deve ter um curso associado.")
     @ManyToOne(fetch = FetchType.LAZY)
     private Course course;
-
-    @Deprecated
-    public Section() {
-    }
 
     public Section(String name, String code, Course course) {
         this.name = name;

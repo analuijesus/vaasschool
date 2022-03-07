@@ -1,7 +1,9 @@
 package br.com.vaasschool.controller.dto;
 
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.model.Subcategory;
+import lombok.Getter;
 
+@Getter
 public class SubcategoryLoginDto {
 
     final private String name;
@@ -10,13 +12,5 @@ public class SubcategoryLoginDto {
     public SubcategoryLoginDto(Subcategory subcategory) {
         this.name = subcategory.getName();
         this.code = subcategory.getCode();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
     }
 }

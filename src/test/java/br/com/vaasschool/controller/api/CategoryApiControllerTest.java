@@ -1,10 +1,10 @@
 package br.com.vaasschool.controller.api;
 
 import br.com.vaasschool.controller.api.dto.CategoryApiDto;
-import br.com.vaasschool.model.Category;
-import br.com.vaasschool.model.Course;
-import br.com.vaasschool.model.CourseVisibility;
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.model.Category;
+import br.com.vaasschool.controller.model.Course;
+import br.com.vaasschool.controller.model.CourseVisibility;
+import br.com.vaasschool.controller.model.Subcategory;
 import br.com.vaasschool.repository.CategoryRepository;
 import br.com.vaasschool.repository.CourseRepository;
 import br.com.vaasschool.repository.SubcategoryRepository;
@@ -29,7 +29,7 @@ import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.List;
 
-import static br.com.vaasschool.model.CourseVisibility.PUBLIC;
+import static br.com.vaasschool.controller.model.CourseVisibility.PUBLIC;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -50,7 +50,7 @@ public class CategoryApiControllerTest {
     private CourseRepository courseRepository;
 
     @AfterEach
-    public void tearDown(){
+    public void tearDown() {
         categoryRepository.deleteAll();
         subcategoryRepository.deleteAll();
         courseRepository.deleteAll();
@@ -63,7 +63,7 @@ public class CategoryApiControllerTest {
 
         Category category = aCategory("programacao", true);
 
-        Course course = aCourse("java-jdbc", PUBLIC,
+        aCourse("java-jdbc", PUBLIC,
                 aSubcategory("java", true, category));
         CategoryApiDto categoryApiDto = new CategoryApiDto(category);
 
@@ -71,8 +71,8 @@ public class CategoryApiControllerTest {
         String json = new ObjectMapper().writeValueAsString(list);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get(uri)
-                .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                        .get(uri)
+                        .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers
                         .status()
                         .is(200))

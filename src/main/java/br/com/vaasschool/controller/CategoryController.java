@@ -3,31 +3,33 @@ package br.com.vaasschool.controller;
 import br.com.vaasschool.controller.dto.CategoryDto;
 import br.com.vaasschool.controller.dto.CategoryPageDto;
 import br.com.vaasschool.controller.form.CategoryForm;
-import br.com.vaasschool.model.Category;
+import br.com.vaasschool.controller.form.validator.CategoryFormValidator;
+import br.com.vaasschool.controller.model.Category;
 import br.com.vaasschool.repository.CategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+@AllArgsConstructor
 @Controller
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
+    private final CategoryFormValidator categoryFormValidator;
 
-    public CategoryController(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    @InitBinder("categoryForm")
+    void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(categoryFormValidator);
     }
 
     @GetMapping("/admin/categories")
@@ -89,7 +91,7 @@ public class CategoryController {
         return "category/pageCategory";
     }
 
-    @GetMapping( "/")
+    @GetMapping("/")
     public String publicPageRedirect() {
         return "redirect:/category/programacao";
     }

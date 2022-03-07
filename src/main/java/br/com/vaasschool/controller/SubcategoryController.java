@@ -2,18 +2,18 @@ package br.com.vaasschool.controller;
 
 import br.com.vaasschool.controller.dto.SubcategoryDto;
 import br.com.vaasschool.controller.form.SubcategoryForm;
-import br.com.vaasschool.model.Category;
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.form.validator.SubcategoryFormValidator;
+import br.com.vaasschool.controller.model.Category;
+import br.com.vaasschool.controller.model.Subcategory;
 import br.com.vaasschool.repository.CategoryRepository;
 import br.com.vaasschool.repository.SubcategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
@@ -22,15 +22,17 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+@AllArgsConstructor
 @Controller
 public class SubcategoryController {
 
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
+    private final SubcategoryFormValidator subcategoryFormValidator;
 
-    public SubcategoryController(CategoryRepository categoryRepository, SubcategoryRepository subcategoryRepository) {
-        this.categoryRepository = categoryRepository;
-        this.subcategoryRepository = subcategoryRepository;
+    @InitBinder("subcategoryForm")
+    void initBinder(WebDataBinder webDataBinder){
+        webDataBinder.addValidators(subcategoryFormValidator);
     }
 
     @GetMapping("/admin/subcategories/{categoryCode}")

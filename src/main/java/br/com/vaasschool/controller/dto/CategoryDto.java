@@ -1,7 +1,9 @@
 package br.com.vaasschool.controller.dto;
 
-import br.com.vaasschool.model.Category;
+import br.com.vaasschool.controller.model.Category;
+import lombok.Getter;
 
+@Getter
 public class CategoryDto {
 
     final private Long id;
@@ -25,41 +27,4 @@ public class CategoryDto {
         this.imagePath = category.getImagePath();
         this.colorCode = category.getColorCode();
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getExplanatoryGuide() {
-        return explanatoryGuide;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public String getColorCode() {
-        return colorCode;
-    }
-
 }

@@ -1,7 +1,7 @@
 package br.com.vaasschool.repository;
 
-import br.com.vaasschool.model.Course;
-import br.com.vaasschool.model.Subcategory;
+import br.com.vaasschool.controller.model.Course;
+import br.com.vaasschool.controller.model.Subcategory;
 import br.com.vaasschool.projection.CourseProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +16,13 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     Optional<Course> findByCode(String courseCode);
 
+    @Deprecated
+    boolean existsByCodeAndIdNot(String code, Long id);
+
+    default boolean existsByCodeWithDifferentId(String code, Long id){
+        return existsByCodeAndIdNot(code, id);
+    }
+
     @Query(value = """
             select instructor_name as instructorName, count(*) as numberOfCourses
             from Course 
@@ -23,4 +30,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
             order by numberOfCourses desc limit 1 
             """, nativeQuery = true)
     Optional<CourseProjection> findInstructorWithMoreCourses();
+
+    boolean existsByCode(String code);
 }

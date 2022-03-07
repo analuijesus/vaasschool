@@ -4,6 +4,7 @@ import br.com.vaasschool.projection.CategoryProjection;
 import br.com.vaasschool.projection.CourseProjection;
 import br.com.vaasschool.repository.CategoryRepository;
 import br.com.vaasschool.repository.CourseRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,16 +14,12 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+@AllArgsConstructor
 @Controller
 public class AdminController {
 
     private final CategoryRepository categoryRepository;
     private final CourseRepository courseRepository;
-
-    AdminController(CategoryRepository categoryRepository, CourseRepository courseRepository) {
-        this.categoryRepository = categoryRepository;
-        this.courseRepository = courseRepository;
-    }
 
     @GetMapping("/admin")
     String showDashboard() {

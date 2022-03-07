@@ -1,17 +1,19 @@
 package br.com.vaasschool.controller.form;
 
-import br.com.vaasschool.model.Category;
-import br.com.vaasschool.model.Subcategory;
-import br.com.vaasschool.repository.SubcategoryRepository;
-import org.springframework.web.server.ResponseStatusException;
+import br.com.vaasschool.controller.model.Category;
+import br.com.vaasschool.controller.model.Subcategory;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-
+@Getter
+@Setter
+@NoArgsConstructor
 public class SubcategoryForm {
 
     private Long id;
@@ -22,15 +24,12 @@ public class SubcategoryForm {
     private String code;
     private String description;
     private String explanatoryGuide;
-    private boolean active;
+    private boolean active = false;
     @Positive(message = "A ordem deve ser um número positivo ou vazio.")
     private Integer order;
     @NotNull(message = "A subcategoria deve ter uma categoria associada.")
     private Long categoryId;
     private String categoryName;
-
-    public SubcategoryForm() {
-    }
 
     public SubcategoryForm(Long id, String name, String code, String description, String explanatoryGuide, boolean active,
                            Integer order, Long categoryId) {
@@ -41,82 +40,6 @@ public class SubcategoryForm {
         this.explanatoryGuide = explanatoryGuide;
         this.active = active;
         this.order = order;
-        this.categoryId = categoryId;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getExplanatoryGuide() {
-        return explanatoryGuide;
-    }
-
-    public boolean getActive() {
-        return active;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setExplanatoryGuide(String explanatoryGuide) {
-        this.explanatoryGuide = explanatoryGuide;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 

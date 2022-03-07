@@ -1,8 +1,9 @@
 package br.com.vaasschool.controller.api;
 
 import br.com.vaasschool.controller.api.dto.CategoryApiDto;
-import br.com.vaasschool.model.Category;
+import br.com.vaasschool.controller.model.Category;
 import br.com.vaasschool.repository.CategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
@@ -12,14 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 public class CategoryApiController {
 
     private final CategoryRepository categoryRepository;
-
-    public CategoryApiController(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
 
     @GetMapping(path = "/api/categories", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_XML_VALUE})
     @Cacheable(value = "listOfCategories")

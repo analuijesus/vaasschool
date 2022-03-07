@@ -1,6 +1,6 @@
 package br.com.vaasschool.util.builder;
 
-import br.com.vaasschool.model.Category;
+import br.com.vaasschool.controller.model.Category;
 
 public class CategoryBuilder {
 

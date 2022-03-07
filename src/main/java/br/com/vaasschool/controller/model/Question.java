@@ -1,8 +1,11 @@
-package br.com.vaasschool.model;
+package br.com.vaasschool.controller.model;
+
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+@NoArgsConstructor(onConstructor = @__(@Deprecated))
 @Entity
 @DiscriminatorValue("Question")
 public class Question extends Activity{
@@ -12,10 +15,6 @@ public class Question extends Activity{
     @Column(name = "question_type", columnDefinition = "ENUM")
     @Enumerated(EnumType.STRING)
     private QuestionType type = QuestionType.SINGLE_ANSWER;
-
-    @Deprecated
-    public Question() {
-    }
 
     public Question(String title, String code, Section section, String statement) {
         super(title, code, section);
